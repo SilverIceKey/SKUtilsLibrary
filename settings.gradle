@@ -1,1 +1,1 @@
-include ':app', ':SKUtilsLibrary'
+include ':app', ':SKLibrary'

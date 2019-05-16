@@ -2,10 +2,7 @@ package com.silvericekey.skutilslibrary;
 
 import android.content.Context;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by silverknife on 2017/12/13.

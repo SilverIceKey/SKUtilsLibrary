@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -24,28 +24,17 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // ------------- Three Parts -------------
-
     implementation rootProject.ext.deps["eventBus"]
-
     implementation rootProject.ext.deps["glide"]
     annotationProcessor rootProject.ext.deps["glideCompiler"]
-
     implementation rootProject.ext.deps["picasso"]
-
     implementation rootProject.ext.deps["fresco"]
-
-    implementation rootProject.ext.deps["gson"]
-
     implementation rootProject.ext.deps["otto"]
-
     annotationProcessor rootProject.ext.deps["auto_service"]
-
-    // ------------- Test dependencies -------------
-    implementation rootProject.ext.deps["junit"]
-    implementation rootProject.ext.deps["truth"]
-    implementation rootProject.ext.deps["robolectric"]
-    implementation rootProject.ext.deps["openglApi"]
-    implementation rootProject.ext.deps["compiletesting"]
-    implementation rootProject.ext.deps["autoservice"]
-    implementation rootProject.ext.deps["autoservice"]
+//    // ------------- Test dependencies -------------
+//    implementation rootProject.ext.deps["junit"]
+//    implementation rootProject.ext.deps["truth"]
+//    implementation rootProject.ext.deps["robolectric"]
+//    implementation rootProject.ext.deps["openglApi"]
+//    implementation rootProject.ext.deps["compiletesting"]
 }

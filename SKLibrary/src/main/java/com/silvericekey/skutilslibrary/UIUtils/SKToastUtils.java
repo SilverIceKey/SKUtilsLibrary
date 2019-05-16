@@ -1,6 +1,5 @@
 package com.silvericekey.skutilslibrary.UIUtils;
 
-import android.app.Application;
 import android.widget.Toast;
 
 import com.silvericekey.skutilslibrary.SKUtilsLibrary;

@@ -1,4 +1,4 @@
-package com.sk.viewdemo;
+package com.silvericekey.skutilslibrary.View;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -8,11 +8,10 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.SweepGradient;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 
 import java.util.ArrayList;
