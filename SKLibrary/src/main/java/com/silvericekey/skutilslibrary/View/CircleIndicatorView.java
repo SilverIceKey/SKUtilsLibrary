@@ -8,9 +8,12 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.SweepGradient;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -20,7 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class CircleProgressView extends View {
+public class CircleIndicatorView extends View {
     private float angle = 0;
     private ProgressListener mListener;
     private float mMaxAngle = 360;
@@ -34,16 +37,27 @@ public class CircleProgressView extends View {
     private int mWidth;
     private int mHeight;
     private float mStylePadding = 0;
+    private static final String DEFAULT_COLOR = "#CCFFFF";
+    private static final String DEFAULT_STRING_FORMAT = "%1$d%%";
+    private static final int DEFAULT_TEXT_SIZE = 20;
+    private static final String DEFAULT_TEXT_COLOR = "#666666";
+    private static final int DEFAULT_STROKE_WIDTH = 40;
+    private int mStrokeWidth;
+    private int mProgressColor;
+    private boolean isShowText = false;
+    private String mStringFormat;
+    private int mTextSize;
+    private int mTextColor;
 
-    public CircleProgressView(Context context) {
+    public CircleIndicatorView(Context context) {
         this(context, null);
     }
 
-    public CircleProgressView(Context context, @NonNull AttributeSet attrs) {
+    public CircleIndicatorView(Context context, @NonNull AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CircleProgressView(Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
+    public CircleIndicatorView(Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
     }
@@ -169,6 +183,38 @@ public class CircleProgressView extends View {
     }
 
     /**
+     * 设置进度
+     * @param progress
+     */
+    public void setProgress(int progress) {
+        setAngle(360f/100*progress);
+    }
+
+    /**
+     * 设置文本格式
+     * @param mStringFormat
+     */
+    public void setStringFormat(String mStringFormat) {
+        this.mStringFormat = mStringFormat;
+    }
+
+    /**
+     * 设置是否显示中间文本
+     * @param showText
+     */
+    public void setShowText(boolean showText) {
+        isShowText = showText;
+    }
+
+    /**
+     * 设置进度条的宽度
+     * @param mStrokeWidth
+     */
+    public void setStrokeWidth(int mStrokeWidth) {
+        this.mStrokeWidth = mStrokeWidth;
+    }
+
+    /**
      * 设置角度(圆弧)为动画调用，一般不用使用
      *
      * @param angle
@@ -191,6 +237,7 @@ public class CircleProgressView extends View {
 
     /**
      * 设置进度条的类型
+     *
      * @param mPaintCap
      */
     public void setPaintCap(Paint.Cap mPaintCap) {
@@ -201,10 +248,35 @@ public class CircleProgressView extends View {
 
     /**
      * 设置圆形的类型
+     *
      * @param mPaintStyle
      */
     public void setPaintStyle(Paint.Style mPaintStyle) {
         this.mPaintStyle = mPaintStyle;
+    }
+
+    /**
+     * 设置进度填充颜色
+     * @param mProgressColor
+     */
+    public void setProgressColor(int mProgressColor) {
+        this.mProgressColor = mProgressColor;
+    }
+
+    /**
+     * 设置文本大小
+     * @param mTextSize
+     */
+    public void setTextSize(int mTextSize) {
+        this.mTextSize = mTextSize;
+    }
+
+    /**
+     * 设置文本颜色
+     * @param mTextColor
+     */
+    public void setTextColor(int mTextColor) {
+        this.mTextColor = mTextColor;
     }
 
     @SuppressLint("DrawAllocation")
@@ -214,7 +286,7 @@ public class CircleProgressView extends View {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setStyle(mPaintStyle);
-        paint.setStrokeWidth(40);
+        paint.setStrokeWidth(mStrokeWidth==0?DEFAULT_STROKE_WIDTH:mStrokeWidth);
         paint.setStrokeCap(mPaintCap);
         drawArc(canvas, paint, angle);
         canvas.save();
@@ -231,7 +303,7 @@ public class CircleProgressView extends View {
                 mStylePadding = 20f;
                 break;
             case FILL_AND_STROKE:
-                mStylePadding = 0f;
+                mStylePadding = 20f;
                 break;
         }
         if (mColors != null && mAngles != null && mColors.size() != 0 && mAngles.size() != 0) {
@@ -239,25 +311,42 @@ public class CircleProgressView extends View {
                 if (angle > getTotalAngle(i)) {
                     paint.setColor(mColors.get(i));
                     if (angle >= mAngles.get(i) + getTotalAngle(i)) {
-                        canvas.drawArc(getPaddingLeft()+mStylePadding, getPaddingTop()+mStylePadding, mWidth - getPaddingRight()-mStylePadding, mHeight - getPaddingBottom()-mStylePadding, mStartAngle + getTotalAngle(i), mAngles.get(i), false, paint);
+                        canvas.drawArc(getPaddingLeft() + mStylePadding, getPaddingTop() + mStylePadding, mWidth - getPaddingRight() - mStylePadding, mHeight - getPaddingBottom() - mStylePadding, mStartAngle + getTotalAngle(i), mAngles.get(i), false, paint);
                     } else {
-                        canvas.drawArc(getPaddingLeft()+mStylePadding, getPaddingTop()+mStylePadding, mWidth - getPaddingRight()-mStylePadding, mHeight - getPaddingBottom()-mStylePadding, mStartAngle + getTotalAngle(i), angle - getTotalAngle(i), false, paint);
+                        canvas.drawArc(getPaddingLeft() + mStylePadding, getPaddingTop() + mStylePadding, mWidth - getPaddingRight() - mStylePadding, mHeight - getPaddingBottom() - mStylePadding, mStartAngle + getTotalAngle(i), angle - getTotalAngle(i), false, paint);
                         break;
                     }
                 }
             }
+        } else if ((mColors == null && mAngles == null )||( mColors.size() == 0 && mAngles.size() == 0 )|| (mStartColor == 0 && mEndColor == 0)) {
+            paint.setColor(Color.parseColor(DEFAULT_COLOR));
+            canvas.drawArc(getPaddingLeft() + mStylePadding, getPaddingTop() + mStylePadding, mWidth - getPaddingRight() - mStylePadding, mHeight - getPaddingBottom() - mStylePadding, mStartAngle, angle, false, paint);
         } else {
             Matrix matrix = new Matrix();
-            matrix.setRotate(mStartAngle, (getPaddingLeft() + mWidth - getPaddingRight()-mStylePadding) / 2, (getPaddingTop() + mWidth - getPaddingBottom()-mStylePadding) / 2);
-            SweepGradient sweepGradient = new SweepGradient((getPaddingLeft() + mWidth - getPaddingRight()-mStylePadding) / 2, (getPaddingTop() + mWidth - getPaddingBottom()-mStylePadding) / 2, mStartColor, mEndColor);
+            matrix.setRotate(mStartAngle, (getPaddingLeft() + mWidth - getPaddingRight() - mStylePadding) / 2, (getPaddingTop() + mWidth - getPaddingBottom() - mStylePadding) / 2);
+            SweepGradient sweepGradient = new SweepGradient((getPaddingLeft() + mWidth - getPaddingRight() - mStylePadding) / 2, (getPaddingTop() + mWidth - getPaddingBottom() - mStylePadding) / 2, mStartColor, mEndColor);
             sweepGradient.setLocalMatrix(matrix);
             paint.setShader(sweepGradient);
-            canvas.drawArc(getPaddingLeft()+mStylePadding, getPaddingTop()+mStylePadding, mWidth - getPaddingRight()-mStylePadding, mHeight - getPaddingBottom()-mStylePadding, mStartAngle, mTotalAngle, false, paint);
-            canvas.drawArc(getPaddingLeft()+mStylePadding, getPaddingTop()+mStylePadding, mWidth - getPaddingRight()-mStylePadding, mHeight - getPaddingBottom()-mStylePadding, mStartAngle + mTotalAngle, angle - mTotalAngle, false, paint);
+            canvas.drawArc(getPaddingLeft() + mStylePadding, getPaddingTop() + mStylePadding, mWidth - getPaddingRight() - mStylePadding, mHeight - getPaddingBottom() - mStylePadding, mStartAngle, mTotalAngle, false, paint);
+            canvas.drawArc(getPaddingLeft() + mStylePadding, getPaddingTop() + mStylePadding, mWidth - getPaddingRight() - mStylePadding, mHeight - getPaddingBottom() - mStylePadding, mStartAngle + mTotalAngle, angle - mTotalAngle, false, paint);
             mTotalAngle += angle - mTotalAngle;
         }
+        float progress = angle/mMaxAngle*100;
+        if (isShowText){
+            Paint textPaint = new Paint();
+            textPaint.setAntiAlias(true);
+            textPaint.setTextSize(mTextSize==0? dp2Px(DEFAULT_TEXT_SIZE): dp2Px(mTextSize));
+            textPaint.setStrokeCap(mPaintCap);
+            textPaint.setTextAlign(Paint.Align.CENTER);
+            textPaint.setColor(mTextColor==0?Color.parseColor(DEFAULT_TEXT_COLOR):mTextColor);
+            Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+            float top = fontMetrics.top;//为基线到字体上边框的距离,即上图中的top
+            float bottom = fontMetrics.bottom;//为基线到字体下边框的距离,即上图中的bottom
+            int baseLineY = (int) ((getPaddingTop() + mStylePadding+mHeight - getPaddingBottom() - mStylePadding)/2 - top/2 - bottom/2);//基线中间点的y轴计算公式
+            canvas.drawText(String.format(TextUtils.isEmpty(mStringFormat)?DEFAULT_STRING_FORMAT:mStringFormat,angle==0?0:(int)(progress)),(getPaddingLeft() + mStylePadding+mWidth - getPaddingRight() - mStylePadding)/2,baseLineY,textPaint);
+        }
         if (mListener != null) {
-            mListener.progress(angle / mMaxAngle * 100);
+            mListener.progress(progress);
         }
     }
 
@@ -311,4 +400,13 @@ public class CircleProgressView extends View {
         }
         return result;
     }
+
+    /**
+     * px转dp
+     */
+    private float dp2Px(float dpVal) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        return (dpVal * scale+0.5f);
+    }
+
 }
