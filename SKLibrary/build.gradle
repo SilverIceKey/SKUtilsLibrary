@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 28
 
@@ -31,4 +33,18 @@ dependencies {
     implementation rootProject.ext.deps["fresco"]
     implementation rootProject.ext.deps["otto"]
     annotationProcessor rootProject.ext.deps["auto_service"]
+
+    implementation rootProject.ext.deps['retrofit2']
+    implementation rootProject.ext.deps['rxandroid2_gson_convert']
+    implementation rootProject.ext.deps['rxjava2']
+    implementation rootProject.ext.deps['rxandroid2']
+    implementation rootProject.ext.deps['rxandroid2_gson_convert']
+    implementation rootProject.ext.deps['rxandroid2_scalars_convert']
+    implementation rootProject.ext.deps['rxandroid2_adapter_rxjava2']
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+repositories {
+    mavenCentral()
 }

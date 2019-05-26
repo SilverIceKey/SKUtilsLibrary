@@ -4,24 +4,24 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 
-public class ThreadHandle {
+public class ThreadUtils {
     private static final String IO_HANDLER_NAME = "IO_HANDLER_NAME";
     private Handler mUIHandle;
     private Handler mIOHandle;
     private HandlerThread mIOThread;
-    private static ThreadHandle mInstance;
+    private static ThreadUtils mInstance;
 
-    private ThreadHandle(){
+    private ThreadUtils(){
         mUIHandle = new Handler(Looper.getMainLooper());
         mIOThread = new HandlerThread(IO_HANDLER_NAME);
         mIOThread.start();
         mIOHandle = new Handler(mIOThread.getLooper());
     }
 
-    private static ThreadHandle getInstance() {
+    private static ThreadUtils getInstance() {
         if (mInstance==null){
-            synchronized (ThreadHandle.class){
-                mInstance = new ThreadHandle();
+            synchronized (ThreadUtils.class){
+                mInstance = new ThreadUtils();
             }
         }
         return mInstance;
