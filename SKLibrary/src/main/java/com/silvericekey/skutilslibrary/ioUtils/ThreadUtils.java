@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.IOUtils;
+package com.silvericekey.skutilslibrary.ioUtils;
 
 import android.os.Handler;
 import android.os.HandlerThread;

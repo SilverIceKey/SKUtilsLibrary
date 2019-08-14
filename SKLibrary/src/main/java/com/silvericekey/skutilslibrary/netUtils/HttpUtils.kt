@@ -1,7 +1,7 @@
-package com.silvericekey.skutilslibrary.NetUtils
+package com.silvericekey.skutilslibrary.netUtils
 
 import android.text.TextUtils
-import com.silvericekey.skutilslibrary.IOUtils.ThreadUtils
+import com.silvericekey.skutilslibrary.ioUtils.ThreadUtils
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit

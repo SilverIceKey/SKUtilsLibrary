@@ -1,5 +1,6 @@
-package com.silvericekey.skutilslibrary.UIUtils;
+package com.silvericekey.skutilslibrary.uiUtils;
 
+import android.animation.ObjectAnimator;
 import android.widget.Toast;
 
 import com.silvericekey.skutilslibrary.SKUtilsLibrary;
