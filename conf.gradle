@@ -1,11 +1,12 @@
 ext {
+
     android = [
             libMinSdkVersion : 14,
             appMinSdkVersion : 21,
             targetSdkVersion : 28,
             compileSdkVersion: 28,
             versionCode      : 1,
-            versionName      : "1.0",
+            versionName      : "1.0.0",
     ]
 
     depsVersion = [

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
 
 def cfg = rootProject.ext.android
 
@@ -29,24 +30,24 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // ------------- Three Parts -------------
-    implementation rootProject.ext.deps["eventBus"]
-    implementation rootProject.ext.deps["glide"]
+    api rootProject.ext.deps["eventBus"]
+    api rootProject.ext.deps["glide"]
     annotationProcessor rootProject.ext.deps["glideCompiler"]
-    implementation rootProject.ext.deps["picasso"]
-    implementation rootProject.ext.deps["fresco"]
-    implementation rootProject.ext.deps["otto"]
+    api rootProject.ext.deps["picasso"]
+    api rootProject.ext.deps["fresco"]
+    api rootProject.ext.deps["otto"]
     annotationProcessor rootProject.ext.deps["auto_service"]
 
-    implementation rootProject.ext.deps['retrofit2']
-    implementation rootProject.ext.deps['rxandroid2_gson_convert']
-    implementation rootProject.ext.deps['rxjava2']
-    implementation rootProject.ext.deps['rxandroid2']
-    implementation rootProject.ext.deps['rxandroid2_gson_convert']
-    implementation rootProject.ext.deps['rxandroid2_scalars_convert']
-    implementation rootProject.ext.deps['rxandroid2_adapter_rxjava2']
-    implementation project(":autosize")
-    implementation "androidx.core:core-ktx:+"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api rootProject.ext.deps['retrofit2']
+    api rootProject.ext.deps['rxandroid2_gson_convert']
+    api rootProject.ext.deps['rxjava2']
+    api rootProject.ext.deps['rxandroid2']
+    api rootProject.ext.deps['rxandroid2_gson_convert']
+    api rootProject.ext.deps['rxandroid2_scalars_convert']
+    api rootProject.ext.deps['rxandroid2_adapter_rxjava2']
+    api project(":autosize")
+    api "androidx.core:core-ktx:+"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 repositories {
