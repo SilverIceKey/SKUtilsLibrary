@@ -39,6 +39,7 @@ dependencies {
     annotationProcessor rootProject.ext.deps["auto_service"]
 
     api rootProject.ext.deps['retrofit2']
+    api rootProject.ext.deps['okhttp3_logging-interceptor']
     api rootProject.ext.deps['rxandroid2_gson_convert']
     api rootProject.ext.deps['rxjava2']
     api rootProject.ext.deps['rxandroid2']

@@ -1,10 +1,14 @@
 package com.silvericekey.skutilslibrary.netUtils
 
 import android.text.TextUtils
+import android.util.Log
 import com.silvericekey.skutilslibrary.ioUtils.ThreadUtils
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
@@ -15,49 +19,72 @@ class HttpUtils {
 
     companion object {
         private var httpUtils: HttpUtils? = null
-        private var baseUrl = ""
+        @JvmStatic
         fun getInstance(): HttpUtils {
             if (httpUtils == null) {
-                synchronized(HttpUtils::class) {
-                    if (httpUtils == null) {
-                        httpUtils = HttpUtils()
-                    }
-                }
+                throw Exception("Please init in Application or other place before use")
             }
             return httpUtils!!
         }
 
-        fun setBaseUrl(baseUrl:String){
-            this.baseUrl = baseUrl
+        @JvmStatic
+        fun init(baseUrl: String) {
+            if (httpUtils == null) {
+                synchronized(HttpUtils::class) {
+                    if (httpUtils == null) {
+                        httpUtils = HttpUtils(baseUrl)
+                    }
+                }
+            }
+        }
+
+        @JvmStatic
+        fun <T> execute(call: Call<T>, callback: NetCallback<T>) {
+            ThreadUtils.runOnIOThread {
+                var response = call.execute()
+                if (callback != null) {
+                    ThreadUtils.runOnUiThread { callback.onSuccess(response.body()) }
+                }
+            }
         }
     }
 
-    constructor() {
-        if (TextUtils.isEmpty(baseUrl)){
+    constructor(baseUrl: String) {
+        if (TextUtils.isEmpty(baseUrl)) {
             throw Exception("Please set base url first")
         }
+        val loggingInterceptor = HttpLoggingInterceptor(object:HttpLoggingInterceptor.Logger{
+            override fun log(message: String) {
+                Log.i("RetrofitLog", "retrofitBack = $message")
+            }
+        })
+        loggingInterceptor.level=HttpLoggingInterceptor.Level.BODY
         okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-            .readTimeout(10000L, TimeUnit.MILLISECONDS)
-            .build()
+                .addInterceptor(loggingInterceptor)
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .build()
         retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+                .baseUrl(baseUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
+                .build()
+    }
+
+    fun addInterceptor(interceptor: Interceptor):HttpUtils{
+        okHttpClient = okHttpClient.newBuilder().addInterceptor(interceptor).build()
+        retrofit = retrofit.newBuilder().client(okHttpClient).build()
+        return this
+    }
+
+    fun changeUrl(baseUrl: String) :HttpUtils{
+        retrofit = retrofit.newBuilder().baseUrl(baseUrl).client(okHttpClient).build()
+        return this
     }
 
     fun <T> obtainClass(clz: Class<T>): T {
         return retrofit.create(clz)
-    }
-
-    fun <T> execute(call: Call<T>, callback: NetCallback<T>) {
-        ThreadUtils.runOnIOThread {
-            var response = call.execute()
-            if (callback != null) {
-                ThreadUtils.runOnUiThread { callback.onSuccess(response.body()) }
-            }
-        }
     }
 }
