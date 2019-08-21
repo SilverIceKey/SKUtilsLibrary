@@ -2,11 +2,10 @@ package com.silvericekey.skutilslibrary.netUtils
 
 import android.text.TextUtils
 import android.util.Log
-import com.silvericekey.skutilslibrary.ioUtils.ThreadUtils
+import okhttp3.Cookie
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -37,16 +36,6 @@ class HttpUtils {
                 }
             }
         }
-
-        @JvmStatic
-        fun <T> execute(call: Call<T>, callback: NetCallback<T>) {
-            ThreadUtils.runOnIOThread {
-                var response = call.execute()
-                if (callback != null) {
-                    ThreadUtils.runOnUiThread { callback.onSuccess(response.body()) }
-                }
-            }
-        }
     }
 
     constructor(baseUrl: String) {
@@ -58,9 +47,12 @@ class HttpUtils {
                 Log.i("RetrofitLog", "retrofitBack = $message")
             }
         })
+        val receivedCookiesInterceptor = ReceivedCookiesInterceptor()
+        val addCookiesInterceptor = AddCookiesInterceptor()
         loggingInterceptor.level=HttpLoggingInterceptor.Level.BODY
         okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(addCookiesInterceptor)
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .build()

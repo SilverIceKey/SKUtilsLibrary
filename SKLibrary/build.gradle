@@ -30,6 +30,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // ------------- Three Parts -------------
+    compileOnly rootProject.ext.deps["androidx_appcompat"]
     api rootProject.ext.deps["eventBus"]
     api rootProject.ext.deps["glide"]
     annotationProcessor rootProject.ext.deps["glideCompiler"]

@@ -1,35 +1,18 @@
 package com.silverknife.meizhi
 
-import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import com.silvericekey.skutilslibrary.netUtils.HttpUtils
-import com.silvericekey.skutilslibrary.uiUtils.SKToastUtils
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import java.util.function.Consumer
+import com.silvericekey.skutilslibrary.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<MainPresenter>(),IMainView {
+    override fun getLayoutID(): Int = R.layout.activity_main
+    override fun initView() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
     }
 
-    fun request(view: View) {
-        HttpUtils.getInstance().addInterceptor(TestInterceptor())
-                .obtainClass(Api::class.java)
-                .login("18368402184", "400938")
-                .setSchedulers()
-                .subscribe({
-                    SKToastUtils.showToast("登录成功")
-                },{
-                    SKToastUtils.showToast("登录失败")
-                },{
-                    SKToastUtils.showToast("登录结束")
-                })
+    override fun initPresenter(): MainPresenter = MainPresenter(this@MainActivity)
 
+    fun request(view: View) {
+        mPresenter.getData()
     }
 
 }
