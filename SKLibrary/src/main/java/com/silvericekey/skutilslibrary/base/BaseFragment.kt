@@ -1,35 +1,40 @@
 package com.silvericekey.skutilslibrary.base
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.silvericekey.skutilslibrary.permissionUtils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(),EasyPermissions.PermissionCallbacks {
+abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks {
     protected lateinit var mPresenter: T
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(getLayoutID())
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mPresenter = initPresenter()
-        initView()
+        var view = inflater.inflate(getLayoutID(), null)
+        return view
     }
 
-    abstract fun getLayoutID():Int
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView(view)
+    }
 
-    abstract fun initView()
+    abstract fun getLayoutID(): Int
+
+    abstract fun initView(view: View)
 
     abstract fun initPresenter(): T
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-    var simpleCallback: PermissionUtil.PermissionSimpleCallback? = null;
-    var fullCallback: PermissionUtil.PermissionFullCallback? = null;
+    var simpleCallback:PermissionUtil.PermissionSimpleCallback? = null;
+    var fullCallback:PermissionUtil.PermissionFullCallback? = null;
     fun requestPermission(vararg permissions: String, callback: PermissionUtil.PermissionSimpleCallback) {
         simpleCallback = callback
         EasyPermissions.requestPermissions(this, "", PermissionUtil.PERMISSION_REQUEST, *permissions)
@@ -40,14 +45,13 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(),EasyPermiss
         EasyPermissions.requestPermissions(this, "", PermissionUtil.PERMISSION_REQUEST, *permissions)
     }
 
+
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        simpleCallback?.permissionGranted()
-        fullCallback?.permissionGranted(perms)
+
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        simpleCallback?.permissionDenied()
-        fullCallback?.permissionDenied(perms)
+
     }
 
     override fun onDestroy() {

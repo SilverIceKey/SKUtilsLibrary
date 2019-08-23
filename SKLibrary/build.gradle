@@ -31,6 +31,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // ------------- Three Parts -------------
     compileOnly rootProject.ext.deps["androidx_appcompat"]
+    api rootProject.ext.deps["camera-core"]
+    api rootProject.ext.deps["camera-camera2"]
+    api rootProject.ext.deps["easypermissions"]
     api rootProject.ext.deps["eventBus"]
     api rootProject.ext.deps["glide"]
     annotationProcessor rootProject.ext.deps["glideCompiler"]
@@ -40,6 +43,7 @@ dependencies {
     annotationProcessor rootProject.ext.deps["auto_service"]
 
     api rootProject.ext.deps['retrofit2']
+    api rootProject.ext.deps['mockwebserver']
     api rootProject.ext.deps['okhttp3_logging-interceptor']
     api rootProject.ext.deps['rxandroid2_gson_convert']
     api rootProject.ext.deps['rxjava2']

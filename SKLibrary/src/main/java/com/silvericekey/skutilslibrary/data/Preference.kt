@@ -7,7 +7,7 @@ import java.lang.IllegalArgumentException
 import kotlin.reflect.KProperty
 
 class Preference<T>(val name: String, val default: T) {
-    val prefs: SharedPreferences by lazy { SKUtilsLibrary.getContext().getSharedPreferences(name, Context.MODE_PRIVATE) }
+    val prefs: SharedPreferences by lazy { SKUtilsLibrary.context!!.getSharedPreferences(name, Context.MODE_PRIVATE) }
 
     operator fun getValue(thisRef:Any?,property:KProperty<*>,value: T):T{
         return getSharedPreferences(name,default)

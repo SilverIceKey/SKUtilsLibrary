@@ -1,9 +1,8 @@
 package com.silverknife.meizhi
 
 import android.annotation.SuppressLint
-import com.silvericekey.skutilslibrary.netUtils.HttpUtils
+import com.silvericekey.skutilslibrary.netUtils.HttpUtil
 import com.silvericekey.skutilslibrary.netUtils.NetCallback
-import com.silvericekey.skutilslibrary.uiUtils.SKToastUtils
 
 class LoginResponse {
 
@@ -24,17 +23,12 @@ class LoginResponse {
         @SuppressLint("CheckResult")
         @JvmStatic
         fun getData(callback: NetCallback<LoginResponse>) {
-            HttpUtils.getInstance()
+            HttpUtil.getInstance()
                     .addInterceptor(TestInterceptor())
                     .obtainClass(Api::class.java)
                     .login("18368402184", "400938")
-                    .execute()
-//                    .setSchedulers()
-//                    .subscribe({
-//                        callback.onSuccess(it)
-//                    }, {
-//                        SKToastUtils.showToast("登录失败")
-//                    })
+                    .execute(callback)
+//                    .setSchedulers(callback)
         }
     }
 }

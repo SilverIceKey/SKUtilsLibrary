@@ -15,9 +15,9 @@ import com.silvericekey.skutilslibrary.SKUtilsLibrary
  * Created by Administrator on 2017/5/24.
  */
 
-object ImageUtils {
+object ImageUtil {
     fun bindImg(url: String, options: RequestOptions): RequestBuilder<*> {
-        return bindImg(SKUtilsLibrary.getContext(), url, options)
+        return bindImg(SKUtilsLibrary.context!!, url, options)
     }
 
     fun bindImg(context: Context, url: String, options: RequestOptions): RequestBuilder<*> {

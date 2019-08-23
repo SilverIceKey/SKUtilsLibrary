@@ -13,4 +13,28 @@
         android:gravity="center|center_vertical"
         android:onClick="request"
         android:text="请求" />
+
+    <Button
+        android:id="@+id/websocker_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center|center_vertical"
+        android:onClick="webSocketRequest"
+        android:text="长连接请求" />
+
+    <Button
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center|center_vertical"
+        android:onClick="request"
+        android:text="摄像机" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
 </LinearLayout>

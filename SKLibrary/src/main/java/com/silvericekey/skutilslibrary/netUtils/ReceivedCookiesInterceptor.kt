@@ -15,7 +15,7 @@ class ReceivedCookiesInterceptor : Interceptor {
             for (header in originResponse.headers("Set-Cookie")){
                 cookies.add(header)
             }
-            var sharedPreferences = SKUtilsLibrary.getContext().getSharedPreferences("cookie",Context.MODE_PRIVATE)
+            var sharedPreferences = SKUtilsLibrary.context!!.getSharedPreferences("cookie",Context.MODE_PRIVATE)
             var editor = sharedPreferences.edit()
             editor.putStringSet("cookies",cookies)
             editor.apply()

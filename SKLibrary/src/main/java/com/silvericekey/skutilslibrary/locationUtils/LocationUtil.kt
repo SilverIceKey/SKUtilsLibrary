@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat
 
 import android.content.ContentValues.TAG
 
-class LocationUtils private constructor(private val mContext: Context) {
+class LocationUtil private constructor(private val mContext: Context) {
     private var locationManager: LocationManager? = null
     private var locationProvider: String? = null
     private var location: Location? = null
@@ -126,14 +126,14 @@ class LocationUtils private constructor(private val mContext: Context) {
     companion object {
 
         @Volatile
-        private var uniqueInstance: LocationUtils? = null
+        private var uniqueInstance: LocationUtil? = null
 
         //采用Double CheckLock(DCL)实现单例
-        fun getInstance(context: Context): LocationUtils? {
+        fun getInstance(context: Context): LocationUtil? {
             if (uniqueInstance == null) {
-                synchronized(LocationUtils::class.java) {
+                synchronized(LocationUtil::class.java) {
                     if (uniqueInstance == null) {
-                        uniqueInstance = LocationUtils(context)
+                        uniqueInstance = LocationUtil(context)
                     }
                 }
             }
