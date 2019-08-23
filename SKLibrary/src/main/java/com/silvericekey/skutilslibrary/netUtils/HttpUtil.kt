@@ -9,11 +9,13 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.time.Duration
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 class HttpUtil {
     private var okHttpClient: OkHttpClient
+    private var okHttpWebSocketClient: OkHttpClient
     private var retrofit: Retrofit
 
     companion object {
@@ -44,12 +46,7 @@ class HttpUtil {
 //            println("hostName:$hostName")
 //            println("port:$port")
             var wsUrl = "wss://echo.websocket.org/"
-            var request = Request.Builder().url(wsUrl)
-                    .header("Upgrade", "websocket")
-                    .header("Connection", "Upgrade")
-                    .header("Sec-WebSocket-Key", "111111111111111")
-                    .header("Sec-WebSocket-Version", "13")
-                    .build()
+            var request = Request.Builder().url(wsUrl).build()
             var okHttpClient = OkHttpClient.Builder()
                     .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                     .readTimeout(10000L, TimeUnit.MILLISECONDS)
@@ -133,11 +130,20 @@ class HttpUtil {
         val receivedCookiesInterceptor = ReceivedCookiesInterceptor()
         val addCookiesInterceptor = AddCookiesInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        okHttpWebSocketClient = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(addCookiesInterceptor)
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .writeTimeout(10000L, TimeUnit.MILLISECONDS)
+                .pingInterval(40,TimeUnit.SECONDS)
+                .build()
         okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(addCookiesInterceptor)
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .writeTimeout(10000L, TimeUnit.MILLISECONDS)
                 .build()
         retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -161,7 +167,7 @@ class HttpUtil {
 
     fun webSocket(url: String, listener: WebSocketListener) {
         var request = Request.Builder().url(url).build()
-        okHttpClient.newWebSocket(request, listener)
+        okHttpWebSocketClient.newWebSocket(request, listener)
     }
 
     fun <T> obtainClass(clz: Class<T>): T {
