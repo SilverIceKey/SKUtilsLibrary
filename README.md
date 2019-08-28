@@ -32,27 +32,23 @@ SKUtilsLibrary
 
 [AutoSize](https://github.com/JessYanCoding/AndroidAutoSize)
 
-#How to get to your project
+# How to get to your project
 
 Step 1. Add the JitPack repository to your build file
 
-<code>
-
+```groovy
 allprojects {
 	repositories {
 		...
 		maven { url 'https://www.jitpack.io' }
 	}
 }
-
-</code>
+```
 
 Step 2. Add the dependency
 
-<code>
-
+```groovy
 dependencies {
 	implementation 'com.github.SilverIceKey:SKUtilsLibrary:Tag'
 }
-
-</code>
+```
