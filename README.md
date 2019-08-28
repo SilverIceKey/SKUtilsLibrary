@@ -1,4 +1,4 @@
-# SKUtilsLibrary
+SKUtilsLibrary
 
 [![](https://www.jitpack.io/v/SilverIceKey/SKUtilsLibrary.svg)](https://www.jitpack.io/#SilverIceKey/SKUtilsLibrary)
 
@@ -33,23 +33,26 @@
 [AutoSize](https://github.com/JessYanCoding/AndroidAutoSize)
 
 #How to get to your project
-----------
 
 Step 1. Add the JitPack repository to your build file
 
-```groovy
+<code>
+
 allprojects {
-		repositories {
-			...
-			maven { url 'https://www.jitpack.io' }
-		}
+	repositories {
+		...
+		maven { url 'https://www.jitpack.io' }
 	}
-```
+}
+
+</code>
 
 Step 2. Add the dependency
 
-```groovy
-	dependencies {
-	        implementation 'com.github.SilverIceKey:SKUtilsLibrary:Tag'
-	}
-```
+<code>
+
+dependencies {
+	implementation 'com.github.SilverIceKey:SKUtilsLibrary:Tag'
+}
+
+</code>
