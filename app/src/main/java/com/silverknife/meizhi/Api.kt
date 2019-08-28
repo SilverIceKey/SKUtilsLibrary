@@ -1,7 +1,5 @@
 package com.silverknife.meizhi
 
-import com.silvericekey.skutilslibrary.rxjava.InLineCall
-import com.silvericekey.skutilslibrary.rxjava.InLineObservable
 import retrofit2.Call
 
 import retrofit2.http.GET
@@ -16,5 +14,5 @@ interface Api {
      */
     @GET("api.php?s=Login/index")
     fun login(@Query("account") phoneu: String,
-              @Query("password") password: String): InLineCall<LoginResponse>
+              @Query("password") password: String): Call<LoginResponse>
 }

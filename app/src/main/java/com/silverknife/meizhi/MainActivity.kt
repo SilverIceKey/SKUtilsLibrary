@@ -1,6 +1,7 @@
 package com.silverknife.meizhi
 
 import android.content.Intent
+import android.graphics.Color
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
 import com.silvericekey.skutilslibrary.base.BaseActivity
@@ -41,6 +42,6 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
         if (qr_info.text.toString().isEmpty()){
             ToastUtils.showShort("请先输入二维码信息")
         }
-        qr_img.setImageBitmap(QRCodeUtil.createQRCode(qr_info.text.toString(),300))
+        qr_img.setImageBitmap(QRCodeUtil.createQRCode(qr_info.text.toString(),300,Color.parseColor("#00ffff")))
     }
 }

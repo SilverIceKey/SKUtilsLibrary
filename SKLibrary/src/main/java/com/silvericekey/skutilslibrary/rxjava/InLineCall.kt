@@ -1,5 +1,6 @@
 package com.silvericekey.skutilslibrary.rxjava
 
+import android.annotation.SuppressLint
 import com.silvericekey.skutilslibrary.net.NetCallback
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -8,24 +9,31 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 
-inline class InLineCall<T>(val call: Call<T>) {
-    fun execute(callback: NetCallback<T>) {
-        Observable.create(object : ObservableOnSubscribe<T> {
-            override fun subscribe(emitter: ObservableEmitter<T>) {
-                var response = call.execute()
-                if (response.isSuccessful){
-                    response.body()?.let { emitter.onNext(it) }
-                }else{
-                    Throwable(response.message())?.let { emitter.onError(it) }
-                }
+inline fun <T> Call<T>.execute(callback: NetCallback<T>) {
+    execute({
+        callback.onSuccess(it)
+    }, {
+        callback.onError(it)
+    })
+}
+
+@SuppressLint("CheckResult")
+inline fun <T> Call<T>.execute(noinline onSuccess: (response: T) -> Unit, noinline onError: (throwable: Throwable) -> Unit) {
+    Observable.create(object : ObservableOnSubscribe<T> {
+        override fun subscribe(emitter: ObservableEmitter<T>) {
+            val response = execute()
+            if (response.isSuccessful) {
+                response.body()?.let { emitter.onNext(it) }
+            } else {
+                Throwable(response.message()).let { emitter.onError(it) }
             }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    callback.onSuccess(it)
-                }, {
-                    callback.onError(it)
-                })
-    }
+        }
+    })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                onSuccess(it)
+            }, {
+                onError(it)
+            })
 }

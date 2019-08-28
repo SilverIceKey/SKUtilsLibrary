@@ -37,8 +37,14 @@ class CameraUtil {
         return this
     }
 
-    fun addUseCase(useCase: UseCase): CameraUtil {
-        useCases.plus(useCase)
+    fun addUseCase(addUseCase: ImageAnalysis.() -> Unit): CameraUtil {
+        val analyzerConfig = ImageAnalysisConfig.Builder().build()
+
+        // Build the image analysis use case and instantiate our analyzer
+        val analyzerUseCase = ImageAnalysis(analyzerConfig).apply {
+            addUseCase()
+        }
+        useCases.plus(analyzerUseCase)
         return this
     }
 
@@ -63,6 +69,7 @@ class CameraUtil {
 
         // Build the image analysis use case and instantiate our analyzer
         val analyzerUseCase = ImageAnalysis(analyzerConfig).apply {
+            println("own usecase")
             analyzer = PreviewAnalyzer()
         }
 

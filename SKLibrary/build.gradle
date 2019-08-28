@@ -13,7 +13,6 @@ android {
         targetSdkVersion cfg["targetSdkVersion"]
         versionCode cfg["versionCode"]
         versionName cfg["versionName"]
-        buildConfigField "Boolean", "DEBUG", "false"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
