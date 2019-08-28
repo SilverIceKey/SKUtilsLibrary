@@ -13,9 +13,8 @@ android {
         targetSdkVersion cfg["targetSdkVersion"]
         versionCode cfg["versionCode"]
         versionName cfg["versionName"]
-
+        buildConfigField "Boolean", "DEBUG", "false"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -39,11 +38,13 @@ dependencies {
     annotationProcessor rootProject.ext.deps["glideCompiler"]
     api rootProject.ext.deps["picasso"]
     api rootProject.ext.deps["fresco"]
+    api rootProject.ext.deps["aucx"]
+    api rootProject.ext.deps["zxing_core"]
+//    api rootProject.ext.deps["auc"]
     api rootProject.ext.deps["otto"]
     annotationProcessor rootProject.ext.deps["auto_service"]
 
     api rootProject.ext.deps['retrofit2']
-    api rootProject.ext.deps['mockwebserver']
     api rootProject.ext.deps['okhttp3_logging-interceptor']
     api rootProject.ext.deps['rxandroid2_gson_convert']
     api rootProject.ext.deps['rxjava2']

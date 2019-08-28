@@ -1,17 +1,11 @@
 package com.silverknife.meizhi
 
 import android.Manifest
-import android.graphics.Matrix
-import android.util.Size
-import android.view.Surface
-import android.view.ViewGroup
 import androidx.camera.core.*
 import com.silvericekey.skutilslibrary.base.BaseActivity
-import com.silvericekey.skutilslibrary.camera.CameraUtil
-import com.silvericekey.skutilslibrary.camera.PreviewAnalyzer
-import com.silvericekey.skutilslibrary.permissionUtils.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.CameraUtil
+import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import kotlinx.android.synthetic.main.activity_camera.*
-import java.io.File
 
 class CameraActivity : BaseActivity<CameraPresenter>() {
     override fun initView() {

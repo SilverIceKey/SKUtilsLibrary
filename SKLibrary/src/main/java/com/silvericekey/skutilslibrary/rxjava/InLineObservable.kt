@@ -1,6 +1,6 @@
 package com.silvericekey.skutilslibrary.rxjava
 
-import com.silvericekey.skutilslibrary.netUtils.NetCallback
+import com.silvericekey.skutilslibrary.net.NetCallback
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

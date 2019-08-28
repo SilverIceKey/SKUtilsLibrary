@@ -1,8 +1,7 @@
-package com.silvericekey.skutilslibrary.netUtils
+package com.silvericekey.skutilslibrary.net
 
 import android.content.Context
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
-import com.silvericekey.skutilslibrary.data.Preference
 import okhttp3.Interceptor
 import okhttp3.Response
 

@@ -1,7 +1,6 @@
 package com.silverknife.meizhi
 
-import com.silvericekey.skutilslibrary.netUtils.HttpUtil
-import com.silvericekey.skutilslibrary.netUtils.MockWebServerUtil
+import com.silvericekey.skutilslibrary.utils.HttpUtil
 import org.junit.Test
 
 class TestWebSocket {

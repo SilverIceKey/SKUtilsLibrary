@@ -1,8 +1,8 @@
 package com.silverknife.meizhi
 
 import android.annotation.SuppressLint
-import com.silvericekey.skutilslibrary.netUtils.HttpUtil
-import com.silvericekey.skutilslibrary.netUtils.NetCallback
+import com.silvericekey.skutilslibrary.utils.HttpUtil
+import com.silvericekey.skutilslibrary.net.NetCallback
 
 class LoginResponse {
 

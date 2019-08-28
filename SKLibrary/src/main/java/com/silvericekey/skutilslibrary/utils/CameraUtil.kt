@@ -1,17 +1,15 @@
-package com.silvericekey.skutilslibrary.camera
+package com.silvericekey.skutilslibrary.utils
 
 import android.content.Context
 import android.graphics.Matrix
-import android.os.Handler
-import android.os.HandlerThread
 import android.util.Rational
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView
 import androidx.camera.core.*
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
+import com.silvericekey.skutilslibrary.camera.AutoFitPreviewBuilder
+import com.silvericekey.skutilslibrary.camera.PreviewAnalyzer
 
 class CameraUtil {
     var context: Context? = null

@@ -1,9 +1,8 @@
 package com.silvericekey.skutilslibrary.base
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.silvericekey.skutilslibrary.permissionUtils.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(),EasyPermissions.PermissionCallbacks {

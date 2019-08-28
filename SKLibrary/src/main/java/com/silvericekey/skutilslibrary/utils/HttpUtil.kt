@@ -1,7 +1,9 @@
-package com.silvericekey.skutilslibrary.netUtils
+package com.silvericekey.skutilslibrary.utils
 
 import android.text.TextUtils
 import android.util.Log
+import com.silvericekey.skutilslibrary.net.AddCookiesInterceptor
+import com.silvericekey.skutilslibrary.net.ReceivedCookiesInterceptor
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okio.ByteString
@@ -9,7 +11,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.time.Duration
 import java.util.*
 import java.util.concurrent.TimeUnit
 

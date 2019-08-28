@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.uiUtils
+package com.silvericekey.skutilslibrary.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable

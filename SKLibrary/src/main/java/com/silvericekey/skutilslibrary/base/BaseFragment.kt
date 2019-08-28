@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.silvericekey.skutilslibrary.permissionUtils.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks {
@@ -33,8 +33,8 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-    var simpleCallback:PermissionUtil.PermissionSimpleCallback? = null;
-    var fullCallback:PermissionUtil.PermissionFullCallback? = null;
+    var simpleCallback: PermissionUtil.PermissionSimpleCallback? = null;
+    var fullCallback: PermissionUtil.PermissionFullCallback? = null;
     fun requestPermission(vararg permissions: String, callback: PermissionUtil.PermissionSimpleCallback) {
         simpleCallback = callback
         EasyPermissions.requestPermissions(this, "", PermissionUtil.PERMISSION_REQUEST, *permissions)

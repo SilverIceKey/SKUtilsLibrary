@@ -1,16 +1,12 @@
 package com.silvericekey.skutilslibrary
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
-import android.util.DisplayMetrics
-
+import com.blankj.utilcode.util.Utils
+import com.bumptech.glide.util.Util
 import com.facebook.drawee.backends.pipeline.Fresco
 
-import me.jessyan.autosize.AutoSize
-import me.jessyan.autosize.AutoSizeConfig
-import me.jessyan.autosize.unit.Subunits
-import me.jessyan.autosize.unit.UnitsManager
-import java.lang.NullPointerException
 
 /**
  * Created by silverknife on 2017/12/13.
@@ -19,8 +15,10 @@ import java.lang.NullPointerException
 @SuppressLint("StaticFieldLeak")
 object SKUtilsLibrary {
     var context: Context?=null
+    private val app_activity: Activity? = null
     fun init(context: Context) {
         this.context = context
+        Utils.init(context)
         Fresco.initialize(context)
     }
 }

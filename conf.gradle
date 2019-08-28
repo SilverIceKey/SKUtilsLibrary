@@ -42,7 +42,9 @@ ext {
             "rxandroid2_scalars_convert" : 'com.squareup.retrofit2:converter-scalars:2.6.1',
             "rxandroid2_adapter_rxjava2" : 'com.squareup.retrofit2:adapter-rxjava2:2.6.1',
             "okhttp3_logging-interceptor": 'com.squareup.okhttp3:logging-interceptor:4.1.0',
-            "mockwebserver"              : 'com.squareup.okhttp3:mockwebserver:4.1.0',
+            "aucx"                       : 'com.blankj:utilcodex:1.25.9',
+            "auc"                        : 'com.blankj:utilcode:1.25.9',
+            "zxing_core"                 : 'com.google.zxing:core:3.4.0',
 
             //---------------Androidx-----------------
             "androidx_appcompat"         : "androidx.appcompat:appcompat:1.0.2",

@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.locationUtils
+package com.silvericekey.skutilslibrary.utils
 
 import android.Manifest
 import android.content.Context

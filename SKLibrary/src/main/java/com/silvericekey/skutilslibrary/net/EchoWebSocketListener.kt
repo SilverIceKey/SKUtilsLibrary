@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.netUtils
+package com.silvericekey.skutilslibrary.net
 
 import okhttp3.Response
 import okhttp3.WebSocket

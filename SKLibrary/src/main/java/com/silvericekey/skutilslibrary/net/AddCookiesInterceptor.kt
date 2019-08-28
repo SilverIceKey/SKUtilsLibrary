@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.netUtils
+package com.silvericekey.skutilslibrary.net
 
 import android.content.Context
 import com.silvericekey.skutilslibrary.SKUtilsLibrary

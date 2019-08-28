@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.netUtils
+package com.silvericekey.skutilslibrary.net
 
 interface NetCallback<T> {
     fun onSuccess(response: T?)
