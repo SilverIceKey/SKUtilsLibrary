@@ -1,10 +1,12 @@
-SKUtilsLibrary
+# SKUtilsLibrary
 
 [![](https://www.jitpack.io/v/SilverIceKey/SKUtilsLibrary.svg)](https://www.jitpack.io/#SilverIceKey/SKUtilsLibrary)
 
 
 
-## 关于框架：
+### 关于框架：
+
+框架的support库是androidx，使用的语言是kotlin。
 
 框架主要是为了应付日常开发使用，集成大量第三方框架。
 
@@ -32,7 +34,7 @@ SKUtilsLibrary
 
 [AutoSize](https://github.com/JessYanCoding/AndroidAutoSize)
 
-# How to get to your project
+### How to get to your project
 
 Step 1. Add the JitPack repository to your build file
 
