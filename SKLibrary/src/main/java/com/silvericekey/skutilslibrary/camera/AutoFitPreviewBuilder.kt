@@ -16,28 +16,30 @@ package com.silvericekey.skutilslibrary.camera
  * limitations under the License.
  */
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Matrix
 import android.hardware.display.DisplayManager
 import android.util.Log
 import android.util.Size
-import android.view.Display
-import android.view.Surface
-import android.view.TextureView
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.camera.core.Preview
 import androidx.camera.core.PreviewConfig
-import java.lang.IllegalArgumentException
+import androidx.lifecycle.GenericLifecycleObserver
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import java.lang.ref.WeakReference
-import java.util.Objects
+import java.util.*
 
 /**
  * Builder for [Preview] that takes in a [WeakReference] of the view finder and [PreviewConfig],
  * then instantiates a [Preview] which automatically resizes and rotates reacting to config changes.
  */
 class AutoFitPreviewBuilder private constructor(
-        config: PreviewConfig, viewFinderRef: WeakReference<TextureView>) {
+        config: PreviewConfig, viewFinderRef: WeakReference<TextureView>, lifecycleOwner: LifecycleOwner) {
+
+    var isPauseToResume: Boolean = false
+    var isPause: Boolean = false
 
     /** Public instance of preview use-case which can be used by consumers of this adapter */
     val useCase: Preview
@@ -80,13 +82,28 @@ class AutoFitPreviewBuilder private constructor(
 
     init {
         // Make sure that the view finder reference is valid
-        val viewFinder = viewFinderRef.get() ?:
-        throw IllegalArgumentException("Invalid reference to view finder used")
+        val viewFinder = viewFinderRef.get()
+                ?: throw IllegalArgumentException("Invalid reference to view finder used")
 
         // Initialize the display and rotation from texture view information
         viewFinderDisplay = viewFinder.display.displayId
         viewFinderRotation = getDisplaySurfaceRotation(viewFinder.display) ?: 0
+        lifecycleOwner.lifecycle.addObserver(@SuppressLint("RestrictedApi")
+        object : GenericLifecycleObserver {
 
+            override fun onStateChanged(source: LifecycleOwner?, event: Lifecycle.Event?) {
+                if (event == Lifecycle.Event.ON_PAUSE) {
+                    isPause = true
+                } else if (event == Lifecycle.Event.ON_RESUME) {
+                    if (isPause) {
+                        isPauseToResume = true
+                        isPause = false
+                    }
+                } else if (event == Lifecycle.Event.ON_DESTROY) {
+                    source?.lifecycle?.removeObserver(this)
+                }
+            }
+        })
         // Initialize public use-case with the given config
         useCase = Preview(config)
 
@@ -141,6 +158,7 @@ class AutoFitPreviewBuilder private constructor(
         viewFinder.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
             override fun onViewAttachedToWindow(view: View?) =
                     displayManager.registerDisplayListener(displayListener, null)
+
             override fun onViewDetachedFromWindow(view: View?) =
                     displayManager.unregisterDisplayListener(displayListener)
         })
@@ -154,7 +172,7 @@ class AutoFitPreviewBuilder private constructor(
 
         if (rotation == viewFinderRotation &&
                 Objects.equals(newBufferDimens, bufferDimens) &&
-                Objects.equals(newViewFinderDimens, viewFinderDimens)) {
+                Objects.equals(newViewFinderDimens, viewFinderDimens) && !isPauseToResume) {
             // Nothing has changed, no need to transform output again
             return
         }
@@ -210,7 +228,7 @@ class AutoFitPreviewBuilder private constructor(
             scaledHeight = viewFinderDimens.height
             scaledWidth = Math.round(viewFinderDimens.height * bufferRatio)
         }
-
+        isPauseToResume = false
         // Compute the relative scale value
         val xScale = scaledWidth / viewFinderDimens.width.toFloat()
         val yScale = scaledHeight / viewFinderDimens.height.toFloat()
@@ -226,7 +244,7 @@ class AutoFitPreviewBuilder private constructor(
         private val TAG = AutoFitPreviewBuilder::class.java.simpleName
 
         /** Helper function that gets the rotation of a [Display] in degrees */
-        fun getDisplaySurfaceRotation(display: Display?) = when(display?.rotation) {
+        fun getDisplaySurfaceRotation(display: Display?) = when (display?.rotation) {
             Surface.ROTATION_0 -> 0
             Surface.ROTATION_90 -> 90
             Surface.ROTATION_180 -> 180
@@ -239,7 +257,7 @@ class AutoFitPreviewBuilder private constructor(
          * of [Preview] which automatically adjusts in size and rotation to compensate for
          * config changes.
          */
-        fun build(config: PreviewConfig, viewFinder: TextureView) =
-                AutoFitPreviewBuilder(config, WeakReference(viewFinder)).useCase
+        fun build(config: PreviewConfig, viewFinder: TextureView, lifecycleOwner: LifecycleOwner) =
+                AutoFitPreviewBuilder(config, WeakReference(viewFinder), lifecycleOwner).useCase
     }
 }

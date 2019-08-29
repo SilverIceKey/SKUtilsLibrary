@@ -1,5 +1,6 @@
 package com.silvericekey.skutilslibrary.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Matrix
 import android.util.Rational
@@ -7,6 +8,8 @@ import android.util.Size
 import android.view.Surface
 import android.view.TextureView
 import androidx.camera.core.*
+import androidx.lifecycle.GenericLifecycleObserver
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.silvericekey.skutilslibrary.camera.AutoFitPreviewBuilder
 import com.silvericekey.skutilslibrary.camera.PreviewAnalyzer
@@ -14,9 +17,11 @@ import com.silvericekey.skutilslibrary.camera.PreviewAnalyzer
 class CameraUtil {
     var context: Context? = null
     var useCases = arrayOf<UseCase>()
+    var analyzerConfig: ImageAnalysisConfig? = null
 
     constructor(context: Context) {
         this.context = context
+        analyzerConfig = ImageAnalysisConfig.Builder().build()
     }
 
     private var view_finder: TextureView? = null
@@ -38,14 +43,18 @@ class CameraUtil {
     }
 
     fun addUseCase(addUseCase: ImageAnalysis.() -> Unit): CameraUtil {
-        val analyzerConfig = ImageAnalysisConfig.Builder().build()
-
         // Build the image analysis use case and instantiate our analyzer
         val analyzerUseCase = ImageAnalysis(analyzerConfig).apply {
             addUseCase()
         }
         useCases.plus(analyzerUseCase)
         return this
+    }
+
+    fun changeCamera() {
+        CameraX.unbindAll()
+        if (cameraId == CameraX.LensFacing.FRONT) cameraId = CameraX.LensFacing.BACK else cameraId = CameraX.LensFacing.FRONT
+        startCamera()
     }
 
     fun startCamera() {
@@ -62,8 +71,6 @@ class CameraUtil {
             setTargetResolution(Size(view_finder.measuredWidth, view_finder.measuredHeight))
             setLensFacing(cameraId)
         }.build()
-
-
         // Setup image analysis pipeline that computes average pixel luminance
         val analyzerConfig = ImageAnalysisConfig.Builder().build()
 
@@ -74,19 +81,7 @@ class CameraUtil {
         }
 
         // Build the viewfinder use case
-        val preview = AutoFitPreviewBuilder.build(previewConfig, view_finder)
-
-        // Every time the viewfinder is updated, recompute layout
-//        preview.setOnPreviewOutputUpdateListener {
-//
-//            // To update the SurfaceTexture, we have to remove it and re-add it
-//            val parent = view_finder.parent as ViewGroup
-//            parent.removeView(view_finder)
-//            parent.addView(view_finder, 0)
-//
-//            view_finder.surfaceTexture = it.surfaceTexture
-//            updateTransform(view_finder)
-//        }
+        val preview = AutoFitPreviewBuilder.build(previewConfig, view_finder,lifecycleOwner)
 
         // Bind use cases to lifecycle
         // If Android Studio complains about "this" being not a LifecycleOwner

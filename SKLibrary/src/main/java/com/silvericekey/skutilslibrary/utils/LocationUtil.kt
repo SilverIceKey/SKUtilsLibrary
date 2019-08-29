@@ -1,6 +1,7 @@
 package com.silvericekey.skutilslibrary.utils
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -9,10 +10,7 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-
 import androidx.core.app.ActivityCompat
-
-import android.content.ContentValues.TAG
 
 class LocationUtil private constructor(private val mContext: Context) {
     private var locationManager: LocationManager? = null
