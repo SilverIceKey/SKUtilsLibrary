@@ -2,14 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
+def cfg = rootProject.ext.android
 android {
-    compileSdkVersion 28
+    compileSdkVersion cfg["compileSdkVersion"]
+
     defaultConfig {
-        applicationId "com.silverknife.meizhi"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion cfg["appMinSdkVersion"]
+        targetSdkVersion cfg["targetSdkVersion"]
+        versionCode cfg["versionCode"]
+        versionName cfg["versionName"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

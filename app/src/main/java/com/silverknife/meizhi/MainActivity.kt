@@ -26,10 +26,6 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
         mPresenter.getData()
     }
 
-    fun camera(view: View) {
-        startActivity(Intent(this@MainActivity, CameraActivity::class.java))
-    }
-
     fun webSocketRequest(view: View) {
         mPresenter.webSocketRequest()
     }

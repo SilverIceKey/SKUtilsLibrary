@@ -28,15 +28,6 @@
             android:text="长连接请求" />
 
         <Button
-            android:id="@+id/camera"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center|center_vertical"
-            android:onClick="camera"
-            android:text="摄像机" />
-
-        <Button
             android:id="@+id/request_install_permission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

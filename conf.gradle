@@ -2,11 +2,11 @@ ext {
 
     android = [
             libMinSdkVersion : 14,
-            appMinSdkVersion : 21,
-            targetSdkVersion : 28,
-            compileSdkVersion: 28,
-            versionCode      : 1,
-            versionName      : "1.0.0",
+            appMinSdkVersion : 15,
+            targetSdkVersion : 29,
+            compileSdkVersion: 29,
+            versionCode      : 3,
+            versionName      : "1.0.3",
     ]
 
     depsVersion = [
@@ -48,8 +48,6 @@ ext {
 
             //---------------Androidx-----------------
             "androidx_appcompat"         : "androidx.appcompat:appcompat:1.0.2",
-            "camera-core"                : "androidx.camera:camera-core:${camerax_version}",
-            "camera-camera2"             : "androidx.camera:camera-camera2:${camerax_version}",
             "easypermissions"            : "pub.devrel:easypermissions:3.0.0",
 
             // ------------- Test dependencies -------------
