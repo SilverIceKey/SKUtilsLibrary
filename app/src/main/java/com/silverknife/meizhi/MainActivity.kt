@@ -8,6 +8,7 @@ import com.silvericekey.skutilslibrary.base.BaseActivity
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import com.silvericekey.skutilslibrary.utils.QRCodeUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : BaseActivity<MainPresenter>(), IMainView {
     override fun setResponse(response: String) {
