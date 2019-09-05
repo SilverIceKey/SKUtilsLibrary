@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
 import com.silvericekey.skutilslibrary.base.BaseActivity
+import com.silvericekey.skutilslibrary.utils.ImageUtil
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import com.silvericekey.skutilslibrary.utils.QRCodeUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,6 +18,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
 
     override fun getLayoutID(): Int = R.layout.activity_main
     var textStr = "暂无数据"
+
     override fun initView() {
         text.text = textStr
     }
