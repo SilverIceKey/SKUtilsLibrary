@@ -1,1 +1,1 @@
-include ':app', ':SKLibrary', ':autosize'
+include ':app', ':SKLibrary', ':autosize', ':FlycoSystemBar_Lib'

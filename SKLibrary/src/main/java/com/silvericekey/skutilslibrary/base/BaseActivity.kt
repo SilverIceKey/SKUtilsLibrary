@@ -5,26 +5,31 @@ import androidx.appcompat.app.AppCompatActivity
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(),EasyPermissions.PermissionCallbacks {
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     protected lateinit var mPresenter: T
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutID())
+        initStatusBar()
         mPresenter = initPresenter()
         initView()
     }
 
-    abstract fun getLayoutID():Int
+    abstract fun getLayoutID(): Int
 
     abstract fun initView()
 
     abstract fun initPresenter(): T
 
+    fun initStatusBar() {
+        BaseApplication.getApp().statusChange()
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
     var simpleCallback: PermissionUtil.PermissionSimpleCallback? = null;

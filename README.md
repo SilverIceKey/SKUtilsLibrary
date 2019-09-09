@@ -34,6 +34,8 @@
 
 [AutoSize](https://github.com/JessYanCoding/AndroidAutoSize)
 
+[FlycoSystemBar](https://github.com/H07000223/FlycoSystemBar)
+
 ### How to get to your project
 
 Step 1. Add the JitPack repository to your build file

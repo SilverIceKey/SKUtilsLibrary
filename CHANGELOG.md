@@ -1,3 +1,5 @@
 - `2019/08/29` 摄像头从onPause到onResume是画面切换回原来view的设置大小导致画面拉伸的bug修复，新增切换摄像头功能。
 - ```2019/09/03```  将camerax从库中移除，因为camerax的最小兼容为android21 部分设备还是15-21之间
 - ```2019/09/04```  ImageUtil增加Builder类用于创建requestOption或者使用Builder类下getOption设置参数创建requestOption
+- ```2019/09/09``` ImageUtil类名修改为ImageLoaderUtil方法名不变;新增第三方库FlycoSystemBar并修改为androidx支持;新增BaseApplication类，使用者请继承此类，新增statusChange方法用于全局修改状态栏;BaseActivity中新增initStatusBar方法用于修改状态栏，默认调用BaseApplication中的statusChange方法。
+

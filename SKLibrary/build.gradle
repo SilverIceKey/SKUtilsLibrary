@@ -50,6 +50,7 @@ dependencies {
     api rootProject.ext.deps['rxandroid2_scalars_convert']
     api rootProject.ext.deps['rxandroid2_adapter_rxjava2']
     api project(":autosize")
+    api project(":FlycoSystemBar_Lib")
     api "androidx.core:core-ktx:+"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

@@ -1,15 +1,12 @@
 package com.silverknife.meizhi
 
-import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
 import com.silvericekey.skutilslibrary.base.BaseActivity
-import com.silvericekey.skutilslibrary.utils.ImageUtil
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import com.silvericekey.skutilslibrary.utils.QRCodeUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : BaseActivity<MainPresenter>(), IMainView {
     override fun setResponse(response: String) {

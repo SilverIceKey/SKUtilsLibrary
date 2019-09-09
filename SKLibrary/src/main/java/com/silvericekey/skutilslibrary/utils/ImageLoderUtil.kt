@@ -1,7 +1,10 @@
 package com.silvericekey.skutilslibrary.utils
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.view.View
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestBuilder
@@ -15,7 +18,7 @@ import com.silvericekey.skutilslibrary.SKUtilsLibrary
  * Created by Administrator on 2017/5/24.
  */
 
-object ImageUtil {
+object ImageLoderUtil {
     fun bindImg(url: String, options: RequestOptions): RequestBuilder<*> {
         return bindImg(SKUtilsLibrary.context!!, url, options)
     }
@@ -26,6 +29,34 @@ object ImageUtil {
                 .load(url)
                 .apply(options)
 
+    }
+
+    fun bindImg(activity: Activity, url: String, options: RequestOptions): RequestBuilder<*> {
+        val requestManager = Glide.with(activity)
+        return requestManager
+                .load(url)
+                .apply(options)
+
+    }
+
+    fun bindImg(fragment: Fragment, url: String, options: RequestOptions): RequestBuilder<*> {
+        val requestManager = Glide.with(fragment)
+        return requestManager
+                .load(url)
+                .apply(options)
+
+    }
+
+    fun clear(context: Context, image: View) {
+        Glide.with(context).clear(image)
+    }
+
+    fun clear(activity: Activity, image: View) {
+        Glide.with(activity).clear(image)
+    }
+
+    fun clear(fragment: Fragment, image: View) {
+        Glide.with(fragment).clear(image)
     }
 
     class Builder {
