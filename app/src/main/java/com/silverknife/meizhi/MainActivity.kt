@@ -1,5 +1,6 @@
 package com.silverknife.meizhi
 
+import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
@@ -28,6 +29,11 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
 
     fun webSocketRequest(view: View) {
         mPresenter.webSocketRequest()
+    }
+
+    fun tabs(view: View) {
+        var intent = Intent(MainActivity@this,TabsActivity::class.java)
+        startActivity(intent)
     }
 
     fun requestInstallPermission(view: View) {

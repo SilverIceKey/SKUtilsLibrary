@@ -3,8 +3,8 @@ ext {
     android = [
             libMinSdkVersion : 14,
             appMinSdkVersion : 15,
-            targetSdkVersion : 29,
-            compileSdkVersion: 29,
+            targetSdkVersion : 28,
+            compileSdkVersion: 28,
             versionCode      : 4,
             versionName      : "1.0.4",
     ]
@@ -17,7 +17,7 @@ ext {
             agera        : '1.1.0',
             butterKnife  : '8.8.1',
     ]
-    def camerax_version = "1.0.0-alpha01"
+
     deps = [
             // ------------- Three Parts -------------
 
@@ -48,6 +48,7 @@ ext {
 
             //---------------Androidx-----------------
             "androidx_appcompat"         : "androidx.appcompat:appcompat:1.0.2",
+            "material"                   : "com.google.android.material:material:1.0.0",
             "easypermissions"            : "pub.devrel:easypermissions:3.0.0",
 
             // ------------- Test dependencies -------------

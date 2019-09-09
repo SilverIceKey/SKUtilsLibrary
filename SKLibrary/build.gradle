@@ -29,6 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // ------------- Three Parts -------------
     compileOnly rootProject.ext.deps["androidx_appcompat"]
+    api rootProject.ext.deps["material"]
     api rootProject.ext.deps["easypermissions"]
     api rootProject.ext.deps["eventBus"]
     api rootProject.ext.deps["glide"]
@@ -51,6 +52,7 @@ dependencies {
     api rootProject.ext.deps['rxandroid2_adapter_rxjava2']
     api project(":autosize")
     api project(":FlycoSystemBar_Lib")
+    api project(":gluetablayout")
     api "androidx.core:core-ktx:+"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

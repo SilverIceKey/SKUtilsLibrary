@@ -36,6 +36,8 @@
 
 [FlycoSystemBar](https://github.com/H07000223/FlycoSystemBar)
 
+[GlueTabLayout](https://github.com/negier/GlueTabLayout)
+
 ### How to get to your project
 
 Step 1. Add the JitPack repository to your build file
