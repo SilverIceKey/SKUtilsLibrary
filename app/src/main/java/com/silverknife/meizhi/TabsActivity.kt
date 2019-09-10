@@ -1,10 +1,14 @@
 package com.silverknife.meizhi
 
+import android.view.View
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
+import com.blankj.utilcode.util.SizeUtils
 import com.negier.gluetablayout.BasePagerAdapter
 import com.negier.gluetablayout.GlueTabLayout
 import com.silvericekey.skutilslibrary.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_tabs.*
+import kotlinx.android.synthetic.main.tab_custom_view.view.*
 
 class TabsActivity : BaseActivity<TabsPresenter>() {
     private val weibo = arrayOf("精选", "推荐", "榜单", "故事", "综艺", "剧集", "VLOG", "明星", "电影")
@@ -29,6 +33,23 @@ class TabsActivity : BaseActivity<TabsPresenter>() {
 
             override fun getPageIcon(position: Int): Int {
                 return R.drawable.ic_switch_camera_black_24dp
+            }
+
+            override fun getPageCustomView(position: Int): View {
+                var custom = layoutInflater.inflate(R.layout.tab_custom_view, null)
+                custom.text.text = weibo[position]
+                custom.num.text = if ((position * 10).toString().equals("0")) "" else (position * 10).toString()
+                var layoutParams = custom.num.layoutParams as RelativeLayout.LayoutParams
+                if ((position * 10).toString().equals("0")) {
+                    layoutParams.width = SizeUtils.dp2px(10f)
+                    layoutParams.height = SizeUtils.dp2px(10f)
+                }else{
+                    layoutParams.width = RelativeLayout.LayoutParams.WRAP_CONTENT
+                    layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT
+                }
+                layoutParams.leftMargin = custom.icon.width - SizeUtils.dp2px(5f)
+                custom.num.layoutParams = layoutParams
+                return custom
             }
         }
         //GlueTabLayout 设置下划线指示器圆角

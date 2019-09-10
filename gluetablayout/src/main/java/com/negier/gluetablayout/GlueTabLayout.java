@@ -29,6 +29,7 @@ import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SoundEffectConstants;
 import android.view.View;
@@ -697,7 +698,11 @@ public class GlueTabLayout extends HorizontalScrollView {
 
             int curItem;
             for (curItem = 0; curItem < adapterCount; ++curItem) {
-                this.addTab(this.newTab().setText(this.pagerAdapter.getPageTitle(curItem)).setIcon(this.pagerAdapter.getPageIcon(curItem)), false);
+                if (this.pagerAdapter.getPageCustomView(curItem) != null) {
+                    this.addTab(this.newTab().setCustomView(this.pagerAdapter.getPageCustomView(curItem)), false);
+                } else {
+                    this.addTab(this.newTab().setText(this.pagerAdapter.getPageTitle(curItem)).setIcon(this.pagerAdapter.getPageIcon(curItem)), false);
+                }
             }
 
             if (this.viewPager != null && adapterCount > 0) {
@@ -1039,7 +1044,7 @@ public class GlueTabLayout extends HorizontalScrollView {
             }
         }
 
-        return hasIconAndText && !this.inlineLabel ? 72 : 48;
+        return hasIconAndText && !this.inlineLabel ? DEFAULT_HEIGHT_WITH_TEXT_ICON : DEFAULT_HEIGHT;
     }
 
     private int getTabMinWidth() {
@@ -1549,10 +1554,10 @@ public class GlueTabLayout extends HorizontalScrollView {
             super(context);
             this.updateBackgroundDrawable(context);
             ViewCompat.setPaddingRelative(this, GlueTabLayout.this.tabPaddingStart, GlueTabLayout.this.tabPaddingTop, GlueTabLayout.this.tabPaddingEnd, GlueTabLayout.this.tabPaddingBottom);
-            this.setGravity(17);
-            this.setOrientation(GlueTabLayout.this.inlineLabel ? 0 : 1);
+            this.setGravity(Gravity.CENTER);
+            this.setOrientation(GlueTabLayout.this.inlineLabel ? HORIZONTAL : VERTICAL);
             this.setClickable(true);
-            ViewCompat.setPointerIcon(this, PointerIconCompat.getSystemIcon(this.getContext(), 1002));
+            ViewCompat.setPointerIcon(this, PointerIconCompat.getSystemIcon(this.getContext(), PointerIconCompat.TYPE_HAND));
         }
 
         @SuppressLint("RestrictedApi")
@@ -1893,7 +1898,7 @@ public class GlueTabLayout extends HorizontalScrollView {
         private Drawable icon;
         private CharSequence text;
         private CharSequence contentDesc;
-        private int position = -1;
+        private int position = INVALID_POSITION;
         private View customView;
         public GlueTabLayout parent;
         public GlueTabLayout.TabView view;

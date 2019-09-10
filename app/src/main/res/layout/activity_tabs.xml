@@ -8,8 +8,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="20dp">
+        android:layout_height="match_parent">
 
         <com.negier.gluetablayout.GlueTabLayout
             android:id="@+id/tab_layout"
