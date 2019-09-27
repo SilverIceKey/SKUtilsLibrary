@@ -1,4 +1,4 @@
-package com.silverknife.meizhi
+package com.silverknife.meizhi.mvp.presenter
 
 import com.silvericekey.skutilslibrary.base.BasePresenter
 

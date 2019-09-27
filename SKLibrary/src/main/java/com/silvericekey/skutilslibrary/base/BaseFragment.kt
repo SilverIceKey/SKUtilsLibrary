@@ -9,7 +9,7 @@ import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks {
-    protected lateinit var mPresenter: T
+    protected var mPresenter: T? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mPresenter = initPresenter()
@@ -27,6 +27,17 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
     abstract fun initView(view: View)
 
     abstract fun initPresenter(): T
+
+    open fun onVisibale() {
+
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (mPresenter != null&&isVisibleToUser) {
+            onVisibale()
+        }
+    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -55,7 +66,7 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
     }
 
     override fun onDestroy() {
-        mPresenter.onDestroy()
+        mPresenter?.onDestroy()
         super.onDestroy()
     }
 }

@@ -4,8 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import com.blankj.utilcode.util.Utils
-import com.bumptech.glide.util.Util
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.silvericekey.skutilslibrary.base.BasePresenter
+import java.util.*
 
 
 /**
@@ -14,7 +15,9 @@ import com.facebook.drawee.backends.pipeline.Fresco
 
 @SuppressLint("StaticFieldLeak")
 object SKUtilsLibrary {
-    var context: Context?=null
+    @JvmStatic
+    var presenters: ArrayList<BasePresenter> = arrayListOf()
+    var context: Context? = null
     private val app_activity: Activity? = null
     fun init(context: Context) {
         this.context = context

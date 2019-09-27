@@ -1,4 +1,4 @@
-package com.silverknife.meizhi
+package com.silverknife.meizhi.app
 
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
 import com.silvericekey.skutilslibrary.base.BaseApplication

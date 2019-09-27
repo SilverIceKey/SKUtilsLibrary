@@ -1,4 +1,4 @@
-package com.silverknife.meizhi
+package com.silverknife.meizhi.app.net
 
 import okhttp3.Interceptor
 import okhttp3.Response

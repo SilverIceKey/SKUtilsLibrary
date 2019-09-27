@@ -1,8 +1,10 @@
-package com.silverknife.meizhi
+package com.silverknife.meizhi.mvp.model
 
 import android.annotation.SuppressLint
 import com.silvericekey.skutilslibrary.rxjava.execute
 import com.silvericekey.skutilslibrary.utils.HttpUtil
+import com.silverknife.meizhi.app.net.TestInterceptor
+import com.silverknife.meizhi.app.Api
 
 class LoginResponse {
 

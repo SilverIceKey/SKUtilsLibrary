@@ -3,7 +3,6 @@ package com.silvericekey.skutilslibrary.data
 import android.content.Context
 import android.content.SharedPreferences
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
-import java.lang.IllegalArgumentException
 import kotlin.reflect.KProperty
 
 class Preference<T>(val name: String, val default: T) {

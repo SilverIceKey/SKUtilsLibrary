@@ -1,5 +1,7 @@
-package com.silverknife.meizhi
+package com.silverknife.meizhi.app
 
+import com.silverknife.meizhi.mvp.model.GankResponse
+import com.silverknife.meizhi.mvp.model.LoginResponse
 import retrofit2.Call
 
 import retrofit2.http.GET
@@ -15,4 +17,7 @@ interface Api {
     @GET("api.php?s=Login/index")
     fun login(@Query("account") phoneu: String,
               @Query("password") password: String): Call<LoginResponse>
+
+    @GET("api/today")
+    fun today():Call<GankResponse>
 }

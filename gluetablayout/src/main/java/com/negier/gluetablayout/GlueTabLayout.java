@@ -700,7 +700,9 @@ public class GlueTabLayout extends HorizontalScrollView {
             for (curItem = 0; curItem < adapterCount; ++curItem) {
                 if (this.pagerAdapter.getPageCustomView(curItem) != null) {
                     this.addTab(this.newTab().setCustomView(this.pagerAdapter.getPageCustomView(curItem)), false);
-                } else {
+                } else if (this.pagerAdapter.getPageIcon(curItem)==0){
+                    this.addTab(this.newTab().setText(this.pagerAdapter.getPageTitle(curItem)), false);
+                }else {
                     this.addTab(this.newTab().setText(this.pagerAdapter.getPageTitle(curItem)).setIcon(this.pagerAdapter.getPageIcon(curItem)), false);
                 }
             }

@@ -1,8 +1,8 @@
 package com.silvericekey.skutilslibrary.base
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 
-open class BaseApplication : Application() {
+open class BaseApplication : MultiDexApplication() {
     companion object {
         @JvmStatic
         private var app: BaseApplication? = null

@@ -11,10 +11,24 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (savedInstanceState != null) {
+            this.intent.putExtras(savedInstanceState)
+        }
         setContentView(getLayoutID())
         initStatusBar()
         mPresenter = initPresenter()
         initView()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.putAll(this.intent.extras)
+        saveDataWhenKill(savedInstanceState)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        mPresenter.refreshData()
     }
 
     abstract fun getLayoutID(): Int
@@ -22,6 +36,10 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
     abstract fun initView()
 
     abstract fun initPresenter(): T
+
+    fun saveDataWhenKill(outState: Bundle?) {
+
+    }
 
     fun initStatusBar() {
         BaseApplication.getApp().statusChange()

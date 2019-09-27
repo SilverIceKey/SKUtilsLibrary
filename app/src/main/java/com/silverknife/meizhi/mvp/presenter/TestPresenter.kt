@@ -1,13 +1,19 @@
-package com.silverknife.meizhi
+package com.silverknife.meizhi.mvp.presenter
 
 import com.blankj.utilcode.util.ToastUtils
 import com.silvericekey.skutilslibrary.base.BasePresenter
 import com.silvericekey.skutilslibrary.utils.HttpUtil
+import com.silverknife.meizhi.mvp.model.LoginResponse
+import com.silverknife.meizhi.mvp.ui.interfaces.ITestView
 
-class MainPresenter : BasePresenter {
-    private var mIView: IMainView?
+class TestPresenter : BasePresenter {
+    override fun onDestroy() {
+        mIView = null
+    }
 
-    constructor(mIView: IMainView) {
+    private var mIView: ITestView?
+
+    constructor(mIView: ITestView) {
         this.mIView = mIView
     }
 
@@ -23,9 +29,5 @@ class MainPresenter : BasePresenter {
 
     fun webSocketRequest() {
         HttpUtil.webSocketTest()
-    }
-
-    override fun onDestroy() {
-        mIView = null
     }
 }

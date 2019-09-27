@@ -1,8 +1,10 @@
-package com.silverknife.meizhi
+package com.silverknife.meizhi.mvp.ui.fragment
 
 import android.os.Bundle
 import android.view.View
 import com.silvericekey.skutilslibrary.base.BaseFragment
+import com.silverknife.meizhi.R
+import com.silverknife.meizhi.mvp.presenter.TabPresenter
 import kotlinx.android.synthetic.main.tab_tmp.*
 
 class TabFragment : BaseFragment<TabPresenter>() {

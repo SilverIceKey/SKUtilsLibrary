@@ -1,4 +1,4 @@
-package com.silverknife.meizhi
+package com.silverknife.meizhi.mvp.ui.activity
 
 import android.view.View
 import android.widget.RelativeLayout
@@ -7,6 +7,9 @@ import com.blankj.utilcode.util.SizeUtils
 import com.negier.gluetablayout.BasePagerAdapter
 import com.negier.gluetablayout.GlueTabLayout
 import com.silvericekey.skutilslibrary.base.BaseActivity
+import com.silverknife.meizhi.R
+import com.silverknife.meizhi.mvp.presenter.TabsPresenter
+import com.silverknife.meizhi.mvp.ui.fragment.TabFragment
 import kotlinx.android.synthetic.main.activity_tabs.*
 import kotlinx.android.synthetic.main.tab_custom_view.view.*
 

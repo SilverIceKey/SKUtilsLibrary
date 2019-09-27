@@ -38,7 +38,7 @@ dependencies {
     api rootProject.ext.deps["fresco"]
     api rootProject.ext.deps["aucx"]
     api rootProject.ext.deps["zxing_core"]
-//    api rootProject.ext.deps["auc"]
+    api rootProject.ext.deps["BaseRecyclerViewAdapterHelper"]
     api rootProject.ext.deps["otto"]
     annotationProcessor rootProject.ext.deps["auto_service"]
 
@@ -50,6 +50,7 @@ dependencies {
     api rootProject.ext.deps['rxandroid2_gson_convert']
     api rootProject.ext.deps['rxandroid2_scalars_convert']
     api rootProject.ext.deps['rxandroid2_adapter_rxjava2']
+    api rootProject.ext.deps['multidex']
     api project(":autosize")
     api project(":FlycoSystemBar_Lib")
     api project(":gluetablayout")

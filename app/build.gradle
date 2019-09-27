@@ -11,6 +11,7 @@ android {
         targetSdkVersion cfg["targetSdkVersion"]
         versionCode cfg["versionCode"]
         versionName cfg["versionName"]
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

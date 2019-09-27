@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|center_vertical"
+            android:onClick="request"
+            android:text="请求" />
+
+        <Button
+            android:id="@+id/websocker_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|center_vertical"
+            android:onClick="webSocketRequest"
+            android:text="长连接请求" />
+
+        <Button
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|center_vertical"
+            android:onClick="tabs"
+            android:text="标签" />
+
+        <Button
+            android:id="@+id/request_install_permission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|center_vertical"
+            android:onClick="requestInstallPermission"
+            android:text="请求安装权限" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+
+        <EditText
+            android:id="@+id/qr_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入二维码信息" />
+
+        <Button
+            android:id="@+id/create_qr_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="生成二维码"
+            android:onClick="createQRCode" />
+
+        <ImageView
+            android:id="@+id/qr_img"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
