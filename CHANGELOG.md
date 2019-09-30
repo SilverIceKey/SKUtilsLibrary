@@ -5,3 +5,4 @@
 - ```2019/09/09``` 新增自定义TabLayout：GlueTabLayout;新增扩展PagerAdapter：BasePagerAdapter。
 - ```2019/09/10``` BasePageAdapter新增getPageView方法用于设定GlueTabLayout的标签，新增FlycoSystemBar的jitpack添加，GlueTabLayout的jitpack添加
 - ```2019/09/29``` BaseFragment新增onVisibale判断是否从后台切换回前台，取消fragment下presenter的lateinit让onVisible判断标准为非初次加载，自动集成MultiDex，让Application继承BaseApplication即可，最小SDK支持变更为16，GlueTabLayout中修改Icon为非必传，demo界面修改，新增干货集中营API，待完善。
+- ```2019/09/30``` 修复福利界面图片无法加载的bug，修复多图片recyclerview空白处无法点击跳转的bug，新增图片预览功能，使用框架photoview。

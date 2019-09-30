@@ -10,5 +10,6 @@ class GankItemImagesAdapter : BaseQuickAdapter<String, GankItemImageHolder>(R.la
     override fun convert(helper: GankItemImageHolder, item: String?) {
         var option = ImageLoderUtil.Builder().build()
         ImageLoderUtil.bindImg(ActivityUtils.getTopActivity(), item.toString(), option).into(helper.image)
+        helper.addOnClickListener(helper.image.id)
     }
 }

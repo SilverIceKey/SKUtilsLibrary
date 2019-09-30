@@ -5,8 +5,8 @@ ext {
             appMinSdkVersion : 16,
             targetSdkVersion : 28,
             compileSdkVersion: 28,
-            versionCode      : 7,
-            versionName      : "1.0.7",
+            versionCode      : 8,
+            versionName      : "1.0.8",
     ]
 
     depsVersion = [
@@ -45,12 +45,13 @@ ext {
             "aucx"                         : 'com.blankj:utilcodex:1.25.9',
             "auc"                          : 'com.blankj:utilcode:1.25.9',
             "zxing_core"                   : 'com.google.zxing:core:3.4.0',
+            "PhotoView"                    : 'com.github.chrisbanes:PhotoView:2.3.0',
 
             //---------------Androidx-----------------
             "androidx_appcompat"           : "androidx.appcompat:appcompat:1.0.2",
             "material"                     : "com.google.android.material:material:1.0.0",
             "easypermissions"              : "pub.devrel:easypermissions:3.0.0",
-            "multidex"              : "androidx.multidex:multidex:2.0.1",
+            "multidex"                     : "androidx.multidex:multidex:2.0.1",
             "BaseRecyclerViewAdapterHelper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.48-androidx',
 
             // ------------- Test dependencies -------------

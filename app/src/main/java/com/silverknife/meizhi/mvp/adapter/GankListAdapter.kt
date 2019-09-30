@@ -10,6 +10,7 @@ import com.silverknife.meizhi.mvp.model.GankItemModel
 import com.silverknife.meizhi.mvp.ui.holder.GankListHolder
 
 class GankListAdapter : BaseQuickAdapter<GankItemModel, GankListHolder>(R.layout.gank_list_item) {
+    var listener: onImagesClickListener? = null
     override fun convert(helper: GankListHolder, item: GankItemModel?) {
         helper.contentTitle.text = item!!.desc
         if (item.images != null) {
@@ -18,14 +19,30 @@ class GankListAdapter : BaseQuickAdapter<GankItemModel, GankListHolder>(R.layout
             imagesAdapter.bindToRecyclerView(helper.images)
             imagesAdapter.setNewData(item.images)
             helper.images.visibility = View.VISIBLE
+            imagesAdapter.setOnItemChildClickListener { adapter, view, position ->
+                listener?.onImagesClick(adapter.getItem(position) as String)
+            }
+            helper.images.viewTreeObserver.addOnGlobalLayoutListener {
+                helper.images.postDelayed({
+                    helper.images.isLayoutFrozen = true
+                },300)
+            }
+//            helper.images.isLayoutFrozen = true
         } else {
             helper.images.visibility = View.GONE
+            helper.images.viewTreeObserver.addOnGlobalLayoutListener {
+                helper.images.postDelayed({
+                    helper.images.isLayoutFrozen = true
+                },300)
+            }
+//            helper.images.isLayoutFrozen = true
         }
-        if (item.url.endsWith(".jpg")){
+        if (item.url.endsWith(".jpg")) {
             var option = ImageLoderUtil.Builder().build()
-            ImageLoderUtil.bindImg(ActivityUtils.getTopActivity(), item.toString(), option).into(helper.image)
+            ImageLoderUtil.bindImg(ActivityUtils.getTopActivity(), item.url, option).into(helper.image)
             helper.image.visibility = View.VISIBLE
-        }else{
+            helper.addOnClickListener(helper.image.id)
+        } else {
             helper.image.visibility = View.GONE
         }
         if (item.used) {
@@ -35,5 +52,9 @@ class GankListAdapter : BaseQuickAdapter<GankItemModel, GankListHolder>(R.layout
         }
         helper.who.text = item.who
         helper.time.text = item.publishedAt.split("T")[0]
+    }
+
+    interface onImagesClickListener {
+        fun onImagesClick(url: String)
     }
 }

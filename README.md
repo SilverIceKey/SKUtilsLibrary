@@ -40,6 +40,8 @@
 
 [BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 
+[PhotoView](https://github.com/chrisbanes/PhotoView)
+
 ### How to get to your project
 
 Step 1. Add the JitPack repository to your build file
