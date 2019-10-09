@@ -2,7 +2,7 @@ package com.silverknife.meizhi.mvp.presenter
 
 import com.silvericekey.skutilslibrary.base.BasePresenter
 
-class MainPresenter : BasePresenter() {
+class XianduPresenter: BasePresenter() {
     override fun onDestroy() {
 
     }

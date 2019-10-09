@@ -1,69 +1,59 @@
 package com.silverknife.meizhi.mvp.ui.activity
 
-import android.Manifest
-import android.view.View
-import android.widget.RelativeLayout
-import androidx.core.content.ContextCompat
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import com.blankj.utilcode.util.PermissionUtils
-import com.blankj.utilcode.util.SizeUtils
-import com.negier.gluetablayout.BasePagerAdapter
-import com.negier.gluetablayout.GlueTabLayout
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.navigation.NavigationView
 import com.silvericekey.skutilslibrary.base.BaseActivity
 import com.silverknife.meizhi.R
 import com.silverknife.meizhi.mvp.presenter.MainPresenter
-import com.silverknife.meizhi.mvp.ui.fragment.GankFragment
-import com.silverknife.meizhi.mvp.ui.fragment.TabFragment
-import com.silverknife.meizhi.mvp.ui.fragment.TestFragment
+import com.silverknife.meizhi.mvp.ui.fragment.HomeFragment
+import com.silverknife.meizhi.mvp.ui.fragment.XianduFragment
 import com.silverknife.meizhi.mvp.ui.interfaces.IMainView
-import kotlinx.android.synthetic.main.activity_tabs.*
-import kotlinx.android.synthetic.main.tab_custom_view.view.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainPresenter>(), IMainView {
-    private val index = arrayOf("干货", "测试")
     override fun getLayoutID(): Int = R.layout.activity_main
-
+    var currentFramgnet: Fragment? = null
+    var fragments: ArrayList<Fragment> = arrayListOf()
+    var transaction: FragmentTransaction? = null
     override fun initView() {
-        if (!PermissionUtils.isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-            PermissionUtils.permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .callback(object :PermissionUtils.SimpleCallback{
-                        override fun onGranted() {
-                            loadData()
-                        }
-
-                        override fun onDenied() {
-
-                        }
-                    }).request()
-        }else{
-            loadData()
-        }
+        transaction = supportFragmentManager.beginTransaction()
+        fragments.add(HomeFragment())
+        fragments.add(XianduFragment())
+        showFragment(fragments[0])
+        navigation_header_container.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(p0: MenuItem): Boolean {
+                when (p0.itemId) {
+                    R.id.home -> showFragment(fragments[0])
+                    R.id.xiandu -> showFragment(fragments[1])
+                }
+                return false
+            }
+        })
     }
 
-    fun loadData(){
-        viewpager.adapter = object : BasePagerAdapter(supportFragmentManager) {
-            override fun getItem(position: Int): Fragment {
-                when(position){
-                    0->return GankFragment.newInstance()
-                    1->return TestFragment.newInstance()
-                }
-                return TabFragment.newInstance(index[position])
-            }
-
-            override fun getCount(): Int {
-                return index.size
-            }
-
-            override fun getPageTitle(position: Int): CharSequence? {
-                return index[position]
-            }
+    override fun onBackPressed() {
+        if (currentFramgnet!=fragments[0]){
+            showFragment(fragments[0])
+            return
         }
-        //GlueTabLayout 设置下划线指示器圆角
-        tab_layout.tabMode = GlueTabLayout.MODE_FIXED
-        tab_layout.setTabTextColors(ContextCompat.getColor(MainActivity@this,R.color.tab_normal),ContextCompat.getColor(MainActivity@this,R.color.tab_selected))
-        //GlueTabLayout 设置下划线指示器的宽度为原来的一半
-        tab_layout.setTabIndicatorWidth(0.8f)
-        tab_layout.setupWithViewPager(viewpager)
+        super.onBackPressed()
+    }
+
+    fun showFragment(fragment: Fragment) {
+        if (!fragment.isAdded) {
+            if (currentFramgnet == null) {
+                supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment::class.java.simpleName).commit()
+            } else {
+                supportFragmentManager.beginTransaction().hide(currentFramgnet!!).add(R.id.content, fragment, fragment::class.java.simpleName).commit()
+            }
+        } else {
+            supportFragmentManager.beginTransaction().hide(currentFramgnet!!).show(fragment).commit()
+        }
+        currentFramgnet = fragment
+        drawer_layout.closeDrawer(navigation_header_container)
+
     }
 
     override fun initPresenter(): MainPresenter = MainPresenter()
