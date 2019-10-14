@@ -1,15 +1,21 @@
 package com.silvericekey.skutilslibrary.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks {
     protected var mPresenter: T? = null
+
+    var optionsCompat: ActivityOptionsCompat? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mPresenter = initPresenter()
@@ -34,7 +40,7 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (mPresenter != null&&isVisibleToUser) {
+        if (mPresenter != null && isVisibleToUser) {
             onVisibale()
         }
     }
@@ -63,6 +69,18 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
 
+    }
+
+    fun initOptionsCompat(vararg sharedElements: Pair<View, String>) {
+        optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, *sharedElements)
+    }
+
+    override fun startActivity(intent: Intent?) {
+        if (optionsCompat == null) {
+            super.startActivity(intent)
+        } else {
+            startActivity(intent, optionsCompat?.toBundle())
+        }
     }
 
     override fun onDestroy() {

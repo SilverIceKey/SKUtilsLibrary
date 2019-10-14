@@ -3,6 +3,8 @@ package com.silverknife.meizhi.mvp.ui.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.silvericekey.skutilslibrary.base.BaseFragment
 import com.silverknife.meizhi.R
@@ -46,6 +48,7 @@ class GankListFragment : BaseFragment<GankListPresenter>() {
             override fun onImagesClick(url: String) {
                 var intent = Intent(activity, PhotoViewActivity::class.java)
                 intent.putExtra("url", url)
+                initOptionsCompat(Pair.create(view, PhotoViewActivity.IMAGE))
                 startActivity(intent)
             }
         }
@@ -62,7 +65,9 @@ class GankListFragment : BaseFragment<GankListPresenter>() {
                     var intent = Intent(activity, PhotoViewActivity::class.java)
                     intent.putExtra("url", item.url)
                     intent.putExtra("title", item.desc)
-                    startActivity(intent)
+                    var optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!,
+                            Pair.create(view, PhotoViewActivity.IMAGE))
+                    startActivity(intent, optionsCompat.toBundle())
                 }
             }
         }

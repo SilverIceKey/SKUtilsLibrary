@@ -1,13 +1,22 @@
 package com.silvericekey.skutilslibrary.base
 
+import android.annotation.TargetApi
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     protected lateinit var mPresenter: T
 
+    var optionsCompat: ActivityOptionsCompat? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +26,9 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         setContentView(getLayoutID())
         initStatusBar()
         mPresenter = initPresenter()
+        for (view in views.keys) {
+            ViewCompat.setTransitionName(view, views[view])
+        }
         initView()
     }
 
@@ -70,6 +82,23 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         simpleCallback?.permissionDenied()
         fullCallback?.permissionDenied(perms)
+    }
+
+    var views: HashMap<View, String> = hashMapOf()
+    fun addTransitionName(view: View, tag: String) {
+        views.put(view, tag)
+    }
+
+    fun initOptionsCompat(vararg sharedElements: Pair<View, String>) {
+        optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, *sharedElements)
+    }
+
+    override fun startActivity(intent: Intent?) {
+        if (optionsCompat == null) {
+            super.startActivity(intent)
+        } else {
+            startActivity(intent, optionsCompat?.toBundle())
+        }
     }
 
     override fun onDestroy() {
