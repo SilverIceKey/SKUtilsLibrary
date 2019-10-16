@@ -39,10 +39,19 @@ class GankListFragment : BaseFragment<GankListPresenter>() {
         gankListAdapter!!.bindToRecyclerView(recycler)
         gankListAdapter!!.setOnItemClickListener { adapter, view, position ->
             var item: GankItemModel = adapter.getItem(position) as GankItemModel
-            var intent = Intent(activity, GankDetailActivity::class.java)
-            intent.putExtra("url", item.url)
-            intent.putExtra("title", item.desc)
-            startActivity(intent)
+            if (item.url.endsWith(".jpg")) {
+                var intent = Intent(activity, PhotoViewActivity::class.java)
+                intent.putExtra("url", item.url)
+                intent.putExtra("title", item.desc)
+                initOptionsCompat(Pair.create(view.findViewById(R.id.content_title), PhotoViewActivity.TITLE))
+                initOptionsCompat(Pair.create(view.findViewById(R.id.image), PhotoViewActivity.IMAGE))
+                startActivity(intent)
+            } else {
+                var intent = Intent(activity, GankDetailActivity::class.java)
+                intent.putExtra("url", item.url)
+                intent.putExtra("title", item.desc)
+                startActivity(intent)
+            }
         }
         gankListAdapter!!.listener = object : GankListAdapter.onImagesClickListener {
             override fun onImagesClick(url: String) {

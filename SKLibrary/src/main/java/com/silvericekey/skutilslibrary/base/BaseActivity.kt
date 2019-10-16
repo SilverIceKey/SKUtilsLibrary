@@ -26,10 +26,15 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         setContentView(getLayoutID())
         initStatusBar()
         mPresenter = initPresenter()
+        initTransitionViews()
         for (view in views.keys) {
             ViewCompat.setTransitionName(view, views[view])
         }
         initView()
+    }
+
+    open fun initTransitionViews() {
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

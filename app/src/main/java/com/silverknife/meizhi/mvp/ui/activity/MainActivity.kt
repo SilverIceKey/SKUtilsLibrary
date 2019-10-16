@@ -2,7 +2,7 @@ package com.silverknife.meizhi.mvp.ui.activity
 
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commitNow
 import com.google.android.material.navigation.NavigationView
 import com.silvericekey.skutilslibrary.base.BaseActivity
 import com.silverknife.meizhi.R
@@ -16,9 +16,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
     override fun getLayoutID(): Int = R.layout.activity_main
     var currentFramgnet: Fragment? = null
     var fragments: ArrayList<Fragment> = arrayListOf()
-    var transaction: FragmentTransaction? = null
     override fun initView() {
-        transaction = supportFragmentManager.beginTransaction()
         fragments.add(HomeFragment())
         fragments.add(XianduFragment())
         showFragment(fragments[0])
@@ -34,7 +32,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
     }
 
     override fun onBackPressed() {
-        if (currentFramgnet!=fragments[0]){
+        if (currentFramgnet != fragments[0]) {
             showFragment(fragments[0])
             return
         }
@@ -44,12 +42,12 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
     fun showFragment(fragment: Fragment) {
         if (!fragment.isAdded) {
             if (currentFramgnet == null) {
-                supportFragmentManager.beginTransaction().add(R.id.content, fragment, fragment::class.java.simpleName).commit()
+                supportFragmentManager.commitNow { add(R.id.content, fragment, fragment::class.java.simpleName) }
             } else {
-                supportFragmentManager.beginTransaction().hide(currentFramgnet!!).add(R.id.content, fragment, fragment::class.java.simpleName).commit()
+                supportFragmentManager.commitNow { hide(currentFramgnet!!).add(R.id.content, fragment, fragment::class.java.simpleName) }
             }
         } else {
-            supportFragmentManager.beginTransaction().hide(currentFramgnet!!).show(fragment).commit()
+            supportFragmentManager.commitNow { hide(currentFramgnet!!).show(fragment) }
         }
         currentFramgnet = fragment
         drawer_layout.closeDrawer(navigation_header_container)

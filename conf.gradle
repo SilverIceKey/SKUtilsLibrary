@@ -5,8 +5,8 @@ ext {
             appMinSdkVersion : 16,
             targetSdkVersion : 28,
             compileSdkVersion: 28,
-            versionCode      : 9,
-            versionName      : "1.0.9",
+            versionCode      : 10,
+            versionName      : "1.0.9.1",
     ]
 
     depsVersion = [
@@ -53,6 +53,7 @@ ext {
             "easypermissions"              : "pub.devrel:easypermissions:3.0.0",
             "multidex"                     : "androidx.multidex:multidex:2.0.1",
             "BaseRecyclerViewAdapterHelper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.48-androidx',
+            "fragment-ktx"                 : 'androidx.fragment:fragment-ktx:1.2.0-beta02',
 
             // ------------- Test dependencies -------------
             "junit"                        : "junit:junit:4.12",
