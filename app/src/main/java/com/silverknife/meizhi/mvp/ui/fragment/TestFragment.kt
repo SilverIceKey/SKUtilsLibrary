@@ -10,6 +10,7 @@ import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import com.silvericekey.skutilslibrary.utils.QRCodeUtil
 import com.silverknife.meizhi.R
 import com.silverknife.meizhi.mvp.presenter.TestPresenter
+import com.silverknife.meizhi.mvp.ui.activity.AnimeMoveActivity
 import com.silverknife.meizhi.mvp.ui.activity.TabsActivity
 import com.silverknife.meizhi.mvp.ui.interfaces.ITestView
 import kotlinx.android.synthetic.main.fragment_test.*
@@ -38,6 +39,7 @@ class TestFragment : BaseFragment<TestPresenter>(), ITestView {
         tabs.setOnClickListener { tabs() }
         request_install_permission.setOnClickListener { requestInstallPermission() }
         create_qr_code.setOnClickListener { createQRCode() }
+        anime_move.setOnClickListener { startActivity(Intent(activity, AnimeMoveActivity::class.java)) }
     }
 
     override fun initPresenter(): TestPresenter {

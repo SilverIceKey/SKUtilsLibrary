@@ -19,6 +19,7 @@
         <activity android:name=".mvp.ui.activity.TabsActivity" />
         <activity android:name=".mvp.ui.activity.GankDetailActivity" />
         <activity android:name=".mvp.ui.activity.PhotoViewActivity" />
+        <activity android:name=".mvp.ui.activity.AnimeMoveActivity" />
         <activity android:name=".mvp.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

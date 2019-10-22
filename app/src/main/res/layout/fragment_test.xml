@@ -44,6 +44,14 @@
             android:gravity="center|center_vertical"
             android:onClick="requestInstallPermission"
             android:text="请求安装权限" />
+        <Button
+            android:id="@+id/anime_move"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|center_vertical"
+            android:onClick="requestInstallPermission"
+            android:text="移动动画测试" />
 
         <TextView
             android:id="@+id/text"
