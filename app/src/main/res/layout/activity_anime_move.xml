@@ -7,7 +7,7 @@
     <com.silverknife.meizhi.mvp.ui.view.MoveAnimeView
         android:id="@+id/anime_move"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/block"
@@ -15,4 +15,19 @@
             android:layout_height="80dp"
             android:background="@color/danger" />
     </com.silverknife.meizhi.mvp.ui.view.MoveAnimeView>
+
+    <com.silverknife.meizhi.mvp.ui.view.SlideCheckView
+        android:id="@+id/slide_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp">
+
+        <View
+            android:id="@+id/slide_block"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@color/danger" />
+    </com.silverknife.meizhi.mvp.ui.view.SlideCheckView>
 </LinearLayout>

@@ -2,7 +2,6 @@ package com.silverknife.meizhi.mvp.ui.view
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
@@ -10,17 +9,21 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import android.widget.LinearLayout
-import com.blankj.utilcode.util.ScreenUtils
-import me.jessyan.autosize.AutoSizeConfig
-import me.jessyan.autosize.utils.AutoSizeUtils
 
-class MoveAnimeView : LinearLayout {
+class SlideCheckView : LinearLayout {
     var block: View? = null
     var blockWrapper: BlockWrapper? = null
+    lateinit var onConfirm: () -> Unit
+    lateinit var onCancel: () -> Unit
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    fun setOnSlideListener(onConfirm: () -> Unit, onCancel: () -> Unit) {
+        this.onConfirm = onConfirm
+        this.onCancel = onCancel
+    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
@@ -54,28 +57,10 @@ class MoveAnimeView : LinearLayout {
                 MotionEvent.ACTION_MOVE -> {
                     var lp = block!!.layoutParams as LinearLayout.LayoutParams
                     lp.leftMargin += (event.rawX - mLastX).toInt()
-                    lp.topMargin += (event.rawY - mLastY).toInt()
                     if (lp.leftMargin <= 0) {
                         lp.leftMargin = 0
-                    } else if (lp.leftMargin >= (ScreenUtils.getScreenWidth() - block!!.width)) {
-                        lp.leftMargin = ScreenUtils.getScreenWidth() - block!!.width
-                    }
-                    if (lp.topMargin <= 0) {
-                        lp.topMargin = 0
-                    } else if (lp.topMargin >= (ScreenUtils.getScreenHeight() - block!!.height)) {
-                        lp.topMargin = ScreenUtils.getScreenHeight() - block!!.height
-                    }
-                    lp.width += (event.rawX - mLastX).toInt()
-                    lp.height += (event.rawY - mLastY).toInt()
-                    if (lp.width <= 80) {
-                        lp.width = 80
-                    } else if (lp.width >= ScreenUtils.getScreenWidth()) {
-                        lp.width = ScreenUtils.getScreenWidth()
-                    }
-                    if (lp.height <= 80) {
-                        lp.height = 80
-                    } else if (lp.height >= ScreenUtils.getScreenHeight()) {
-                        lp.height = ScreenUtils.getScreenHeight()
+                    } else if (lp.leftMargin >= (this@SlideCheckView.width - this@SlideCheckView.paddingRight - block!!.width)) {
+                        lp.leftMargin = this@SlideCheckView.width - this@SlideCheckView.paddingRight - block!!.width
                     }
                     block!!.layoutParams = lp
                 }
@@ -83,15 +68,15 @@ class MoveAnimeView : LinearLayout {
 
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (block!!.height >= ScreenUtils.getScreenHeight() / 3) {
+                    if (blockWrapper!!.getMarginLeft() < this@SlideCheckView.width - this@SlideCheckView.paddingRight - blockWrapper!!.getWidth()) {
                         val set = AnimatorSet()
                         set.playTogether(
-                                ObjectAnimator.ofInt(blockWrapper, "width", blockWrapper!!.getWidth(), ScreenUtils.getScreenWidth()),
-                                ObjectAnimator.ofInt(blockWrapper, "height", blockWrapper!!.getHeight(), ScreenUtils.getScreenHeight() / 3),
-                                ObjectAnimator.ofInt(blockWrapper, "marginTop", blockWrapper!!.getMarginTop(), ScreenUtils.getScreenHeight() / 3 * 2),
                                 ObjectAnimator.ofInt(blockWrapper, "marginLeft", blockWrapper!!.getMarginLeft(), 0)
                         )
                         set.setDuration(200).start()
+                        onCancel()
+                    } else {
+                        onConfirm()
                     }
                 }
             }
@@ -101,8 +86,17 @@ class MoveAnimeView : LinearLayout {
         }
     }
 
+    fun getReturn() {
+        val set = AnimatorSet()
+        set.playTogether(
+                ObjectAnimator.ofInt(blockWrapper, "marginLeft", blockWrapper!!.getMarginLeft(), 0)
+        )
+        set.setDuration(200).start()
+    }
+
     inner class BlockWrapper {
         var params: LinearLayout.LayoutParams
+
         constructor() {
             params = block!!.layoutParams as LayoutParams
         }
