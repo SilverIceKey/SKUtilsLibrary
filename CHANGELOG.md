@@ -11,4 +11,5 @@
 - ```2019/10/16``` BaseActivity新增initTransitionViews方法用于初始化转场view，修改photoview的glide加载增加图片大小显示，防止有些图片被异常放大。
 - ```2019/10/22``` 新增动画类，关于临界点自动放大。
 - ```2019/10/25``` 新增简易滑动确认自定义view
+- ```2019/10/19``` 适配Android Q全面屏底部导航栏，并在BaseActivity中新增isStatusDark方法用于设置状态栏图标是否为灰色已经statusColor用于设置状态栏颜色。
 

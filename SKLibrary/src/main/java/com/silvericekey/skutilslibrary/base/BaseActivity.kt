@@ -1,15 +1,15 @@
 package com.silvericekey.skutilslibrary.base
 
-import android.annotation.TargetApi
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
+import com.flyco.systembar.SystemBarHelper
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -23,7 +23,19 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         if (savedInstanceState != null) {
             this.intent.putExtras(savedInstanceState)
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            var flag: Int
+            if (isStatusDark()) {
+                flag = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            } else {
+                flag = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            }
+            window.decorView.systemUiVisibility = flag//导航栏不会被隐藏但activity布局会扩展到导航栏所在位置
+            window.navigationBarColor = Color.TRANSPARENT
+            window.statusBarColor = statusColor()
+        }
         setContentView(getLayoutID())
+        SystemBarHelper.setPadding(this, window.decorView.findViewById(android.R.id.content))
         initStatusBar()
         mPresenter = initPresenter()
         initTransitionViews()
@@ -31,6 +43,14 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
             ViewCompat.setTransitionName(view, views[view])
         }
         initView()
+    }
+
+    open fun isStatusDark(): Boolean {
+        return true
+    }
+
+    open fun statusColor(): Int {
+        return Color.WHITE
     }
 
     open fun initTransitionViews() {
