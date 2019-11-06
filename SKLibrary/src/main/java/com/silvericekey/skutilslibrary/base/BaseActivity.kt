@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -13,10 +14,12 @@ import com.flyco.systembar.SystemBarHelper
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks,IBaseView {
     protected lateinit var mPresenter: T
 
     var optionsCompat: ActivityOptionsCompat? = null
+    var slideToFinishSpeed = 2
+    var openSlideToFinish = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,6 +127,24 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         } else {
             startActivity(intent, optionsCompat?.toBundle())
         }
+    }
+
+    private var mDownX: Int = 0
+    private var mDownTime: Long = 0
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        when (ev!!.action) {
+            MotionEvent.ACTION_DOWN -> {
+                mDownX = ev.x.toInt()
+                mDownTime = System.currentTimeMillis()
+            }
+            MotionEvent.ACTION_UP -> {
+                if ((ev.x.toInt() - mDownX) / (System.currentTimeMillis() - mDownTime) >= slideToFinishSpeed && openSlideToFinish) {
+                    finish()
+                    return true
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     override fun onDestroy() {

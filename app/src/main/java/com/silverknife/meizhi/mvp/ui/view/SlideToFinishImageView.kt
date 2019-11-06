@@ -9,26 +9,24 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import android.widget.LinearLayout
-import androidx.core.view.marginRight
+import androidx.core.view.marginLeft
+import androidx.core.view.marginTop
+import com.blankj.utilcode.util.ScreenUtils
+import com.github.chrisbanes.photoview.PhotoView
+import com.silvericekey.skutilslibrary.base.IBaseView
 
-class SlideCheckView : LinearLayout {
-    var block: View? = null
+class SlideToFinishImageView : LinearLayout {
+    var block: PhotoView? = null
     var blockWrapper: BlockWrapper? = null
-    lateinit var onConfirm: () -> Unit
-    lateinit var onCancel: () -> Unit
+    var iView: IBaseView? = null
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    fun setOnSlideListener(onConfirm: () -> Unit, onCancel: () -> Unit) {
-        this.onConfirm = onConfirm
-        this.onCancel = onCancel
-    }
-
     override fun onFinishInflate() {
         super.onFinishInflate()
-        block = getChildAt(0)
+        block = getChildAt(0) as PhotoView
 
         blockWrapper = BlockWrapper()
         block!!.setOnTouchListener(blockTouchListener())
@@ -41,6 +39,10 @@ class SlideCheckView : LinearLayout {
         //刚触摸时手指的坐标
         private var mDownY: Int = 0
         private var mDownX: Int = 0
+        private var mViewWidth: Int = 0
+        private var mViewHeight: Int = 0
+        private var mViewTopMargin: Int = 0
+        private var mViewLeftMargin: Int = 0
 
         private var dy: Int = 0//和上一次滑动的差值 设置为全局变量是因为 UP里也要使用
 
@@ -54,14 +56,41 @@ class SlideCheckView : LinearLayout {
                 MotionEvent.ACTION_DOWN -> {
                     mDownX = event.x.toInt()
                     mDownY = event.y.toInt()
+                    mViewWidth = block!!.width
+                    mViewHeight = block!!.height
+                    mViewLeftMargin = block!!.marginLeft
+                    mViewTopMargin = block!!.marginTop
+                    var lp = block!!.layoutParams as LinearLayout.LayoutParams
+                    lp.width = this@SlideToFinishImageView.width
+                    lp.height = this@SlideToFinishImageView.height
+                    block!!.layoutParams = lp
+
                 }
                 MotionEvent.ACTION_MOVE -> {
                     var lp = block!!.layoutParams as LinearLayout.LayoutParams
                     lp.leftMargin += (event.rawX - mLastX).toInt()
+                    lp.topMargin += (event.rawY - mLastY).toInt()
                     if (lp.leftMargin <= 0) {
                         lp.leftMargin = 0
-                    } else if (lp.leftMargin >= (this@SlideCheckView.width - this@SlideCheckView.paddingRight - block!!.width - this@SlideCheckView.marginRight)) {
-                        lp.leftMargin = this@SlideCheckView.width - this@SlideCheckView.paddingRight - block!!.width - this@SlideCheckView.marginRight
+                    } else if (lp.leftMargin >= (ScreenUtils.getScreenWidth() - block!!.width)) {
+                        lp.leftMargin = ScreenUtils.getScreenWidth() - block!!.width
+                    }
+                    if (lp.topMargin <= 0) {
+                        lp.topMargin = 0
+                    } else if (lp.topMargin >= (ScreenUtils.getScreenHeight() - block!!.height)) {
+                        lp.topMargin = ScreenUtils.getScreenHeight() - block!!.height
+                    }
+                    lp.width -= (event.rawY - mLastY).toInt()
+                    lp.height -= (event.rawY - mLastY).toInt()
+                    if (lp.width <= 80) {
+                        lp.width = 80
+                    } else if (lp.width >= ScreenUtils.getScreenWidth()) {
+                        lp.width = ScreenUtils.getScreenWidth()
+                    }
+                    if (lp.height <= 80) {
+                        lp.height = 80
+                    } else if (lp.height >= ScreenUtils.getScreenHeight()) {
+                        lp.height = ScreenUtils.getScreenHeight()
                     }
                     block!!.layoutParams = lp
                 }
@@ -69,15 +98,18 @@ class SlideCheckView : LinearLayout {
 
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (blockWrapper!!.getMarginLeft() < this@SlideCheckView.width - this@SlideCheckView.paddingRight - blockWrapper!!.getWidth() - this@SlideCheckView.marginRight) {
+                    println(block!!.height.toString() + ":" + ScreenUtils.getScreenHeight() / 1.5 + ":" + (block!!.height >= ScreenUtils.getScreenHeight() / 3).toString())
+                    if (block!!.height >= ScreenUtils.getScreenHeight() / 1.5) {
                         val set = AnimatorSet()
                         set.playTogether(
-                                ObjectAnimator.ofInt(blockWrapper, "marginLeft", blockWrapper!!.getMarginLeft(), 0)
+                                ObjectAnimator.ofInt(blockWrapper, "width", blockWrapper!!.getWidth(), mViewWidth),
+                                ObjectAnimator.ofInt(blockWrapper, "height", blockWrapper!!.getHeight(), mViewHeight),
+                                ObjectAnimator.ofInt(blockWrapper, "marginTop", blockWrapper!!.getMarginTop(), mViewTopMargin),
+                                ObjectAnimator.ofInt(blockWrapper, "marginLeft", blockWrapper!!.getMarginLeft(), mViewLeftMargin)
                         )
                         set.setDuration(200).start()
-                        onCancel()
                     } else {
-                        onConfirm()
+                        iView?.finish()
                     }
                 }
             }
@@ -85,14 +117,6 @@ class SlideCheckView : LinearLayout {
             mLastX = x
             return true
         }
-    }
-
-    fun getReturn() {
-        val set = AnimatorSet()
-        set.playTogether(
-                ObjectAnimator.ofInt(blockWrapper, "marginLeft", blockWrapper!!.getMarginLeft(), 0)
-        )
-        set.setDuration(200).start()
     }
 
     inner class BlockWrapper {
