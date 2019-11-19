@@ -2,7 +2,7 @@ ext {
 
     android = [
             libMinSdkVersion : 14,
-            appMinSdkVersion : 16,
+            appMinSdkVersion : 21,
             targetSdkVersion : 28,
             compileSdkVersion: 28,
             versionCode      : 13,
@@ -48,12 +48,13 @@ ext {
             "PhotoView"                    : 'com.github.chrisbanes:PhotoView:2.3.0',
 
             //---------------Androidx-----------------
-            "androidx_appcompat"           : "androidx.appcompat:appcompat:1.0.2",
-            "material"                     : "com.google.android.material:material:1.0.0",
+            "androidx_appcompat"           : "androidx.appcompat:appcompat:1.1.0",
+            "material"                     : "com.google.android.material:material:1.2.0-alpha01",
             "easypermissions"              : "pub.devrel:easypermissions:3.0.0",
             "multidex"                     : "androidx.multidex:multidex:2.0.1",
             "BaseRecyclerViewAdapterHelper": 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.48-androidx',
             "fragment-ktx"                 : 'androidx.fragment:fragment-ktx:1.2.0-beta02',
+            "swiperefreshlayout"           : 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03',
 
             // ------------- Test dependencies -------------
             "junit"                        : "junit:junit:4.12",

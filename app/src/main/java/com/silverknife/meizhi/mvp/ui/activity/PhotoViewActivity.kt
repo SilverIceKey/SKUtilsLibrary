@@ -24,8 +24,8 @@ class PhotoViewActivity : BaseActivity<PhotoViewPresenter>() {
     }
 
     override fun initTransitionViews() {
-        addTransitionName(image, IMAGE)
-        addTransitionName(content_title, TITLE)
+//        addTransitionName(image, IMAGE)
+//        addTransitionName(content_title, TITLE)
     }
 
     override fun initView() {
@@ -39,7 +39,7 @@ class PhotoViewActivity : BaseActivity<PhotoViewPresenter>() {
         back.setOnClickListener { ActivityCompat.finishAfterTransition(this) }
         image.isEnabled = true
         var url = intent.getStringExtra("url")
-        ImageLoderUtil.bindImg(this, url, ImageLoderUtil.Builder().build()).override(AutoSizeUtils.dp2px(this, 360f), AutoSizeUtils.dp2px(this, 480f)).into(image)
+        ImageLoderUtil.bindImg(image.context, url, ImageLoderUtil.Builder().build()).override(AutoSizeUtils.dp2px(this, 360f), AutoSizeUtils.dp2px(this, 480f)).into(image)
         slide_back_layout.iView = this
     }
 

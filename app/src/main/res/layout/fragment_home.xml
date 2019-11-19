@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:elevation="20dp"
             android:layout_gravity="bottom" />
     </androidx.viewpager.widget.ViewPager>
 </LinearLayout>

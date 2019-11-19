@@ -2,6 +2,7 @@ package com.silvericekey.skutilslibrary.utils
 
 import android.text.TextUtils
 import android.util.Log
+import com.silvericekey.skutilslibrary.SKUtilsLibrary
 import com.silvericekey.skutilslibrary.net.AddCookiesInterceptor
 import com.silvericekey.skutilslibrary.net.ReceivedCookiesInterceptor
 import okhttp3.*
@@ -11,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -42,10 +44,6 @@ class HttpUtil {
 
         @JvmStatic
         fun webSocketTest() {
-//            val hostName = mockWebServerUtil.mockWebServer!!.hostName
-//            val port = mockWebServerUtil.mockWebServer!!.port
-//            println("hostName:$hostName")
-//            println("port:$port")
             var wsUrl = "wss://echo.websocket.org/"
             var request = Request.Builder().url(wsUrl).build()
             var okHttpClient = OkHttpClient.Builder()
@@ -130,18 +128,30 @@ class HttpUtil {
         })
         val receivedCookiesInterceptor = ReceivedCookiesInterceptor()
         val addCookiesInterceptor = AddCookiesInterceptor()
+        //缓存文件夹
+        val cacheFile = File(SKUtilsLibrary.context!!.getExternalCacheDir().toString(), "cache")
+        if (!cacheFile.exists()){
+            cacheFile.mkdirs()
+        }
+        //缓存大小为10M
+        val cacheSize: Long = 10 * 1024 * 1024
+        //创建缓存对象
+        val cache = Cache(cacheFile, cacheSize)
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         okHttpWebSocketClient = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(addCookiesInterceptor)
+                .addInterceptor(receivedCookiesInterceptor)
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .writeTimeout(10000L, TimeUnit.MILLISECONDS)
-                .pingInterval(40,TimeUnit.SECONDS)
+                .pingInterval(40, TimeUnit.SECONDS)
                 .build()
         okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(addCookiesInterceptor)
+                .addInterceptor(receivedCookiesInterceptor)
+                .cache(cache)
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .writeTimeout(10000L, TimeUnit.MILLISECONDS)
