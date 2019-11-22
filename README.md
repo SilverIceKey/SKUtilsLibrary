@@ -42,6 +42,8 @@
 
 [PhotoView](https://github.com/chrisbanes/PhotoView)
 
+[NumberAnimTextView](https://github.com/Bakumon/NumberAnimTextView)
+
 ### How to get to your project
 
 Step 1. Add the JitPack repository to your build file

@@ -52,6 +52,8 @@ dependencies {
     api rootProject.ext.deps['rxandroid2_adapter_rxjava2']
     api rootProject.ext.deps['multidex']
     api rootProject.ext.deps['PhotoView']
+    api rootProject.ext.deps['easing']
+    api rootProject.ext.deps['androidanimations']
     api project(":autosize")
     api project(":FlycoSystemBar_Lib")
     api project(":gluetablayout")
