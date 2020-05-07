@@ -117,7 +117,7 @@ class HttpUtil {
         }
     }
 
-    constructor(baseUrl: String) {
+    private constructor(baseUrl: String) {
         if (TextUtils.isEmpty(baseUrl)) {
             throw Exception("Please set base url first")
         }
