@@ -56,8 +56,8 @@ class HttpUtil {
                     super.onOpen(webSocket, response)
                     mWebSocket = webSocket
                     println("client onOpen")
-                    println("client request header:" + response.request.headers)
-                    println("client response header:" + response.headers)
+                    println("client request header:" + response.request().headers())
+                    println("client response header:" + response.headers())
                     println("client response:" + response)
                     //开启消息定时发送
                     startTask()
