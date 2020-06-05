@@ -5,9 +5,9 @@ buildscript {
     ext.kotlin_version = '1.3.50'
 
     repositories {
-        google()
-        jcenter()
-        mavenCentral()
+        maven{ url'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven{ url'http://maven.aliyun.com/nexus/content/repositories/google' }
+        maven{ url'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         maven { url 'https://jitpack.io' }
     }
     dependencies {
@@ -23,10 +23,10 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
+        maven{ url'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven{ url'http://maven.aliyun.com/nexus/content/repositories/google' }
+        maven{ url'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         maven { url 'https://jitpack.io' }
-        mavenCentral()
     }
 
     tasks.withType(Javadoc) {
