@@ -1,6 +1,8 @@
 package com.silverknife.meizhi.mvp.model
 
-class GankItemModel {
+import java.io.Serializable
+
+class GankItemModel:Serializable {
     var _id = ""
     var createdAt = ""
     var desc: String = ""

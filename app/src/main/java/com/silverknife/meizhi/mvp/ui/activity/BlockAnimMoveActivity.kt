@@ -3,12 +3,12 @@ package com.silverknife.meizhi.mvp.ui.activity
 import com.blankj.utilcode.util.ToastUtils
 import com.silvericekey.skutilslibrary.base.BaseActivity
 import com.silverknife.meizhi.R
-import com.silverknife.meizhi.mvp.presenter.AnimeMovePresenter
-import kotlinx.android.synthetic.main.activity_anime_move.*
+import com.silverknife.meizhi.mvp.presenter.BlockAnimeMovePresenter
+import kotlinx.android.synthetic.main.activity_block_anim_move.*
 
-class AnimeMoveActivity : BaseActivity<AnimeMovePresenter>() {
+class BlockAnimMoveActivity : BaseActivity<BlockAnimeMovePresenter>() {
     override fun getLayoutID(): Int {
-        return R.layout.activity_anime_move
+        return R.layout.activity_block_anim_move
     }
 
     override fun initView() {
@@ -22,7 +22,7 @@ class AnimeMoveActivity : BaseActivity<AnimeMovePresenter>() {
         })
     }
 
-    override fun initPresenter(): AnimeMovePresenter {
-        return AnimeMovePresenter()
+    override fun initPresenter(): BlockAnimeMovePresenter {
+        return BlockAnimeMovePresenter()
     }
 }

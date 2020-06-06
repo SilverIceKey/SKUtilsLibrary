@@ -30,9 +30,10 @@ class GankFragment : BaseFragment<GankPresenter>() {
     override fun initView(view: View) {
         gankAdapter = GankAdapter(childFragmentManager)
         mPresenter?.getData {
-            gankAdapter!!.pageTitles.addAll(it.category!!)
-            it.category!!.forEach {
-                gankAdapter!!.pages.add(GankListFragment.newInstance(it))
+            val gankResponse = it
+            gankAdapter!!.pageTitles.addAll(gankResponse.category!!)
+            gankResponse.category!!.forEach {
+                gankAdapter!!.pages.add(GankListFragment.newInstance(gankResponse.results!![it]!!))
             }
             viewpager.adapter = gankAdapter
             tab_layout.tabMode = GlueTabLayout.MODE_SCROLLABLE

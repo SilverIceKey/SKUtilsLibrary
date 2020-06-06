@@ -120,5 +120,49 @@
                 android:layout_weight="1"
                 android:text="重置"/>
         </LinearLayout>
+        <Button
+            android:id="@+id/flashlight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开闪光灯"/>
+        <Button
+            android:id="@+id/btnStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="可点击"/>
+        <Button
+            android:id="@+id/btnStatusChange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="按钮状态调整"/>
+
+        <Button
+            android:id="@+id/share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="分享"/>
+
+        <Button
+            android:id="@+id/select_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择相机/相册"/>
+
+        <Button
+            android:id="@+id/viewpager2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="viewpager2测试"/>
+
+        <Button
+            android:id="@+id/viewdraghelp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="viewdraghelp测试"/>
+        <Button
+            android:id="@+id/rn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RN测试"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

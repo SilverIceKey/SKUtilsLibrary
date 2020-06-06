@@ -24,7 +24,7 @@ class PhotoViewActivity : BaseActivity<PhotoViewPresenter>() {
     }
 
     override fun initTransitionViews() {
-//        addTransitionName(image, IMAGE)
+        addTransitionName(image, IMAGE)
 //        addTransitionName(content_title, TITLE)
     }
 

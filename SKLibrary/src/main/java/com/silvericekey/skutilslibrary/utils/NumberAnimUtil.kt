@@ -1,16 +1,13 @@
 package com.silvericekey.skutilslibrary.utils
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.TypeEvaluator
-import android.animation.ValueAnimator
+import android.animation.*
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
 import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.util.regex.Pattern
 
-class NumberAnimUtils {
+class NumberAnimUtil {
     /**
      * 起始值 默认 0
      */
@@ -40,8 +37,12 @@ class NumberAnimUtils {
      */
     private var animatorUpdaterListeners = ArrayList<ValueAnimator.AnimatorUpdateListener>()
     private var animatorListeners = ArrayList<AnimatorListenerAdapter>()
+    /**
+     * 插值器
+     */
+    private var interpolator:TimeInterpolator = AccelerateDecelerateInterpolator()
     private lateinit var animator: ValueAnimator
-    fun setStart(start: String): NumberAnimUtils {
+    fun setStart(start: String): NumberAnimUtil {
         val p = Pattern.compile("[0-9]*\\.?[0-9]+")
         val m = p.matcher(start)
         if (m.matches()) {
@@ -57,7 +58,7 @@ class NumberAnimUtils {
         return this
     }
 
-    fun setEnd(end: String): NumberAnimUtils {
+    fun setEnd(end: String): NumberAnimUtil {
         val p = Pattern.compile("[0-9]*\\.?[0-9]+")
         val m = p.matcher(end)
         if (m.matches()) {
@@ -74,32 +75,37 @@ class NumberAnimUtils {
         return this
     }
 
-    fun setDuration(duration: Long): NumberAnimUtils {
+    fun setDuration(duration: Long): NumberAnimUtil {
         mDuration = duration
         return this
     }
 
-    fun setPrefixString(prefixString: String): NumberAnimUtils {
+    fun setPrefixString(prefixString: String): NumberAnimUtil {
         mPrefixString = prefixString
         return this
     }
 
-    fun setPostfixString(postfixString: String): NumberAnimUtils {
+    fun setPostfixString(postfixString: String): NumberAnimUtil {
         mPostfixString = postfixString
         return this
     }
 
-    fun setIsInt(isInt: Boolean): NumberAnimUtils {
+    fun setIsInt(isInt: Boolean): NumberAnimUtil {
         this.isInt = isInt
         return this
     }
 
-    fun addUpdateListener(listener: ValueAnimator.AnimatorUpdateListener): NumberAnimUtils {
+    fun setInterpolator(interpolator: TimeInterpolator):NumberAnimUtil{
+        this.interpolator = interpolator
+        return this
+    }
+
+    fun addUpdateListener(listener: ValueAnimator.AnimatorUpdateListener): NumberAnimUtil {
         animatorUpdaterListeners.add(listener)
         return this
     }
 
-    fun addListener(listener: AnimatorListenerAdapter): NumberAnimUtils {
+    fun addListener(listener: AnimatorListenerAdapter): NumberAnimUtil {
         animatorListeners.add(listener)
         return this
     }
@@ -127,7 +133,7 @@ class NumberAnimUtils {
     fun playOn(textView: TextView) {
         animator = ValueAnimator.ofObject(BigDecimalEvaluator(), BigDecimal(mNumStart), BigDecimal(mNumEnd))
         animator.setDuration(mDuration)
-        animator.setInterpolator(AccelerateDecelerateInterpolator())
+        animator.setInterpolator(interpolator)
         animator.addUpdateListener({
             val value = it.animatedValue as BigDecimal
             textView.text = mPrefixString + format(value) + mPostfixString

@@ -11,11 +11,19 @@ import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.qrcode.QRCodeReader
 import com.google.zxing.qrcode.QRCodeWriter
 
-
+/*
+* 二维码工具类
+* */
 object QRCodeUtil {
+    /*
+    * 快捷创建二维码bitmap
+    * */
     fun createQRCode(info: String, size: Int): Bitmap = createQRCode(info, size, -1)
     fun createQRCode(info: String, size: Int, color: Int): Bitmap = bitMatrixToBitmap(QRCodeWriter().encode(String(info.toByteArray(Charsets.UTF_8), Charsets.ISO_8859_1), BarcodeFormat.QR_CODE, size, size), color)
 
+    /*
+    * 根绝bitmap读取二维码
+    * */
     fun readQRCode(bitmap: Bitmap):String{
         var pixels = intArrayOf()
         bitmap.getPixels(pixels,0,bitmap.width,0,0,bitmap.width,bitmap.height)

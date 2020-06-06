@@ -6,6 +6,7 @@ import com.silvericekey.skutilslibrary.base.BaseFragment
 import com.silverknife.meizhi.R
 import com.silverknife.meizhi.mvp.presenter.TabPresenter
 import kotlinx.android.synthetic.main.tab_tmp.*
+import me.jessyan.autosize.utils.LogUtils
 
 class TabFragment : BaseFragment<TabPresenter>() {
     private var mParam1: String? = null
@@ -37,5 +38,20 @@ class TabFragment : BaseFragment<TabPresenter>() {
 
     override fun initPresenter(): TabPresenter {
         return TabPresenter()
+    }
+
+    override fun onDestroyView() {
+        LogUtils.e("onDestroyView")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        LogUtils.e("onDestroy")
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        LogUtils.e("onDetach")
+        super.onDetach()
     }
 }

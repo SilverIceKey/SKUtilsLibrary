@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <application
         android:name=".app.MyApplication"
@@ -19,7 +21,11 @@
         <activity android:name=".mvp.ui.activity.TabsActivity" />
         <activity android:name=".mvp.ui.activity.GankDetailActivity" />
         <activity android:name=".mvp.ui.activity.PhotoViewActivity" />
-        <activity android:name=".mvp.ui.activity.AnimeMoveActivity" />
+        <activity android:name=".mvp.ui.activity.BlockAnimMoveActivity" />
+        <activity android:name=".mvp.ui.activity.ShareActivity"/>
+        <activity android:name=".mvp.ui.activity.RNActivity"/>
+        <activity android:name=".mvp.ui.activity.ViewPager2Activity"/>
+        <activity android:name=".mvp.ui.activity.ViewDragHelpActivity"/>
         <activity android:name=".mvp.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

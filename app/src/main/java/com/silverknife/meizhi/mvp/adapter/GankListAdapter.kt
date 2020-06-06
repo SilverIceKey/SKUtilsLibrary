@@ -1,6 +1,8 @@
 package com.silverknife.meizhi.mvp.adapter
 
+import android.graphics.Outline
 import android.view.View
+import android.view.ViewOutlineProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.ActivityUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -12,6 +14,7 @@ import com.silverknife.meizhi.mvp.ui.holder.GankListHolder
 class GankListAdapter : BaseQuickAdapter<GankItemModel, GankListHolder>(R.layout.gank_list_item) {
     var listener: onImagesClickListener? = null
     override fun convert(helper: GankListHolder, item: GankItemModel?) {
+        helper.itemView.elevation = 2f
         helper.contentTitle.text = item!!.desc
         if (item.images != null) {
             var imagesAdapter = GankItemImagesAdapter()

@@ -1,6 +1,7 @@
 package com.silverknife.meizhi.mvp.ui.activity
 
 import android.view.View
+import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.SizeUtils
@@ -54,6 +55,7 @@ class TabsActivity : BaseActivity<TabsPresenter>() {
                 custom.num.layoutParams = layoutParams
                 return custom
             }
+
         }
         //GlueTabLayout 设置下划线指示器圆角
         tab_layout.setSelectedTabIndicator(R.drawable.tab_selected_bg)

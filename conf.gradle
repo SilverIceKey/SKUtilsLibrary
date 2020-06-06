@@ -5,8 +5,8 @@ ext {
             appMinSdkVersion : 21,
             targetSdkVersion : 28,
             compileSdkVersion: 28,
-            versionCode      : 14,
-            versionName      : "1.2.2",
+            versionCode      : 16,
+            versionName      : "1.2.4",
     ]
 
     depsVersion = [

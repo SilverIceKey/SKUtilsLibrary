@@ -6,6 +6,7 @@ import android.content.Context
 import com.blankj.utilcode.util.Utils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.silvericekey.skutilslibrary.base.BasePresenter
+import java.lang.NullPointerException
 import java.util.*
 
 
@@ -18,7 +19,16 @@ object SKUtilsLibrary {
     @JvmStatic
     var presenters: ArrayList<BasePresenter> = arrayListOf()
     var context: Context? = null
+    get() {
+        if (field==null){
+            throw NullPointerException("please init SKUtilsLibrary first")
+        }
+        return field
+    }
     private val app_activity: Activity? = null
+    /**
+     * 框架初始化，获取ApplicationContext
+     * */
     fun init(context: Context) {
         this.context = context
         Utils.init(context)

@@ -14,7 +14,7 @@ import com.flyco.systembar.SystemBarHelper
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks,IBaseView {
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks, IBaseView {
     protected lateinit var mPresenter: T
 
     var optionsCompat: ActivityOptionsCompat? = null
@@ -37,7 +37,11 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
             window.navigationBarColor = Color.TRANSPARENT
             window.statusBarColor = statusColor()
         }
-        setContentView(getLayoutID())
+        if (getLayoutID()!=-1){
+            setContentView(getLayoutID())
+        }else{
+            setContentView(getLayout())
+        }
         SystemBarHelper.setPadding(this, window.decorView.findViewById(android.R.id.content))
         initStatusBar()
         mPresenter = initPresenter()
@@ -71,7 +75,13 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         mPresenter.refreshData()
     }
 
-    abstract fun getLayoutID(): Int
+    open fun getLayoutID(): Int{
+        return -1
+    }
+
+    open fun getLayout(): View? {
+        return null
+    }
 
     abstract fun initView()
 

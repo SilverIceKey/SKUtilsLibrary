@@ -2,7 +2,6 @@ package com.silverknife.meizhi.mvp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.DragEvent
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
@@ -15,16 +14,17 @@ import com.silverknife.meizhi.mvp.presenter.GankListPresenter
 import com.silverknife.meizhi.mvp.ui.activity.GankDetailActivity
 import com.silverknife.meizhi.mvp.ui.activity.PhotoViewActivity
 import kotlinx.android.synthetic.main.fragment_gank_list.*
+import java.io.Serializable
 
 class GankListFragment : BaseFragment<GankListPresenter>() {
     var gankListAdapter: GankListAdapter? = null
 
     companion object {
         @JvmStatic
-        fun newInstance(category: String): GankListFragment {
+        fun newInstance(data: ArrayList<GankItemModel>): GankListFragment {
             val fragment = GankListFragment()
             val args = Bundle()
-            args.putString("category", category)
+            args.putSerializable("data", data as Serializable)
             fragment.setArguments(args)
             return fragment
         }
@@ -81,15 +81,18 @@ class GankListFragment : BaseFragment<GankListPresenter>() {
                 }
             }
         }
-        mPresenter!!.getList(arguments!!.getString("category"), {
-            gankListAdapter!!.setNewData(it)
-        })
+        gankListAdapter!!.setNewData(arguments!!.getSerializable("data") as List<GankItemModel>)
+//        mPresenter!!.getList(arguments!!.getString("data"), {
+//            gankListAdapter!!.setNewData(it)
+//        })
         refresh.setOnRefreshListener {
-            mPresenter!!.getList(arguments!!.getString("category"), {
-                gankListAdapter!!.setNewData(it)
-                refresh.isRefreshing = false
-            })
+//            mPresenter!!.getList(arguments!!.getString("category"), {
+//                gankListAdapter!!.setNewData(it)
+//                refresh.isRefreshing = false
+//            })
+            refresh.isRefreshing = false
         }
+//        PagerSnapHelper().attachToRecyclerView(recycler)
     }
 
     override fun initPresenter(): GankListPresenter {
