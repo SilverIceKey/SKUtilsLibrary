@@ -20,7 +20,22 @@ import java.io.InputStream
  * Created by Administrator on 2017/5/24.
  */
 
-object ImageLoderUtil {
+class ImageLoderUtil {
+    companion object{
+        @JvmStatic
+        private var imageLoderUtil:ImageLoderUtil? = null
+        @JvmStatic
+        fun  getInstance():ImageLoderUtil{
+            if (imageLoderUtil==null){
+                synchronized(ImageLoderUtil::class.java,{
+                    if (imageLoderUtil==null){
+                        imageLoderUtil = ImageLoderUtil()
+                    }
+                })
+            }
+            return imageLoderUtil!!
+        }
+    }
     fun bindImg(url: String, options: RequestOptions): RequestBuilder<*> {
         return bindImg(SKUtilsLibrary.context!!, url, options)
     }
@@ -181,25 +196,24 @@ object ImageLoderUtil {
             }
             return option
         }
-    }
-
-    fun getLoadDrawable(): Drawable {
-        var open: InputStream? = null
-        var drawable: Drawable? = null
-        try {
-            open = SKUtilsLibrary.context!!.getAssets().open("load.jpg")
-            drawable = Drawable.createFromStream(open, null)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
+        fun getLoadDrawable(): Drawable {
+            var open: InputStream? = null
+            var drawable: Drawable? = null
             try {
-                if (open != null) {
-                    open.close()
-                }
+                open = SKUtilsLibrary.context!!.getAssets().open("load.jpg")
+                drawable = Drawable.createFromStream(open, null)
             } catch (e: IOException) {
                 e.printStackTrace()
+            } finally {
+                try {
+                    if (open != null) {
+                        open.close()
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
+            return drawable!!
         }
-        return drawable!!
     }
 }
