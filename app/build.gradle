@@ -15,7 +15,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', "armeabi-v7a","armeabi-v7a","x86"
+            abiFilters "armeabi-v7a"
+        }
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+            }
         }
     }
     buildTypes {
@@ -44,8 +49,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    configurations.all {
-        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.0'
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
     }
 }
 

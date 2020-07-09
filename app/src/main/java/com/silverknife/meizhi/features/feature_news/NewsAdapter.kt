@@ -2,7 +2,7 @@ package com.silverknife.meizhi.features.feature_news
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.negier.gluetablayout.BasePagerAdapter
+import com.silvericekey.skutilslibrary.base.BasePagerAdapter
 
 /**
  * <pre>

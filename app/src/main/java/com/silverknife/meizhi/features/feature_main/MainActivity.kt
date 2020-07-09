@@ -1,10 +1,14 @@
 package com.silverknife.meizhi.features.feature_main
 
+import android.graphics.Color
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
+import androidx.customview.widget.ViewDragHelper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
+import com.blankj.utilcode.util.ToastUtils
 import com.google.android.material.navigation.NavigationView
 import com.silvericekey.skutilslibrary.base.BaseActivity
 import com.silverknife.meizhi.R
@@ -12,6 +16,7 @@ import com.silverknife.meizhi.features.feature_gank.GankFragment
 import com.silverknife.meizhi.features.feature_news.NewsFragment
 import com.silverknife.meizhi.features.feature_test.TestFragment
 import com.silverknife.meizhi.features.feature_test.XianduFragment
+import com.silverknife.meizhi.utils.JNITools
 import jp.wasabeef.blurry.Blurry
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -36,6 +41,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
                 return false
             }
         })
+        ToastUtils.showShort(JNITools().getApi())
     }
 
     override fun onBackPressed() {

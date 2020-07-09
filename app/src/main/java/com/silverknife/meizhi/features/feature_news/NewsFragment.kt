@@ -2,7 +2,7 @@ package com.silverknife.meizhi.features.feature_news
 
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.negier.gluetablayout.GlueTabLayout
+import com.silvericekey.skutilslibrary.widget.GlueTabLayout
 import com.silvericekey.skutilslibrary.base.BaseFragment
 import com.silverknife.meizhi.R
 import kotlinx.android.synthetic.main.fragment_news.*

@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
-import com.flyco.systembar.SystemBarHelper
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.SystemBarUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks, IBaseView {
@@ -42,7 +42,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         }else{
             setContentView(getLayout())
         }
-        SystemBarHelper.setPadding(this, window.decorView.findViewById(android.R.id.content))
+        SystemBarUtil.setPadding(this, window.decorView.findViewById(android.R.id.content))
         initStatusBar()
         mPresenter = initPresenter()
         initTransitionViews()

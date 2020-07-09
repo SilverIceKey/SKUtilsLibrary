@@ -4,7 +4,7 @@ import android.text.TextUtils
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.silvericekey.skutilslibrary.utils.ImageLoderUtil
-import com.silvericekey.skutilslibrary.utils.TimeUtils
+import com.silvericekey.skutilslibrary.utils.TimeUtil
 import com.silverknife.meizhi.R
 
 /**
@@ -48,6 +48,6 @@ class NewListAdapter : BaseQuickAdapter<NewsModel, NewsItemHolder>(R.layout.item
         } else {
             helper.img3.visibility = View.GONE
         }
-        helper.time.text = TimeUtils.getInstance().getTimeIntervalofCur(item.date)
+        helper.time.text = TimeUtil.getInstance().getTimeIntervalofCur(item.date)
     }
 }

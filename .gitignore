@@ -34,3 +34,4 @@ proguard/
 build/
 *.iml
 out/
+app/.cxx/

@@ -4,8 +4,8 @@ import android.view.View
 import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.SizeUtils
-import com.negier.gluetablayout.BasePagerAdapter
-import com.negier.gluetablayout.GlueTabLayout
+import com.silvericekey.skutilslibrary.base.BasePagerAdapter
+import com.silvericekey.skutilslibrary.widget.GlueTabLayout
 import com.silvericekey.skutilslibrary.base.BaseActivity
 import com.silverknife.meizhi.R
 import kotlinx.android.synthetic.main.activity_tabs.*

@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.negier.gluetablayout;
+package com.silvericekey.skutilslibrary.widget;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -69,6 +69,8 @@ import com.google.android.material.internal.ViewUtils;
 import com.google.android.material.resources.MaterialResources;
 import com.google.android.material.ripple.RippleUtils;
 import com.google.android.material.tabs.TabItem;
+import com.silvericekey.skutilslibrary.R;
+import com.silvericekey.skutilslibrary.base.BasePagerAdapter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

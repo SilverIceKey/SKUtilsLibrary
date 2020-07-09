@@ -3,7 +3,6 @@ package com.silvericekey.skutilslibrary.utils
 import java.text.DateFormat
 import java.text.ParsePosition
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 
 /**
  * <pre>
@@ -12,16 +11,16 @@ import java.time.format.DateTimeFormatter
  *     version: 1.0
  * </pre>
  */
-class TimeUtils {
+class TimeUtil {
     companion object{
         @JvmStatic
-        private var timeUtils:TimeUtils? = null
+        private var timeUtils:TimeUtil? = null
         @JvmStatic
-        fun  getInstance():TimeUtils{
+        fun  getInstance():TimeUtil{
             if (timeUtils==null){
-                synchronized(TimeUtils::class.java,{
+                synchronized(TimeUtil::class.java,{
                     if (timeUtils==null){
-                        timeUtils = TimeUtils()
+                        timeUtils = TimeUtil()
                     }
                 })
             }

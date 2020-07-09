@@ -2,7 +2,7 @@
  * Copyright (c) 2016 BiliBili Inc.
  */
 
-package com.flyco.systembar;
+package com.silvericekey.skutilslibrary.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -21,6 +21,8 @@ import androidx.annotation.FloatRange;
 import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.silvericekey.skutilslibrary.R;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
@@ -31,7 +33,7 @@ import java.util.regex.Pattern;
  * 1.沉浸式全屏模式
  * 2.状态栏着色模式
  */
-public class SystemBarHelper {
+public class SystemBarUtil {
     private static float DEFAULT_ALPHA = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 0.2f : 0.3f;
 
     /**
