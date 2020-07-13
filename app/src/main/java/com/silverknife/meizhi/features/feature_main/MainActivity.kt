@@ -1,27 +1,31 @@
 package com.silverknife.meizhi.features.feature_main
 
-import android.graphics.Color
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
+import android.os.*
+import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewTreeObserver
-import android.widget.ImageView
-import androidx.customview.widget.ViewDragHelper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
 import com.blankj.utilcode.util.ToastUtils
 import com.google.android.material.navigation.NavigationView
 import com.silvericekey.skutilslibrary.base.BaseActivity
+import com.silverknife.meizhi.ICallbacklInterface
+import com.silverknife.meizhi.IManagerInterface
 import com.silverknife.meizhi.R
 import com.silverknife.meizhi.features.feature_gank.GankFragment
 import com.silverknife.meizhi.features.feature_news.NewsFragment
 import com.silverknife.meizhi.features.feature_test.TestFragment
 import com.silverknife.meizhi.features.feature_test.XianduFragment
+import com.silverknife.meizhi.services.CustomService
 import com.silverknife.meizhi.utils.JNITools
-import jp.wasabeef.blurry.Blurry
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainPresenter>(), IMainView {
     override fun getLayoutID(): Int = R.layout.activity_main
+    var iManagerInterface:IManagerInterface?=null
     var currentFramgnet: Fragment? = null
     var fragments: ArrayList<Fragment> = arrayListOf()
     override fun initView() {
@@ -42,6 +46,42 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
             }
         })
         ToastUtils.showShort(JNITools().getApi())
+        mainHandler = Handler() { msg: Message? ->
+            Log.d("debug","${Thread.currentThread()}")
+            true
+        }
+        mainHandler?.sendEmptyMessage(0)
+        bindCustomService()
+    }
+
+    fun bindCustomService(){
+        var service = Intent(this, CustomService::class.java)
+//        startService(service)
+        bindService(service,object :ServiceConnection{
+            override fun onServiceDisconnected(name: ComponentName?) {
+                unbindService(this)
+                Log.d("debug","onServiceDisconnected")
+                Log.d("debug","${name}")
+            }
+
+            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                Log.d("debug","${name}")
+                iManagerInterface = IManagerInterface.Stub.asInterface(service)
+                try {
+                    Log.d("debug","${service}")
+                    iManagerInterface?.setCallBack(object : ICallbacklInterface.Stub(){
+                        override fun callback() {
+                            Log.d("debug","aidlcallback")
+                        }
+                    })
+                    iManagerInterface?.test()
+                }catch (e:RemoteException){
+                    e.printStackTrace()
+                }
+                Log.d("debug","onServiceConnected")
+
+            }
+        }, Context.BIND_AUTO_CREATE)
     }
 
     override fun onBackPressed() {
@@ -68,4 +108,8 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
     }
 
     override fun initPresenter(): MainPresenter = MainPresenter()
+
+    companion object{
+        var mainHandler: Handler? = null
+    }
 }
