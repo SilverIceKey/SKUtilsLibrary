@@ -20,7 +20,8 @@
 [BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)  
 [PhotoView](https://github.com/chrisbanes/PhotoView)  
 [NumberAnimTextView](https://github.com/Bakumon/NumberAnimTextView)  
-### How to get to your project 
+[Kotson](https://github.com/SalomonBrys/Kotson)
+### How to get to your project
 Step 1. Add the JitPack repository to your build file
 ```groovy
 allprojects {
