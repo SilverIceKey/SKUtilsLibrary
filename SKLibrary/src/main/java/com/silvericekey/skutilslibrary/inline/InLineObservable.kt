@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.rxjava
+package com.silvericekey.skutilslibrary.inline
 
 import android.annotation.SuppressLint
 import com.silvericekey.skutilslibrary.net.NetCallback

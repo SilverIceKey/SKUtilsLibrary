@@ -1,7 +1,7 @@
 package com.silverknife.meizhi.features.feature_test
 
 import android.annotation.SuppressLint
-import com.silvericekey.skutilslibrary.rxjava.execute
+import com.silvericekey.skutilslibrary.inline.execute
 import com.silvericekey.skutilslibrary.utils.HttpUtil
 import com.silverknife.meizhi.app.net.Api
 

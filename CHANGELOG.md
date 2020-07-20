@@ -16,3 +16,4 @@
 - ```2019/11/22``` 根据NumberAnimTextView的动画方式新增NumberAnimUtils用于进行textview的数值变化，并且新增addUpdateListener和addListener用于增加监听，可以都监听。
 - ```2019/11/26``` 新增CameraUtil.enableFlashLight方法用于开关闪光灯。
 - ```2020/07/07``` 将FlycoSystemBar和GlueTabLayout中的类文件移入SKLibrary删除依赖。
+- ```2020/07/20``` 新增Aidl demo 新增ndk demo 新增kotson框架。

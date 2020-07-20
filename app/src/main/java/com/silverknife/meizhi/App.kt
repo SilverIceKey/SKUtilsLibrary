@@ -9,9 +9,18 @@ import com.silvericekey.skutilslibrary.utils.HttpUtil
  */
 
 class App : BaseApplication() {
+    companion object{
+        @JvmStatic
+        private var mApp:App?=null
+        @JvmStatic
+        fun getInstance():App{
+            return mApp!!
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
+        mApp = this
         SKUtilsLibrary.init(this)
         HttpUtil.init("http://www.baidu.com/")
     }

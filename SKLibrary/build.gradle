@@ -54,6 +54,7 @@ dependencies {
     api rootProject.ext.deps['PhotoView']
     api rootProject.ext.deps['easing']
     api rootProject.ext.deps['androidanimations']
+    api rootProject.ext.deps['kotson']
     api project(":autosize")
     api "androidx.core:core-ktx:+"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

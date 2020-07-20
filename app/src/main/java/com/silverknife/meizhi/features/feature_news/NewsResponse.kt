@@ -1,7 +1,7 @@
 package com.silverknife.meizhi.features.feature_news
 
 import com.blankj.utilcode.util.ToastUtils
-import com.silvericekey.skutilslibrary.rxjava.execute
+import com.silvericekey.skutilslibrary.inline.execute
 import com.silvericekey.skutilslibrary.utils.HttpUtil
 import com.silverknife.meizhi.app.net.Api
 
