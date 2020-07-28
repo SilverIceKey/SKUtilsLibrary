@@ -114,3 +114,4 @@ object QRCodeUtil {
         }
         return bitmap
     }
+}

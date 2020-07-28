@@ -26,8 +26,4 @@ class TestPresenter : BasePresenter {
             mIView!!.setResponse("登录失败")
         })
     }
-
-    fun webSocketRequest() {
-        HttpUtil.webSocketTest()
-    }
 }

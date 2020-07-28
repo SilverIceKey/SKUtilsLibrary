@@ -1,0 +1,24 @@
+{
+  "name": "sklibrary",
+  "version": "1.0.0",
+  "description": "[![](https://www.jitpack.io/v/SilverIceKey/SKUtilsLibrary.svg)](https://www.jitpack.io/#SilverIceKey/SKUtilsLibrary)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SilverIceKey/SKUtilsAndViewLibrary.git"
+  },
+  "author": "SilverIceKey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SilverIceKey/SKUtilsAndViewLibrary/issues"
+  },
+  "homepage": "https://github.com/SilverIceKey/SKUtilsAndViewLibrary#readme",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-native": "^0.62.2"
+  }
+}

@@ -6,7 +6,8 @@
 *.dll
 *.exe
 *.o
-
+package-lock.json
+node_modules/
 # files for the dex VM
 *.dex
 

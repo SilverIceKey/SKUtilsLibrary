@@ -17,15 +17,6 @@
             android:layout_gravity="center"
             android:gravity="center|center_vertical"
             android:text="请求" />
-
-        <Button
-            android:id="@+id/websocker_request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center|center_vertical"
-            android:text="长连接请求" />
-
         <Button
             android:id="@+id/tabs"
             android:layout_width="match_parent"

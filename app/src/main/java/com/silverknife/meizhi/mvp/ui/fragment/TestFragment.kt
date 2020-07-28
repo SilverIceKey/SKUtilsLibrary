@@ -44,7 +44,6 @@ class TestFragment : BaseFragment<TestPresenter>(), ITestView {
     override fun initView(view: View) {
         text.text = textStr
         request.setOnClickListener { request() }
-        websocker_request.setOnClickListener { webSocketRequest() }
         tabs.setOnClickListener { tabs() }
         request_install_permission.setOnClickListener { requestInstallPermission() }
         create_qr_code.setOnClickListener { createQRCode() }
@@ -101,10 +100,6 @@ class TestFragment : BaseFragment<TestPresenter>(), ITestView {
 
     fun request() {
         mPresenter?.getData()
-    }
-
-    fun webSocketRequest() {
-        mPresenter?.webSocketRequest()
     }
 
     fun tabs() {
