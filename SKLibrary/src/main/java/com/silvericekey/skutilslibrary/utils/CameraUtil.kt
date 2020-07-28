@@ -10,7 +10,22 @@ import com.silvericekey.skutilslibrary.SKUtilsLibrary
 /**
  * 摄像头工具类
  * */
-object CameraUtil {
+class CameraUtil {
+    companion object{
+        @JvmStatic
+        private var cameraUtil:CameraUtil? = null
+        @JvmStatic
+        fun  getInstance():CameraUtil{
+            if (cameraUtil==null){
+                synchronized(CameraUtil::class.java,{
+                    if (cameraUtil==null){
+                        cameraUtil = CameraUtil()
+                    }
+                })
+            }
+            return cameraUtil!!
+        }
+    }
     /**
      * 是否打开摄像头
      * */

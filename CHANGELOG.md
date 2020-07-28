@@ -15,3 +15,5 @@
 - ```2019/11/06``` 新增滑动返回使用openSlideToFinish开启，默认关闭，使用slideToFinishSpeed设置滑动速度，越小需要越快速滑动才能触发，新增图片下拉返回的外部view，当高度小于屏幕的1/3时触发返回。
 - ```2019/11/22``` 根据NumberAnimTextView的动画方式新增NumberAnimUtils用于进行textview的数值变化，并且新增addUpdateListener和addListener用于增加监听，可以都监听。
 - ```2019/11/26``` 新增CameraUtil.enableFlashLight方法用于开关闪光灯。
+- ```2020/07/07``` 将FlycoSystemBar和GlueTabLayout中的类文件移入SKLibrary删除依赖。
+- ```2020/07/20``` 新增Aidl demo 新增ndk demo 新增kotson框架。

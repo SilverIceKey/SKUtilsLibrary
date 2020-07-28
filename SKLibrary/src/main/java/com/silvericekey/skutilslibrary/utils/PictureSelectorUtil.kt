@@ -6,9 +6,23 @@ import android.content.Intent
 import android.provider.MediaStore
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.silvericekey.skutilslibrary.SKUtilsLibrary
 
-object PictureSelectorUtil {
+class PictureSelectorUtil {
+    companion object{
+        @JvmStatic
+        private var pictureSelectorUtil:PictureSelectorUtil? = null
+        @JvmStatic
+        fun  getInstance():PictureSelectorUtil{
+            if (pictureSelectorUtil==null){
+                synchronized(PictureSelectorUtil::class.java,{
+                    if (pictureSelectorUtil==null){
+                        pictureSelectorUtil = PictureSelectorUtil()
+                    }
+                })
+            }
+            return pictureSelectorUtil!!
+        }
+    }
     /**
      * 直接调用系统相机拍照
      * **/

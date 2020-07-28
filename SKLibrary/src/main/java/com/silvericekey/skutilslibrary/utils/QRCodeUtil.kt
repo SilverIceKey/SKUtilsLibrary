@@ -17,7 +17,22 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 /*
 * 二维码工具类
 * */
-object QRCodeUtil {
+class QRCodeUtil {
+    companion object{
+        @JvmStatic
+        private var qrCodeUtil:QRCodeUtil? = null
+        @JvmStatic
+        fun  getInstance():QRCodeUtil{
+            if (qrCodeUtil==null){
+                synchronized(QRCodeUtil::class.java,{
+                    if (qrCodeUtil==null){
+                        qrCodeUtil = QRCodeUtil()
+                    }
+                })
+            }
+            return qrCodeUtil!!
+        }
+    }
     /*
     * 快捷创建二维码bitmap
     * */

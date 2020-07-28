@@ -11,7 +11,7 @@ import com.silvericekey.skutilslibrary.SKUtilsLibrary
 class ShareUtil {
     companion object{
         @JvmStatic
-        var shareUtil:ShareUtil? = null
+        private var shareUtil:ShareUtil? = null
         @JvmStatic
         fun  getInstance():ShareUtil{
             if (shareUtil==null){

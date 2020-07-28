@@ -6,7 +6,6 @@ import android.net.NetworkInfo
 import android.text.TextUtils
 import android.util.Log
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
-import com.silvericekey.skutilslibrary.interpolator.CustomCacheInterceptor
 import com.silvericekey.skutilslibrary.net.AddCookiesInterceptor
 import com.silvericekey.skutilslibrary.net.ReceivedCookiesInterceptor
 import okhttp3.*
@@ -32,6 +31,7 @@ class HttpUtil {
     companion object {
         private val TAG = "HttpUtil"
         private var httpUtils: HttpUtil? = null
+
         @JvmStatic
         fun getInstance(): HttpUtil {
             if (httpUtils == null) {
@@ -105,7 +105,6 @@ class HttpUtil {
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(addCookiesInterceptor)
                 .addInterceptor(receivedCookiesInterceptor)
-                .addInterceptor(CustomCacheInterceptor())
                 .cache(cache)
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
@@ -118,6 +117,14 @@ class HttpUtil {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build()
+    }
+
+    /**
+     * 清空所有请求
+     */
+    fun clearAllRequest() {
+        okHttpClient.dispatcher().cancelAll()
+        okHttpWebSocketClient.dispatcher().cancelAll()
     }
 
     /**

@@ -1,1 +1,2 @@
-include ':app', ':SKLibrary', ':autosize', ':FlycoSystemBar_Lib', ':gluetablayout'
+include ':app', ':SKLibrary', ':autosize'
+rootProject.name = 'SKUtilsLibrary'
