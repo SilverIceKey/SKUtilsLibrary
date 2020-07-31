@@ -18,7 +18,7 @@ import com.silverknife.meizhi.R
 import com.silverknife.meizhi.features.feature_gank.GankFragment
 import com.silverknife.meizhi.features.feature_news.NewsFragment
 import com.silverknife.meizhi.features.feature_test.TestFragment
-import com.silverknife.meizhi.features.feature_test.XianduFragment
+import com.silverknife.meizhi.features.feature_xiandu.XianduFragment
 import com.silverknife.meizhi.services.CustomService
 import com.silverknife.meizhi.utils.JNITools
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
         fragments.add(GankFragment.newInstance())
         fragments.add(TestFragment.newInstance())
         fragments.add(XianduFragment())
-        showFragment(fragments[0])
+        showFragment(fragments[3])
         navigation_header_container.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
                 when (p0.itemId) {
@@ -45,7 +45,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
                 return false
             }
         })
-        ToastUtils.showShort(JNITools().getApi())
+//        ToastUtils.showShort(JNITools().getApi())
         mainHandler = Handler() { msg: Message? ->
             Log.d("debug","${Thread.currentThread()}")
             true

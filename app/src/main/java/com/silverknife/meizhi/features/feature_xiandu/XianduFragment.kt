@@ -1,15 +1,15 @@
-package com.silverknife.meizhi.features.feature_test
+package com.silverknife.meizhi.features.feature_xiandu
 
 import android.view.View
 import com.github.salomonbrys.kotson.fromJson
 import com.github.salomonbrys.kotson.get
 import com.google.gson.Gson
 import com.google.gson.JsonElement
-import com.google.gson.JsonObject
 import com.silvericekey.skutilslibrary.base.BaseFragment
 import com.silvericekey.skutilslibrary.inline.toString
 import com.silvericekey.skutilslibrary.utils.FileIOUtil
 import com.silverknife.meizhi.R
+import com.silverknife.meizhi.features.feature_xiandu.XianduPresenter
 import kotlinx.android.synthetic.main.fragment_xiandu.*
 
 class XianduFragment: BaseFragment<XianduPresenter>() {

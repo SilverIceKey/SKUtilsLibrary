@@ -38,9 +38,14 @@ class NumberTextView(context: Context?, attrs: AttributeSet?) : View(context, at
         var text = "Hello，World！"
         val positionX = mWidth / 2f
         val positionY = (mHeight-TextSize) / 2f
-        canvas?.drawText(text, positionX, positionY, mNumberPaint)
+        val rectF = RectF(100f,positionY,400f,positionY+150f)
+        mNumberPaint.style = Paint.Style.FILL
+        mNumberPaint.color = Color.BLACK
+        canvas?.drawRoundRect(rectF,10f,10f,mNumberPaint)
+//        canvas?.drawText(text, positionX, positionY, mNumberPaint)
         mNumberPaint.style = Paint.Style.STROKE
         mNumberPaint.color = Color.WHITE
-        canvas?.drawText(text, positionX, positionY, mNumberPaint)
+//        canvas?.drawText(text, positionX, positionY, mNumberPaint)
+        canvas?.drawRoundRect(rectF,10f,10f,mNumberPaint)
     }
 }
