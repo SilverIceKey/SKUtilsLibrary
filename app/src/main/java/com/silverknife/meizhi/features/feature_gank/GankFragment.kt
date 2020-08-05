@@ -20,7 +20,9 @@ class GankFragment : BaseFragment<GankPresenter>() {
     }
 
     var gankAdapter: GankAdapter? = null
-
+    override fun fitSystemBar(): Boolean {
+        return true
+    }
     override fun getLayoutID(): Int {
         return R.layout.fragment_gank
     }

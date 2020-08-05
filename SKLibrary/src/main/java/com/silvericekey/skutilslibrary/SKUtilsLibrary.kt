@@ -2,6 +2,7 @@ package com.silvericekey.skutilslibrary
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import com.blankj.utilcode.util.Utils
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -19,13 +20,14 @@ object SKUtilsLibrary {
     @JvmStatic
     var presenters: ArrayList<BasePresenter> = arrayListOf()
     var context: Context? = null
-    get() {
-        if (field==null){
-            throw NullPointerException("please init SKUtilsLibrary first")
+        get() {
+            if (field == null) {
+                throw NullPointerException("please init SKUtilsLibrary first")
+            }
+            return field
         }
-        return field
-    }
     private val app_activity: Activity? = null
+
     /**
      * 框架初始化，获取ApplicationContext
      * */

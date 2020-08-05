@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
 
 def cfg = rootProject.ext.android
@@ -39,6 +39,7 @@ dependencies {
     api rootProject.ext.deps["aucx"]
     api rootProject.ext.deps["zxing_core"]
     api rootProject.ext.deps["BaseRecyclerViewAdapterHelper"]
+    api rootProject.ext.deps["picture_library"]
     api rootProject.ext.deps["otto"]
     annotationProcessor rootProject.ext.deps["auto_service"]
 
@@ -55,9 +56,12 @@ dependencies {
     api rootProject.ext.deps['easing']
     api rootProject.ext.deps['androidanimations']
     api rootProject.ext.deps['kotson']
+    api rootProject.ext.deps['kotlinx_coroutines_core']
+    api rootProject.ext.deps['kotlinx_coroutines_android']
     api project(":autosize")
     api "androidx.core:core-ktx:+"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
 }
 
 repositories {

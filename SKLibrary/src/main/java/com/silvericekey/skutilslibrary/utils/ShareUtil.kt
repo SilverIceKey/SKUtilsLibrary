@@ -2,6 +2,7 @@ package com.silvericekey.skutilslibrary.utils
 
 import android.content.Intent
 import android.net.Uri
+import com.blankj.utilcode.util.ActivityUtils
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
 
 /*
@@ -9,14 +10,15 @@ import com.silvericekey.skutilslibrary.SKUtilsLibrary
 * 调用系统的分享
 * */
 class ShareUtil {
-    companion object{
+    companion object {
         @JvmStatic
-        private var shareUtil:ShareUtil? = null
+        private var shareUtil: ShareUtil? = null
+
         @JvmStatic
-        fun  getInstance():ShareUtil{
-            if (shareUtil==null){
-                synchronized(ShareUtil::class.java,{
-                    if (shareUtil==null){
+        fun getInstance(): ShareUtil {
+            if (shareUtil == null) {
+                synchronized(ShareUtil::class.java, {
+                    if (shareUtil == null) {
                         shareUtil = ShareUtil()
                     }
                 })
@@ -24,6 +26,7 @@ class ShareUtil {
             return shareUtil!!
         }
     }
+
     /*
     * 分享文字
     * */
@@ -34,7 +37,7 @@ class ShareUtil {
         shareIntent.putExtra(Intent.EXTRA_TEXT, text)
         //切记需要使用Intent.createChooser，否则会出现别样的应用选择框，您可以试试
         shareIntent = Intent.createChooser(shareIntent, title)
-        SKUtilsLibrary.context!!.startActivity(shareIntent)
+        ActivityUtils.getTopActivity().startActivity(shareIntent)
     }
 
     /*
@@ -42,12 +45,12 @@ class ShareUtil {
     * */
     fun shareImage(title: String, uri: Uri) {
         var shareIntent = Intent()
-        shareIntent.action = Intent.ACTION_SEND
+        shareIntent.action = Intent.ACTION_SEND_MULTIPLE
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
         shareIntent.type = "image/*"
         //切记需要使用Intent.createChooser，否则会出现别样的应用选择框，您可以试试
         shareIntent = Intent.createChooser(shareIntent, title)
-        SKUtilsLibrary.context!!.startActivity(shareIntent)
+        ActivityUtils.getTopActivity().startActivity(shareIntent)
     }
 
     /*
@@ -60,6 +63,6 @@ class ShareUtil {
         shareIntent.type = "image/*"
         //切记需要使用Intent.createChooser，否则会出现别样的应用选择框，您可以试试
         shareIntent = Intent.createChooser(shareIntent, title)
-        SKUtilsLibrary.context!!.startActivity(shareIntent)
+        ActivityUtils.getTopActivity().startActivity(shareIntent)
     }
 }

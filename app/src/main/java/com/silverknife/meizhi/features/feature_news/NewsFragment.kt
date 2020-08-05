@@ -16,6 +16,10 @@ class NewsFragment : BaseFragment<NewsPresenter>() {
         return R.layout.fragment_news
     }
 
+    override fun fitSystemBar(): Boolean {
+        return true
+    }
+
     override fun initView(view: View) {
         newsAdapter = NewsAdapter(childFragmentManager)
         newsAdapter?.pageTitles?.addAll(mNewsType)

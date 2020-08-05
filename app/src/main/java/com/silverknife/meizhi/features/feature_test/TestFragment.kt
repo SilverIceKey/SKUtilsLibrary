@@ -6,7 +6,9 @@ import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -18,6 +20,7 @@ import com.silverknife.meizhi.R
 import jp.wasabeef.blurry.Blurry
 import kotlinx.android.synthetic.main.fragment_test.*
 import me.jessyan.autosize.AutoSize
+import java.io.File
 
 
 class TestFragment : BaseFragment<TestPresenter>(), ITestView {
@@ -32,7 +35,9 @@ class TestFragment : BaseFragment<TestPresenter>(), ITestView {
             return fragment
         }
     }
-
+    override fun fitSystemBar(): Boolean {
+        return true
+    }
     override fun getLayoutID(): Int {
         return R.layout.fragment_test
     }
@@ -48,16 +53,12 @@ class TestFragment : BaseFragment<TestPresenter>(), ITestView {
         start.setOnClickListener { start() }
         pause.setOnClickListener { pause() }
         reset.setOnClickListener { reset() }
-        share.setOnClickListener { startActivity(Intent(activity, ShareActivity::class.java)) }
         select_image.setOnClickListener {
-            AutoSize.cancelAdapt(activity!!)
-            AlertDialog.Builder(context!!).setMessage("请选择图片选择路径").setPositiveButton("拍照", { dialog: DialogInterface?, which: Int ->
-                PictureSelectorUtil.getInstance().getPictureWithCamera(context!!)
-                dialog!!.dismiss()
-            }).setNegativeButton("相册", { dialog: DialogInterface?, which: Int ->
-                PictureSelectorUtil.getInstance().getPictureWithGallery(context!!)
-                dialog!!.dismiss()
-            }).setNeutralButton("取消", { dialog: DialogInterface?, which: Int -> dialog!!.dismiss() }).create().show()
+            PictureSelectorUtil.getInstance().openGallery(this,{
+                ShareUtil.getInstance().shareImage("分享",Uri.parse(it!![0].path))
+            },{
+                ToastUtils.showShort("操作取消")
+            })
         }
         rn.setOnClickListener { startActivity(Intent(activity, RNActivity::class.java)) }
         var data = arrayListOf<String>()

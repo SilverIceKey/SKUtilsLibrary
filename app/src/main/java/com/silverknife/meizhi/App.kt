@@ -21,7 +21,6 @@ class App : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         mApp = this
-        SKUtilsLibrary.init(this)
         HttpUtil.init("http://www.baidu.com/")
     }
 

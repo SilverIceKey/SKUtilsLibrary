@@ -37,12 +37,15 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
             window.navigationBarColor = Color.TRANSPARENT
             window.statusBarColor = statusColor()
         }
-        if (getLayoutID()!=-1){
+        if (fitSystemBar()) {
+            SystemBarUtil.setPadding(this, window.decorView.findViewById(android.R.id.content))
+        }
+        if (getLayoutID() != -1) {
             setContentView(getLayoutID())
-        }else{
+        } else {
             setContentView(getLayout())
         }
-        SystemBarUtil.setPadding(this, window.decorView.findViewById(android.R.id.content))
+
         initStatusBar()
         mPresenter = initPresenter()
         initTransitionViews()
@@ -57,7 +60,11 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
     }
 
     open fun statusColor(): Int {
-        return Color.WHITE
+        return Color.TRANSPARENT
+    }
+
+    open fun fitSystemBar(): Boolean {
+        return false
     }
 
     open fun initTransitionViews() {
@@ -75,7 +82,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         mPresenter.refreshData()
     }
 
-    open fun getLayoutID(): Int{
+    open fun getLayoutID(): Int {
         return -1
     }
 

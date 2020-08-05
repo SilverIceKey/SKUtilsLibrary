@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import com.silvericekey.skutilslibrary.utils.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.SystemBarUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks {
@@ -19,7 +19,10 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mPresenter = initPresenter()
-        var view = inflater.inflate(getLayoutID(), null)
+        var view = LayoutInflater.from(context).inflate(getLayoutID(), null)
+        if (fitSystemBar()) {
+            SystemBarUtil.setPadding(context, view)
+        }
         return view
     }
 
@@ -36,6 +39,10 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
 
     open fun onVisibale() {
 
+    }
+
+    open fun fitSystemBar(): Boolean {
+        return false
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

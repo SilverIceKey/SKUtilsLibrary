@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.silvericekey.skutilslibrary.base.BaseActivity
 import com.silverknife.meizhi.R
+import com.silverknife.meizhi.features.feature_test.TabFragment
 import com.silverknife.meizhi.mvp.presenter.ViewPager2Presenter
-import com.silverknife.meizhi.mvp.ui.fragment.TabFragment
 import kotlinx.android.synthetic.main.activity_viewpager2.*
 
 class ViewPager2Activity : BaseActivity<ViewPager2Presenter>() {

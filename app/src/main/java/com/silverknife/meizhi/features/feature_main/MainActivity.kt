@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainPresenter>(), IMainView {
     override fun getLayoutID(): Int = R.layout.activity_main
-    var iManagerInterface:IManagerInterface?=null
+    var iManagerInterface: IManagerInterface? = null
     var currentFramgnet: Fragment? = null
     var fragments: ArrayList<Fragment> = arrayListOf()
     override fun initView() {
@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
         fragments.add(GankFragment.newInstance())
         fragments.add(TestFragment.newInstance())
         fragments.add(XianduFragment())
-        showFragment(fragments[3])
+        showFragment(fragments[2])
         navigation_header_container.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
                 when (p0.itemId) {
@@ -47,46 +47,46 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
         })
 //        ToastUtils.showShort(JNITools().getApi())
         mainHandler = Handler() { msg: Message? ->
-            Log.d("debug","${Thread.currentThread()}")
+            Log.d("debug", "${Thread.currentThread()}")
             true
         }
         mainHandler?.sendEmptyMessage(0)
         bindCustomService()
     }
 
-    fun bindCustomService(){
+    fun bindCustomService() {
         var service = Intent(this, CustomService::class.java)
 //        startService(service)
-        bindService(service,object :ServiceConnection{
+        bindService(service, object : ServiceConnection {
             override fun onServiceDisconnected(name: ComponentName?) {
                 unbindService(this)
-                Log.d("debug","onServiceDisconnected")
-                Log.d("debug","${name}")
+                Log.d("debug", "onServiceDisconnected")
+                Log.d("debug", "${name}")
             }
 
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-                Log.d("debug","${name}")
+                Log.d("debug", "${name}")
                 iManagerInterface = IManagerInterface.Stub.asInterface(service)
                 try {
-                    Log.d("debug","${service}")
-                    iManagerInterface?.setCallBack(object : ICallbacklInterface.Stub(){
+                    Log.d("debug", "${service}")
+                    iManagerInterface?.setCallBack(object : ICallbacklInterface.Stub() {
                         override fun callback() {
-                            Log.d("debug","aidlcallback")
+                            Log.d("debug", "aidlcallback")
                         }
                     })
                     iManagerInterface?.test()
-                }catch (e:RemoteException){
+                } catch (e: RemoteException) {
                     e.printStackTrace()
                 }
-                Log.d("debug","onServiceConnected")
+                Log.d("debug", "onServiceConnected")
 
             }
         }, Context.BIND_AUTO_CREATE)
     }
 
     override fun onBackPressed() {
-        if (currentFramgnet != fragments[0]) {
-            showFragment(fragments[0])
+        if (currentFramgnet != fragments[2]) {
+            showFragment(fragments[2])
             return
         }
         super.onBackPressed()
@@ -109,7 +109,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
 
     override fun initPresenter(): MainPresenter = MainPresenter()
 
-    companion object{
+    companion object {
         var mainHandler: Handler? = null
     }
 }
