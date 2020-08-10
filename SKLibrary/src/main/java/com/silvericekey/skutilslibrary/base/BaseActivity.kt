@@ -1,5 +1,6 @@
 package com.silvericekey.skutilslibrary.base
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -14,7 +15,11 @@ import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import com.silvericekey.skutilslibrary.utils.SystemBarUtil
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks, IBaseView {
+
+/**
+ * 基类
+ */
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks, IBaseActivity {
     protected lateinit var mPresenter: T
 
     var optionsCompat: ActivityOptionsCompat? = null
@@ -162,6 +167,10 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
             }
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    override fun getActivity(): Activity {
+        return this
     }
 
     override fun onDestroy() {

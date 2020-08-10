@@ -29,10 +29,8 @@
         <activity android:name=".features.feature_gank.GankDetailActivity" />
         <activity android:name=".features.feature_gank.PhotoViewActivity" />
         <activity android:name=".features.feature_test.BlockAnimMoveActivity" />
-        <activity android:name=".features.feature_test.ShareActivity" />
         <activity android:name=".features.feature_test.RNActivity" />
         <activity android:name=".features.feature_news.NewsDetailActivity" />
-        <activity android:name=".features.feature_qmui.QMUIActivity"/>
         <activity android:name=".features.feature_main.MainActivity"/>
 
         <service

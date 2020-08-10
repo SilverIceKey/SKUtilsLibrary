@@ -12,8 +12,8 @@ import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import com.silvericekey.skutilslibrary.utils.SystemBarUtil
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks {
-    protected var mPresenter: T? = null
+abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks, IBaseFragment {
+    protected lateinit var mPresenter: T
 
     var optionsCompat: ActivityOptionsCompat? = null
 
@@ -88,6 +88,10 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
         } else {
             startActivity(intent, optionsCompat?.toBundle())
         }
+    }
+
+    override fun getFragment(): Fragment {
+        return this
     }
 
     override fun onDestroy() {

@@ -22,6 +22,7 @@
 [NumberAnimTextView](https://github.com/Bakumon/NumberAnimTextView)  
 [Kotson](https://github.com/SalomonBrys/Kotson)
 [QMUI](https://github.com/Tencent/QMUI_Android)
+[PictureSelector](https://github.com/LuckSiege/PictureSelector)
 ### How to get to your project
 Step 1. Add the JitPack repository to your build file
 ```groovy

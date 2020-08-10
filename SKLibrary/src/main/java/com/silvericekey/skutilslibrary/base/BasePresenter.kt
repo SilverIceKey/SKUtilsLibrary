@@ -3,8 +3,8 @@ package com.silvericekey.skutilslibrary.base
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
 import com.silvericekey.skutilslibrary.utils.HttpUtil
 
-abstract class BasePresenter {
-    constructor() {
+abstract class BasePresenter() {
+    init {
         SKUtilsLibrary.presenters.add(this)
     }
 

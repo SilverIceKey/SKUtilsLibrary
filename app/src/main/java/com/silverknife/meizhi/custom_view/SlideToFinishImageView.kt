@@ -13,12 +13,12 @@ import androidx.core.view.marginLeft
 import androidx.core.view.marginTop
 import com.blankj.utilcode.util.ScreenUtils
 import com.github.chrisbanes.photoview.PhotoView
-import com.silvericekey.skutilslibrary.base.IBaseView
+import com.silvericekey.skutilslibrary.base.IBaseActivity
 
 class SlideToFinishImageView : LinearLayout {
     var block: PhotoView? = null
     var blockWrapper: BlockWrapper? = null
-    var iView: IBaseView? = null
+    var iView: IBaseActivity? = null
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)

@@ -17,3 +17,4 @@
 - ```2019/11/26``` 新增CameraUtil.enableFlashLight方法用于开关闪光灯。
 - ```2020/07/07``` 将FlycoSystemBar和GlueTabLayout中的类文件移入SKLibrary删除依赖。
 - ```2020/07/20``` 新增Aidl demo 新增ndk demo 新增kotson框架。
+- ```2020/08/10``` 新增qmui、PictureSelector框架，preference修改。
