@@ -16,6 +16,6 @@ class GankDetailActivity : BaseActivity<GankDetailPresenter>() {
     }
 
     override fun initPresenter(): GankDetailPresenter {
-        return GankDetailPresenter()
+        return GankDetailPresenter(this)
     }
 }
