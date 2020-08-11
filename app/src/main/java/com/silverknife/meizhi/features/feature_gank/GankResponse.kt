@@ -12,7 +12,7 @@ class GankResponse {
 
     companion object {
         @JvmStatic
-        fun getToday(onSuccess: (response: GankResponse) -> Unit) {
+        fun     getToday(onSuccess: (response: GankResponse) -> Unit) {
             HttpUtil.getInstance()
                     .changeUrl("http://gank.io/")
                     .obtainClass(Api::class.java)
