@@ -18,3 +18,4 @@
 - ```2020/07/07``` 将FlycoSystemBar和GlueTabLayout中的类文件移入SKLibrary删除依赖。
 - ```2020/07/20``` 新增Aidl demo 新增ndk demo 新增kotson框架。
 - ```2020/08/10``` 新增qmui、PictureSelector框架，preference修改。
+- ```2020/08/11``` 新增fitSystemBarView指定view不占用statusbar。新增http请求内联error自动处理方法

@@ -1,6 +1,8 @@
 package com.silvericekey.skutilslibrary.inline
 
 import android.annotation.SuppressLint
+import android.util.Log
+import com.blankj.utilcode.util.ToastUtils
 import com.silvericekey.skutilslibrary.net.NetCallback
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -16,7 +18,12 @@ inline fun <T> Call<T>.execute(callback: NetCallback<T>) {
         callback.onError(it)
     })
 }
-
+inline fun <T> Call<T>.execute(noinline onSuccess: (response: T) -> Unit) {
+    execute(onSuccess,{
+        Log.e("requestError", "${it}")
+        ToastUtils.showShort("请求失败")
+    })
+}
 @SuppressLint("CheckResult")
 inline fun <T> Call<T>.execute(noinline onSuccess: (response: T) -> Unit, noinline onError: (throwable: Throwable) -> Unit) {
     Observable.create(object : ObservableOnSubscribe<T> {
