@@ -14,13 +14,13 @@ import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks, IBaseFragment {
     protected lateinit var mPresenter: T
-    protected var fitSystemBarView:View?=null
+    protected var fitSystemBarView: View? = null
     var optionsCompat: ActivityOptionsCompat? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mPresenter = initPresenter()
         var view = LayoutInflater.from(context).inflate(getLayoutID(), null)
-        fitSystemBarView(view)
+        fitSystemBarView = if (fitSystemBarView() == null) view else fitSystemBarView()
         if (fitSystemBar()) {
             SystemBarUtil.setPadding(context, fitSystemBarView)
         }
@@ -46,8 +46,8 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
         return false
     }
 
-    open fun fitSystemBarView(view: View){
-        this.fitSystemBarView = view
+    open fun fitSystemBarView(): View? {
+        return null
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

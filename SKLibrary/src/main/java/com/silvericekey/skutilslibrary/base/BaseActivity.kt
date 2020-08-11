@@ -21,7 +21,7 @@ import pub.devrel.easypermissions.EasyPermissions
  */
 abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks, IBaseActivity {
     protected lateinit var mPresenter: T
-    protected var fitSystemBarView:View?=null
+    protected var fitSystemBarView: View? = null
 
     var optionsCompat: ActivityOptionsCompat? = null
     var slideToFinishSpeed = 2
@@ -43,7 +43,7 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
             window.navigationBarColor = Color.TRANSPARENT
             window.statusBarColor = statusColor()
         }
-        fitSystemBarView(window.decorView.findViewById(android.R.id.content))
+        fitSystemBarView = if (fitSystemBarView() == null) window.decorView.findViewById(android.R.id.content) else fitSystemBarView()
         if (fitSystemBar()) {
             SystemBarUtil.setPadding(this, fitSystemBarView)
         }
@@ -74,8 +74,8 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         return false
     }
 
-    open fun fitSystemBarView(view: View){
-        this.fitSystemBarView = view
+    open fun fitSystemBarView(): View? {
+        return null
     }
 
 
