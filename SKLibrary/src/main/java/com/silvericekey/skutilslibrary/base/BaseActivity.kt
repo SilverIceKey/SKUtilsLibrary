@@ -43,10 +43,6 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
             window.navigationBarColor = Color.TRANSPARENT
             window.statusBarColor = statusColor()
         }
-        fitSystemBarView = if (fitSystemBarView() == null) window.decorView.findViewById(android.R.id.content) else fitSystemBarView()
-        if (fitSystemBar()) {
-            SystemBarUtil.setPadding(this, fitSystemBarView)
-        }
         if (getLayoutID() != -1) {
             setContentView(getLayoutID())
         } else {
@@ -92,6 +88,14 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
     override fun onRestart() {
         super.onRestart()
         mPresenter.refreshData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fitSystemBarView = if (fitSystemBarView() == null) window.decorView.findViewById(android.R.id.content) else fitSystemBarView()
+        if (fitSystemBar()) {
+            SystemBarUtil.setPadding(this, fitSystemBarView)
+        }
     }
 
     open fun getLayoutID(): Int {

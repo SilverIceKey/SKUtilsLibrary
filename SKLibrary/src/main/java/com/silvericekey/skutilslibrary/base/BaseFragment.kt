@@ -20,15 +20,15 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mPresenter = initPresenter()
         var view = LayoutInflater.from(context).inflate(getLayoutID(), null)
-        fitSystemBarView = if (fitSystemBarView() == null) view else fitSystemBarView()
-        if (fitSystemBar()) {
-            SystemBarUtil.setPadding(context, fitSystemBarView)
-        }
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fitSystemBarView = if (fitSystemBarView() == null) view else fitSystemBarView()
+        if (fitSystemBar()) {
+            SystemBarUtil.setPadding(context, fitSystemBarView)
+        }
         initView(view)
     }
 
