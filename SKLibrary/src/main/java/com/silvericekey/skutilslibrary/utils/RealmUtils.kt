@@ -107,4 +107,22 @@ object RealmUtils {
             Log.e("realm", e.toString())
         }
     }
+
+    //条件清除数据
+    fun <T : RealmModel> delete(clazz: Class<T>, addConditions: (RealmQuery<T>) -> Unit) {
+        try {
+            Realm.getDefaultInstance().use {
+                it.beginTransaction()
+                it.delete(clazz)
+                var realmQuery: RealmQuery<T> = it.where(clazz)
+                addConditions(realmQuery)
+                var realmData = realmQuery.findAll()
+                realmData.deleteAllFromRealm()
+                it.commitTransaction()
+                it.close()
+            }
+        } catch (e: Exception) {
+            Log.e("realm", e.toString())
+        }
+    }
 }
