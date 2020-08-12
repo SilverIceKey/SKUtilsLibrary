@@ -3,6 +3,7 @@ package com.silvericekey.skutilslibrary.utils
 import android.util.Log
 import io.realm.Realm
 import io.realm.RealmModel
+import io.realm.RealmQuery
 
 /**
  * 数据库工具
@@ -63,6 +64,25 @@ object RealmUtils {
             Realm.getDefaultInstance().use {
                 it.beginTransaction()
                 var realmData = it.where(clazz).findAll()
+                var data = it.copyFromRealm(realmData)
+                it.commitTransaction()
+                it.close()
+                return data
+            }
+        } catch (e: Exception) {
+            Log.e("realm", e.toString())
+        }
+        return mutableListOf()
+    }
+
+    //获取所有条件对应数据
+    fun <T : RealmModel> getDatas(clazz: Class<T>, addConditions: (RealmQuery<T>) -> Unit): MutableList<T> {
+        try {
+            Realm.getDefaultInstance().use {
+                it.beginTransaction()
+                var realmQuery: RealmQuery<T> = it.where(clazz)
+                addConditions(realmQuery)
+                var realmData = realmQuery.findAll()
                 var data = it.copyFromRealm(realmData)
                 it.commitTransaction()
                 it.close()
