@@ -20,9 +20,26 @@ object RealmUtils {
                 }
             }
         } catch (e: Exception) {
-            Log.e("realm",e.toString())
+            Log.e("realm", e.toString())
         }
     }
+
+    //增加或更新多条数据
+    fun addOrUpdate(response: List<RealmModel>) {
+        try {
+            Realm.getDefaultInstance().use {
+                it.beginTransaction()
+                it.insertOrUpdate(response)
+                it.commitTransaction()
+                if (!it.isClosed) {
+                    it.close()
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("realm", e.toString())
+        }
+    }
+
     //获取第一条数据
     fun <T : RealmModel> getFirstData(clazz: Class<T>): T {
         try {
@@ -35,10 +52,11 @@ object RealmUtils {
                 return data
             }
         } catch (e: Exception) {
-            Log.e("realm",e.toString())
+            Log.e("realm", e.toString())
         }
         return clazz.newInstance()
     }
+
     //获取所有数据
     fun <T : RealmModel> getDatas(clazz: Class<T>): MutableList<T> {
         try {
@@ -51,12 +69,13 @@ object RealmUtils {
                 return data
             }
         } catch (e: Exception) {
-            Log.e("realm",e.toString())
+            Log.e("realm", e.toString())
         }
         return mutableListOf()
     }
+
     //清除数据
-    fun <T : RealmModel> clear(clazz: Class<T>){
+    fun <T : RealmModel> clear(clazz: Class<T>) {
         try {
             Realm.getDefaultInstance().use {
                 it.beginTransaction()
@@ -65,7 +84,7 @@ object RealmUtils {
                 it.close()
             }
         } catch (e: Exception) {
-            Log.e("realm",e.toString())
+            Log.e("realm", e.toString())
         }
     }
 }
