@@ -33,7 +33,7 @@ class HttpUtil {
         private var httpUtils: HttpUtil? = null
 
         @JvmStatic
-        fun getInstance(): HttpUtil {
+        fun get(): HttpUtil {
             if (httpUtils == null) {
                 throw Exception("Please init in Application or other place before use")
             }

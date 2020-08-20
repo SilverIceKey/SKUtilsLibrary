@@ -3,6 +3,7 @@ package com.silvericekey.skutilslibrary.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -17,18 +18,19 @@ import java.io.InputStream
 
 
 /**
- * Created by Administrator on 2017/5/24.
+ * 图片加载工具类
  */
 
 class ImageLoderUtil {
-    companion object{
+    companion object {
         @JvmStatic
-        private var imageLoderUtil:ImageLoderUtil? = null
+        private var imageLoderUtil: ImageLoderUtil? = null
+
         @JvmStatic
-        fun  getInstance():ImageLoderUtil{
-            if (imageLoderUtil==null){
-                synchronized(ImageLoderUtil::class.java,{
-                    if (imageLoderUtil==null){
+        fun get(): ImageLoderUtil {
+            if (imageLoderUtil == null) {
+                synchronized(ImageLoderUtil::class.java, {
+                    if (imageLoderUtil == null) {
                         imageLoderUtil = ImageLoderUtil()
                     }
                 })
@@ -36,6 +38,11 @@ class ImageLoderUtil {
             return imageLoderUtil!!
         }
     }
+
+    fun bindImg(url: String): RequestBuilder<*> {
+        return bindImg(url, Builder().build())
+    }
+
     fun bindImg(url: String, options: RequestOptions): RequestBuilder<*> {
         return bindImg(SKUtilsLibrary.context!!, url, options)
     }
@@ -48,12 +55,20 @@ class ImageLoderUtil {
 
     }
 
+    fun bindImg(activity: Activity, url: String): RequestBuilder<*> {
+        return bindImg(activity, url, Builder().build())
+    }
+
     fun bindImg(activity: Activity, url: String, options: RequestOptions): RequestBuilder<*> {
         val requestManager = Glide.with(activity)
         return requestManager
                 .load(url)
                 .apply(options)
 
+    }
+
+    fun bindImg(fragment: Fragment, url: String): RequestBuilder<*> {
+        return bindImg(fragment, url, Builder().build())
     }
 
     fun bindImg(fragment: Fragment, url: String, options: RequestOptions): RequestBuilder<*> {
@@ -79,7 +94,7 @@ class ImageLoderUtil {
     class Builder() {
         private var option: RequestOptions
         private var radius = 1
-        private var strategy = DiskCacheStrategy.AUTOMATIC
+        private var strategy = DiskCacheStrategy.ALL
         private var priority = Priority.HIGH
         private var placeholderInt = 0
         private var placeholderDrawable: Drawable? = getLoadDrawable()
@@ -196,6 +211,7 @@ class ImageLoderUtil {
             }
             return option
         }
+
         fun getLoadDrawable(): Drawable {
             var open: InputStream? = null
             var drawable: Drawable? = null

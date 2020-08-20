@@ -15,7 +15,7 @@ class ShareUtil {
         private var shareUtil: ShareUtil? = null
 
         @JvmStatic
-        fun getInstance(): ShareUtil {
+        fun get(): ShareUtil {
             if (shareUtil == null) {
                 synchronized(ShareUtil::class.java, {
                     if (shareUtil == null) {

@@ -9,13 +9,16 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import com.silvericekey.skutilslibrary.R
 
+/**
+ * 图片选择工具类
+ */
 class PictureSelectorUtil {
     companion object {
         @JvmStatic
         private var pictureSelectorUtil: PictureSelectorUtil? = null
 
         @JvmStatic
-        fun getInstance(): PictureSelectorUtil {
+        fun get(): PictureSelectorUtil {
             if (pictureSelectorUtil == null) {
                 synchronized(PictureSelectorUtil::class.java, {
                     if (pictureSelectorUtil == null) {
@@ -160,6 +163,7 @@ class PictureSelectorUtil {
         this.freeStyleCropEnabled = freeStyleCropEnabled
         return this
     }
+
     fun isEnableCrop(isEnableCrop: Boolean): PictureSelectorUtil {
         this.isEnableCrop = isEnableCrop
         return this
@@ -188,7 +192,7 @@ class PictureSelectorUtil {
                 .cutOutQuality(cutOutQuality)// Crop output quality defaults to 100
                 .freeStyleCropEnabled(freeStyleCropEnabled)// Crop dragged
                 .isEnableCrop(isEnableCrop)
-                .forResult(object :OnResultCallbackListener<LocalMedia>{
+                .forResult(object : OnResultCallbackListener<LocalMedia> {
                     override fun onResult(result: MutableList<LocalMedia>?) {
                         result(result)
                     }
@@ -200,7 +204,7 @@ class PictureSelectorUtil {
                 })
     }
 
-    fun openGallery(fragment: Fragment,  result:(result: List<LocalMedia>?) -> Unit, cancel: () -> Unit) {
+    fun openGallery(fragment: Fragment, result: (result: List<LocalMedia>?) -> Unit, cancel: () -> Unit) {
         PictureSelector.create(fragment)
                 .openGallery(type)// Album Media Type PictureMimeType.ofAll()、ofImage()、ofVideo()、ofAudio()
                 //.openCamera()// Camera Album Media Type PictureMimeType.ofImage()、ofVideo()
@@ -223,7 +227,7 @@ class PictureSelectorUtil {
                 .cutOutQuality(cutOutQuality)// Crop output quality defaults to 100
                 .freeStyleCropEnabled(freeStyleCropEnabled)// Crop dragged
                 .isEnableCrop(isEnableCrop)
-                .forResult(object :OnResultCallbackListener<LocalMedia>{
+                .forResult(object : OnResultCallbackListener<LocalMedia> {
                     override fun onResult(result: MutableList<LocalMedia>?) {
                         result(result)
                     }

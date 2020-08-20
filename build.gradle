@@ -17,10 +17,11 @@ buildscript {
         }
         google()
     }
+    ext.objectboxVersion = '2.7.1'
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.realm:realm-gradle-plugin:7.1.0-SNAPSHOT"
+        classpath "io.objectbox:objectbox-gradle-plugin:$objectboxVersion"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 
 

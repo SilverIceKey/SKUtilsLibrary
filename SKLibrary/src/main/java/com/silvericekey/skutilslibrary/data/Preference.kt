@@ -1,9 +1,9 @@
 package com.silvericekey.skutilslibrary.data
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
-import com.silvericekey.skutilslibrary.base.BaseApplication
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -14,7 +14,7 @@ import kotlin.reflect.KProperty
 class Preference<T>(val name: String, val default: T) : ReadWriteProperty<Any?, T> {
     companion object {
         val prefs: SharedPreferences by lazy {
-            BaseApplication.getApp().getSharedPreferences("PreferencesData", Context.MODE_PRIVATE)
+            SKUtilsLibrary.context!!.getSharedPreferences("PreferencesData", Context.MODE_PRIVATE)
         }
 
         /**

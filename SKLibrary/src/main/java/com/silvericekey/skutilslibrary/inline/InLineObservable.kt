@@ -8,6 +8,9 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+/**
+ * Observable内联函数
+ */
 inline fun <T> Observable<T>.execute(callback: NetCallback<T>) {
     execute({
         callback.onSuccess(it)
@@ -16,6 +19,9 @@ inline fun <T> Observable<T>.execute(callback: NetCallback<T>) {
     })
 }
 
+/**
+ * Observable内联函数
+ */
 inline fun <T> Observable<T>.execute(noinline onSuccess: (response: T) -> Unit) {
     execute(onSuccess, {
         Log.e("requestError", "${it}")
@@ -23,6 +29,9 @@ inline fun <T> Observable<T>.execute(noinline onSuccess: (response: T) -> Unit) 
     })
 }
 
+/**
+ * Observable内联函数
+ */
 @SuppressLint("CheckResult")
 inline fun <T> Observable<T>.execute(noinline onSuccess: (response: T) -> Unit, noinline onError: (throwable: Throwable) -> Unit) {
     subscribeOn(Schedulers.io())

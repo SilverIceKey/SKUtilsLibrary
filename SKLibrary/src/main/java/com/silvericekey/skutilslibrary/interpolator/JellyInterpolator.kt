@@ -2,6 +2,9 @@ package com.silvericekey.skutilslibrary.interpolator
 
 import android.animation.TimeInterpolator
 
+/**
+ * 动画插值器
+ */
 class JellyInterpolator : TimeInterpolator {
     // 因子数值越小振动频率越高
     private var factor: Float = 0.15f

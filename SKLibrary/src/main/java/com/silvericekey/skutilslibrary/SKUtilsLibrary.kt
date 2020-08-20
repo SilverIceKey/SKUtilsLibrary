@@ -1,14 +1,9 @@
 package com.silvericekey.skutilslibrary
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Application
 import android.content.Context
 import com.blankj.utilcode.util.Utils
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.silvericekey.skutilslibrary.base.BasePresenter
-import java.lang.NullPointerException
-import java.util.*
 
 
 /**
@@ -17,8 +12,11 @@ import java.util.*
 
 @SuppressLint("StaticFieldLeak")
 object SKUtilsLibrary {
+
+    /**
+     * 获取Context如果没有初始化会抛出异常
+     */
     @JvmStatic
-    var presenters: ArrayList<BasePresenter> = arrayListOf()
     var context: Context? = null
         get() {
             if (field == null) {
@@ -26,7 +24,6 @@ object SKUtilsLibrary {
             }
             return field
         }
-    private val app_activity: Activity? = null
 
     /**
      * 框架初始化，获取ApplicationContext

@@ -11,14 +11,15 @@ import com.silvericekey.skutilslibrary.SKUtilsLibrary
  * 摄像头工具类
  * */
 class CameraUtil {
-    companion object{
+    companion object {
         @JvmStatic
-        private var cameraUtil:CameraUtil? = null
+        private var cameraUtil: CameraUtil? = null
+
         @JvmStatic
-        fun  getInstance():CameraUtil{
-            if (cameraUtil==null){
-                synchronized(CameraUtil::class.java,{
-                    if (cameraUtil==null){
+        fun get(): CameraUtil {
+            if (cameraUtil == null) {
+                synchronized(CameraUtil::class.java, {
+                    if (cameraUtil == null) {
                         cameraUtil = CameraUtil()
                     }
                 })
@@ -26,10 +27,11 @@ class CameraUtil {
             return cameraUtil!!
         }
     }
+
     /**
-     * 是否打开摄像头
+     * 是否打开摄像头手电筒
      * */
-    fun enableFlashLight(enable:Boolean){
+    fun enableFlashLight(enable: Boolean) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             var cameraManager = SKUtilsLibrary.context!!.getSystemService(Context.CAMERA_SERVICE) as CameraManager
             var ids = cameraManager.cameraIdList

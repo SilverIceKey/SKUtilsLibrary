@@ -3,6 +3,7 @@ package com.silverknife.meizhi
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
 import com.silvericekey.skutilslibrary.base.BaseApplication
 import com.silvericekey.skutilslibrary.utils.HttpUtil
+import com.silverknife.meizhi.utils.ObjectBox
 
 /**
  * Created by silverknife on 2017/12/13.
@@ -22,6 +23,7 @@ class App : BaseApplication() {
         super.onCreate()
         mApp = this
         HttpUtil.init("http://www.baidu.com/")
+        ObjectBox.init(this)
     }
 
 }

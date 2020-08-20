@@ -6,6 +6,9 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
+/**
+ * 请求cookie保存插值器
+ */
 class AddCookiesInterceptor :Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var builder = chain.request().newBuilder()

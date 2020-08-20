@@ -6,23 +6,19 @@ import java.io.IOException
 import java.io.InputStream
 
 /**
- * <pre>
- *     time   : 2020/07/17
- *     desc   :
- *     version: 1.0
- * </pre>
+ * 文件工具
  */
-class FileIOUtil {
+class FileUtil {
     companion object {
         @JvmStatic
-        private var fileIOUtil: FileIOUtil? = null
+        private var fileIOUtil: FileUtil? = null
 
         @JvmStatic
-        fun getInstance(): FileIOUtil {
+        fun get(): FileUtil {
             if (fileIOUtil == null) {
-                synchronized(FileIOUtil::class.java, {
+                synchronized(FileUtil::class.java, {
                     if (fileIOUtil == null) {
-                        fileIOUtil = FileIOUtil()
+                        fileIOUtil = FileUtil()
                     }
                 })
             }

@@ -7,6 +7,9 @@ import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.util.regex.Pattern
 
+/**
+ * 数字跳动动画工具
+ */
 class NumberAnimUtil {
     /**
      * 起始值 默认 0

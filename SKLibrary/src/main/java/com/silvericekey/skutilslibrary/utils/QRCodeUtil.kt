@@ -18,14 +18,15 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 * 二维码工具类
 * */
 class QRCodeUtil {
-    companion object{
+    companion object {
         @JvmStatic
-        private var qrCodeUtil:QRCodeUtil? = null
+        private var qrCodeUtil: QRCodeUtil? = null
+
         @JvmStatic
-        fun  getInstance():QRCodeUtil{
-            if (qrCodeUtil==null){
-                synchronized(QRCodeUtil::class.java,{
-                    if (qrCodeUtil==null){
+        fun get(): QRCodeUtil {
+            if (qrCodeUtil == null) {
+                synchronized(QRCodeUtil::class.java, {
+                    if (qrCodeUtil == null) {
                         qrCodeUtil = QRCodeUtil()
                     }
                 })
@@ -33,6 +34,7 @@ class QRCodeUtil {
             return qrCodeUtil!!
         }
     }
+
     /*
     * 快捷创建二维码bitmap
     * */

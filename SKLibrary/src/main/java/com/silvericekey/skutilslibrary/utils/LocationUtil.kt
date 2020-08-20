@@ -12,6 +12,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
 
+/**
+ * 定位工具类
+ */
 class LocationUtil private constructor(private val mContext: Context) {
     private var locationManager: LocationManager? = null
     private var locationProvider: String? = null

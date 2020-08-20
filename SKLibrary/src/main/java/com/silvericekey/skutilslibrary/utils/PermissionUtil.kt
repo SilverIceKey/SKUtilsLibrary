@@ -11,17 +11,22 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.silvericekey.skutilslibrary.SKUtilsLibrary
 import pub.devrel.easypermissions.EasyPermissions
 
+/**
+ * 权限工具类
+ */
 class PermissionUtil {
-    companion object{
+    companion object {
         @JvmStatic
         val PERMISSION_REQUEST = 100
+
         @JvmStatic
-        private var permissionUtil:PermissionUtil? = null
+        private var permissionUtil: PermissionUtil? = null
+
         @JvmStatic
-        fun  getInstance():PermissionUtil{
-            if (permissionUtil==null){
-                synchronized(PermissionUtil::class.java,{
-                    if (permissionUtil==null){
+        fun get(): PermissionUtil {
+            if (permissionUtil == null) {
+                synchronized(PermissionUtil::class.java, {
+                    if (permissionUtil == null) {
                         permissionUtil = PermissionUtil()
                     }
                 })
@@ -29,6 +34,7 @@ class PermissionUtil {
             return permissionUtil!!
         }
     }
+
     fun hasPermission(vararg permissions: String): Boolean {
         return EasyPermissions.hasPermissions(SKUtilsLibrary.context!!, *permissions)
     }
@@ -43,7 +49,7 @@ class PermissionUtil {
                 AlertDialog.Builder(ActivityUtils.getTopActivity()!!)
                         .setTitle("安装权限")
                         .setMessage("需要打开允许来自此来源，请去设置中开启此权限")
-                        .setPositiveButton("确定", object:DialogInterface.OnClickListener{
+                        .setPositiveButton("确定", object : DialogInterface.OnClickListener {
                             override fun onClick(dialog: DialogInterface?, which: Int) {
                                 toInstallPermissionSettingIntent()
                                 dialog!!.dismiss()
@@ -54,12 +60,14 @@ class PermissionUtil {
             }
         }
     }
+
     var INSTALL_PERMISS_CODE = 100
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     fun toInstallPermissionSettingIntent() {
-        var packageURI = Uri.parse ("package:" + SKUtilsLibrary.context?.getPackageName())
+        var packageURI = Uri.parse("package:" + SKUtilsLibrary.context?.getPackageName())
         var intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI)
-        ActivityUtils.startActivityForResult(ActivityUtils.getTopActivity(),intent, INSTALL_PERMISS_CODE)
+        ActivityUtils.startActivityForResult(ActivityUtils.getTopActivity(), intent, INSTALL_PERMISS_CODE)
     }
 
     interface PermissionSimpleCallback {
