@@ -2,7 +2,6 @@ package com.silverknife.meizhi.mvp.presenter
 
 import com.blankj.utilcode.util.ToastUtils
 import com.silvericekey.skutilslibrary.base.BasePresenter
-import com.silvericekey.skutilslibrary.utils.HttpUtil
 import com.silverknife.meizhi.mvp.model.LoginResponse
 import com.silverknife.meizhi.mvp.ui.interfaces.ITestView
 
@@ -28,6 +27,6 @@ class TestPresenter : BasePresenter {
     }
 
     fun webSocketRequest() {
-        HttpUtil.webSocketTest()
+
     }
 }

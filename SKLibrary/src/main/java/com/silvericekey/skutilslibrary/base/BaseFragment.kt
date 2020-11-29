@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.silvericekey.skutilslibrary.utils.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.permission.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks {

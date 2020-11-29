@@ -1,7 +1,6 @@
 package com.silvericekey.skutilslibrary.net
 
 import android.content.Context
-import com.silvericekey.skutilslibrary.SKUtilsLibrary
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -14,7 +13,7 @@ class ReceivedCookiesInterceptor : Interceptor {
             for (header in originResponse.headers("Set-Cookie")){
                 cookies.add(header)
             }
-            var sharedPreferences = SKUtilsLibrary.context!!.getSharedPreferences("cookie",Context.MODE_PRIVATE)
+            var sharedPreferences = BaseApplication.getApp().getSharedPreferences("cookie",Context.MODE_PRIVATE)
             var editor = sharedPreferences.edit()
             editor.putStringSet("cookies",cookies)
             editor.apply()

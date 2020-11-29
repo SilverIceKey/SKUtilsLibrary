@@ -2,7 +2,7 @@ package com.silverknife.meizhi.mvp.adapter
 
 import com.blankj.utilcode.util.ActivityUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.silvericekey.skutilslibrary.utils.ImageLoderUtil
+import com.silvericekey.skutilslibrary.utils.image.ImageLoderUtil
 import com.silverknife.meizhi.R
 import com.silverknife.meizhi.mvp.ui.holder.GankItemImageHolder
 

@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.utils
+package com.silvericekey.skutilslibrary.utils.location
 
 import android.Manifest
 import android.content.ContentValues.TAG

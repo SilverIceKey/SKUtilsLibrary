@@ -2,7 +2,7 @@ package com.silverknife.meizhi.mvp.ui.activity
 
 import android.text.TextUtils
 import com.silvericekey.skutilslibrary.base.BaseActivity
-import com.silvericekey.skutilslibrary.utils.ImageLoderUtil
+import com.silvericekey.skutilslibrary.utils.image.ImageLoderUtil
 import com.silverknife.meizhi.R
 import com.silverknife.meizhi.mvp.presenter.PhotoViewPresenter
 import kotlinx.android.synthetic.main.activity_gank_detail.*

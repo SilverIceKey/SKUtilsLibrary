@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.View
 import com.blankj.utilcode.util.ToastUtils
 import com.silvericekey.skutilslibrary.base.BaseFragment
-import com.silvericekey.skutilslibrary.utils.PermissionUtil
-import com.silvericekey.skutilslibrary.utils.QRCodeUtil
+import com.silvericekey.skutilslibrary.utils.permission.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.qrcode.QRCodeUtil
 import com.silverknife.meizhi.R
 import com.silverknife.meizhi.mvp.presenter.TestPresenter
 import com.silverknife.meizhi.mvp.ui.activity.TabsActivity

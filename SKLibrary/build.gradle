@@ -52,10 +52,14 @@ dependencies {
     api rootProject.ext.deps['rxandroid2_adapter_rxjava2']
     api rootProject.ext.deps['multidex']
     api rootProject.ext.deps['PhotoView']
+    api rootProject.ext.deps['arouter']
+    api rootProject.ext.deps['mmkv']
+    api rootProject.ext.deps['hutool']
+    api rootProject.ext.deps['logger']
     api project(":autosize")
     api project(":FlycoSystemBar_Lib")
     api project(":gluetablayout")
-    api "androidx.core:core-ktx:+"
+    api "androidx.core:core-ktx:1.3.2"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 

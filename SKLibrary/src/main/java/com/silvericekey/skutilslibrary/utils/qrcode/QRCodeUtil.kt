@@ -1,10 +1,9 @@
-package com.silvericekey.skutilslibrary.utils
+package com.silvericekey.skutilslibrary.utils.qrcode
 
 import android.graphics.Bitmap
 import android.graphics.Color
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.BinaryBitmap
-import com.google.zxing.LuminanceSource
 import com.google.zxing.RGBLuminanceSource
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.common.HybridBinarizer

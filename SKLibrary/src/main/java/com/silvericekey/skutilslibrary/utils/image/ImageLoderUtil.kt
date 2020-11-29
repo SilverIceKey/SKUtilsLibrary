@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.utils
+package com.silvericekey.skutilslibrary.utils.image
 
 import android.app.Activity
 import android.content.Context
@@ -11,7 +11,7 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.silvericekey.skutilslibrary.SKUtilsLibrary
+import com.silvericekey.skutilslibrary.base.BaseApplication
 import java.io.IOException
 import java.io.InputStream
 
@@ -22,7 +22,7 @@ import java.io.InputStream
 
 object ImageLoderUtil {
     fun bindImg(url: String, options: RequestOptions): RequestBuilder<*> {
-        return bindImg(SKUtilsLibrary.context!!, url, options)
+        return bindImg(BaseApplication.getApp(), url, options)
     }
 
     fun bindImg(context: Context, url: String, options: RequestOptions): RequestBuilder<*> {
@@ -187,7 +187,7 @@ object ImageLoderUtil {
         var open: InputStream? = null
         var drawable: Drawable? = null
         try {
-            open = SKUtilsLibrary.context!!.getAssets().open("load.jpg")
+            open = BaseApplication.getApp().getAssets().open("load.jpg")
             drawable = Drawable.createFromStream(open, null)
         } catch (e: IOException) {
             e.printStackTrace()

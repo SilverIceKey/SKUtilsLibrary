@@ -1,9 +1,7 @@
-package com.silvericekey.skutilslibrary.utils
+package com.silvericekey.skutilslibrary.net
 
 import android.text.TextUtils
 import android.util.Log
-import com.silvericekey.skutilslibrary.net.AddCookiesInterceptor
-import com.silvericekey.skutilslibrary.net.ReceivedCookiesInterceptor
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okio.ByteString
@@ -21,6 +19,7 @@ class HttpUtil {
 
     companion object {
         private var httpUtils: HttpUtil? = null
+
         @JvmStatic
         fun getInstance(): HttpUtil {
             if (httpUtils == null) {
@@ -40,12 +39,11 @@ class HttpUtil {
             }
         }
 
+        /**
+         * websocket测试
+         */
         @JvmStatic
         fun webSocketTest() {
-//            val hostName = mockWebServerUtil.mockWebServer!!.hostName
-//            val port = mockWebServerUtil.mockWebServer!!.port
-//            println("hostName:$hostName")
-//            println("port:$port")
             var wsUrl = "wss://echo.websocket.org/"
             var request = Request.Builder().url(wsUrl).build()
             var okHttpClient = OkHttpClient.Builder()
@@ -119,15 +117,14 @@ class HttpUtil {
         }
     }
 
+    /**
+     * 初始化网络请求框架
+     */
     constructor(baseUrl: String) {
         if (TextUtils.isEmpty(baseUrl)) {
             throw Exception("Please set base url first")
         }
-        val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Log.i("RetrofitLog", "retrofitBack = $message")
-            }
-        })
+        val loggingInterceptor = HttpLoggingInterceptor(HttpLogger())
         val receivedCookiesInterceptor = ReceivedCookiesInterceptor()
         val addCookiesInterceptor = AddCookiesInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -137,7 +134,7 @@ class HttpUtil {
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .writeTimeout(10000L, TimeUnit.MILLISECONDS)
-                .pingInterval(40,TimeUnit.SECONDS)
+                .pingInterval(40, TimeUnit.SECONDS)
                 .build()
         okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
@@ -155,12 +152,19 @@ class HttpUtil {
                 .build()
     }
 
+    /**
+     * 添加拦截器
+     */
     fun addInterceptor(interceptor: Interceptor): HttpUtil {
         okHttpClient = okHttpClient.newBuilder().addInterceptor(interceptor).build()
         retrofit = retrofit.newBuilder().client(okHttpClient).build()
         return this
     }
 
+
+    /**
+     * 修改基础地址
+     */
     fun changeUrl(baseUrl: String): HttpUtil {
         retrofit = retrofit.newBuilder().baseUrl(baseUrl).client(okHttpClient).build()
         return this

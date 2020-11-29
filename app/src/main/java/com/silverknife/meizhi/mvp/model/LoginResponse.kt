@@ -1,10 +1,6 @@
 package com.silverknife.meizhi.mvp.model
 
 import android.annotation.SuppressLint
-import com.silvericekey.skutilslibrary.rxjava.execute
-import com.silvericekey.skutilslibrary.utils.HttpUtil
-import com.silverknife.meizhi.app.net.TestInterceptor
-import com.silverknife.meizhi.app.Api
 
 class LoginResponse {
 
@@ -25,16 +21,7 @@ class LoginResponse {
         @SuppressLint("CheckResult")
         @JvmStatic
         fun getData(onSuccess: (response: LoginResponse) -> Unit, onError: (throwable: Throwable) -> Unit) {
-            HttpUtil.getInstance()
-                    .addInterceptor(TestInterceptor())
-                    .obtainClass(Api::class.java)
-                    .login("18368402184", "400938")
-                    .execute({
-                        onSuccess(it)
-                    }, {
-                        onError(it)
-                    })
-//                    .setSchedulers(callback)
+
         }
     }
 }

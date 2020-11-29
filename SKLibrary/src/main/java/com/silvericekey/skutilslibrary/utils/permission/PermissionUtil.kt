@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.utils
+package com.silvericekey.skutilslibrary.utils.permission
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -8,20 +8,20 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.blankj.utilcode.util.ActivityUtils
-import com.silvericekey.skutilslibrary.SKUtilsLibrary
+import com.silvericekey.skutilslibrary.base.BaseApplication
 import pub.devrel.easypermissions.EasyPermissions
 
 object PermissionUtil {
     val PERMISSION_REQUEST = 100
     fun hasPermission(vararg permissions: String): Boolean {
-        return EasyPermissions.hasPermissions(SKUtilsLibrary.context!!, *permissions)
+        return EasyPermissions.hasPermissions(BaseApplication.getApp(), *permissions)
     }
 
     fun canInstallAPK() {
         var haveInstallPermission: Boolean
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //先判断是否有安装未知来源应用的权限
-            haveInstallPermission = SKUtilsLibrary.context?.getPackageManager()!!.canRequestPackageInstalls();
+            haveInstallPermission = BaseApplication.getApp().getPackageManager()!!.canRequestPackageInstalls();
             if (!haveInstallPermission) {
                 //弹框提示用户手动打开
                 AlertDialog.Builder(ActivityUtils.getTopActivity()!!)
@@ -41,7 +41,7 @@ object PermissionUtil {
     var INSTALL_PERMISS_CODE = 100
     @RequiresApi(api = Build.VERSION_CODES.O)
     fun toInstallPermissionSettingIntent() {
-        var packageURI = Uri.parse ("package:" + SKUtilsLibrary.context?.getPackageName())
+        var packageURI = Uri.parse ("package:" + BaseApplication.getApp().getPackageName())
         var intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI)
         ActivityUtils.startActivityForResult(ActivityUtils.getTopActivity(),intent, INSTALL_PERMISS_CODE)
     }

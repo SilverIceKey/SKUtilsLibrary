@@ -1,7 +1,5 @@
 package com.silvericekey.skutilslibrary.base
 
-import com.silvericekey.skutilslibrary.SKUtilsLibrary
-
 abstract class BasePresenter {
     constructor() {
         SKUtilsLibrary.presenters.add(this)
