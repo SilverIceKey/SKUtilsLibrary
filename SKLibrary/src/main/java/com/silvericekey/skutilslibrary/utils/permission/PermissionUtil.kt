@@ -11,8 +11,24 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.silvericekey.skutilslibrary.base.BaseApplication
 import pub.devrel.easypermissions.EasyPermissions
 
-object PermissionUtil {
-    val PERMISSION_REQUEST = 100
+class PermissionUtil {
+    companion object{
+        @JvmStatic
+        val PERMISSION_REQUEST = 100
+        @JvmStatic
+        private var permissionUtil:PermissionUtil? = null
+        @JvmStatic
+        fun  getInstance():PermissionUtil{
+            if (permissionUtil==null){
+                synchronized(PermissionUtil::class.java,{
+                    if (permissionUtil==null){
+                        permissionUtil = PermissionUtil()
+                    }
+                })
+            }
+            return permissionUtil!!
+        }
+    }
     fun hasPermission(vararg permissions: String): Boolean {
         return EasyPermissions.hasPermissions(BaseApplication.getApp(), *permissions)
     }

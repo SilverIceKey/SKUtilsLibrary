@@ -6,3 +6,16 @@
 - ```2019/09/10``` BasePageAdapter新增getPageView方法用于设定GlueTabLayout的标签，新增FlycoSystemBar的jitpack添加，GlueTabLayout的jitpack添加
 - ```2019/09/29``` BaseFragment新增onVisibale判断是否从后台切换回前台，取消fragment下presenter的lateinit让onVisible判断标准为非初次加载，自动集成MultiDex，让Application继承BaseApplication即可，最小SDK支持变更为16，GlueTabLayout中修改Icon为非必传，demo界面修改，新增干货集中营API，待完善。
 - ```2019/09/30``` 修复福利界面图片无法加载的bug，修复多图片recyclerview空白处无法点击跳转的bug，新增图片预览功能，使用框架photoview，新增详情页跳转。
+- ```2019/10/09``` 添加navigationview侧滑菜单，主界面改为fragment的切换。
+- ```2019/10/14``` BaseActivity，BaseFragment 增加initOptionsCompat方法用于添加转场动画，重写startActivity,判断转场动画参数optionsCompat:ActivityOptionsCompat是否为null，如果不为null则增加，BaseActivity增加addTransitionName方法用于设置被跳转activity的转场view。
+- ```2019/10/16``` BaseActivity新增initTransitionViews方法用于初始化转场view，修改photoview的glide加载增加图片大小显示，防止有些图片被异常放大。
+- ```2019/10/22``` 新增动画类，关于临界点自动放大。
+- ```2019/10/25``` 新增简易滑动确认自定义view
+- ```2019/10/19``` 适配Android Q全面屏底部导航栏，并在BaseActivity中新增isStatusDark方法用于设置状态栏图标是否为灰色已经statusColor用于设置状态栏颜色。
+- ```2019/11/06``` 新增滑动返回使用openSlideToFinish开启，默认关闭，使用slideToFinishSpeed设置滑动速度，越小需要越快速滑动才能触发，新增图片下拉返回的外部view，当高度小于屏幕的1/3时触发返回。
+- ```2019/11/22``` 根据NumberAnimTextView的动画方式新增NumberAnimUtils用于进行textview的数值变化，并且新增addUpdateListener和addListener用于增加监听，可以都监听。
+- ```2019/11/26``` 新增CameraUtil.enableFlashLight方法用于开关闪光灯。
+- ```2020/07/07``` 将FlycoSystemBar和GlueTabLayout中的类文件移入SKLibrary删除依赖。
+- ```2020/07/20``` 新增Aidl demo 新增ndk demo 新增kotson框架。
+- ```2020/08/10``` 新增qmui、PictureSelector框架，preference修改。
+- ```2020/08/11``` 新增fitSystemBarView指定view不占用statusbar。新增http请求内联error自动处理方法

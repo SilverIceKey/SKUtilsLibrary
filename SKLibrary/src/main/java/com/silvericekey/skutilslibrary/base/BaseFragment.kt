@@ -1,24 +1,34 @@
 package com.silvericekey.skutilslibrary.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
-import com.silvericekey.skutilslibrary.utils.permission.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.SystemBarUtil
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks {
-    protected var mPresenter: T? = null
+abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.PermissionCallbacks, IBaseFragment {
+    protected lateinit var mPresenter: T
+    protected var fitSystemBarView: View? = null
+    var optionsCompat: ActivityOptionsCompat? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mPresenter = initPresenter()
-        var view = inflater.inflate(getLayoutID(), null)
+        var view = LayoutInflater.from(context).inflate(getLayoutID(), null)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fitSystemBarView = if (fitSystemBarView() == null) view else fitSystemBarView()
+        if (fitSystemBar()) {
+            SystemBarUtil.setPadding(context, fitSystemBarView)
+        }
         initView(view)
     }
 
@@ -32,9 +42,17 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
 
     }
 
+    open fun fitSystemBar(): Boolean {
+        return false
+    }
+
+    open fun fitSystemBarView(): View? {
+        return null
+    }
+
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (mPresenter != null&&isVisibleToUser) {
+        if (mPresenter != null && isVisibleToUser) {
             onVisibale()
         }
     }
@@ -63,6 +81,22 @@ abstract class BaseFragment<T : BasePresenter> : Fragment(), EasyPermissions.Per
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
 
+    }
+
+    fun initOptionsCompat(vararg sharedElements: Pair<View, String>) {
+        optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, *sharedElements)
+    }
+
+    override fun startActivity(intent: Intent?) {
+        if (optionsCompat == null) {
+            super.startActivity(intent)
+        } else {
+            startActivity(intent, optionsCompat?.toBundle())
+        }
+    }
+
+    override fun getFragment(): Fragment {
+        return this
     }
 
     override fun onDestroy() {

@@ -1,11 +1,16 @@
 package com.silvericekey.skutilslibrary.base
 
-abstract class BasePresenter {
-    constructor() {
+import com.silvericekey.skutilslibrary.SKUtilsLibrary
+import com.silvericekey.skutilslibrary.utils.HttpUtil
+
+abstract class BasePresenter() {
+    init {
         SKUtilsLibrary.presenters.add(this)
     }
 
-    abstract fun onDestroy()
+    open fun onDestroy(){
+        HttpUtil.getInstance().clearAllRequest()
+    }
 
     fun refreshData() {
 

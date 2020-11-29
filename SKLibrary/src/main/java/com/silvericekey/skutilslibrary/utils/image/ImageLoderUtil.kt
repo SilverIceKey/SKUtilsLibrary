@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.utils.image
+package com.silvericekey.skutilslibrary.utils
 
 import android.app.Activity
 import android.content.Context
@@ -11,7 +11,7 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.silvericekey.skutilslibrary.base.BaseApplication
+import com.silvericekey.skutilslibrary.SKUtilsLibrary
 import java.io.IOException
 import java.io.InputStream
 
@@ -20,9 +20,24 @@ import java.io.InputStream
  * Created by Administrator on 2017/5/24.
  */
 
-object ImageLoderUtil {
+class ImageLoderUtil {
+    companion object{
+        @JvmStatic
+        private var imageLoderUtil:ImageLoderUtil? = null
+        @JvmStatic
+        fun  getInstance():ImageLoderUtil{
+            if (imageLoderUtil==null){
+                synchronized(ImageLoderUtil::class.java,{
+                    if (imageLoderUtil==null){
+                        imageLoderUtil = ImageLoderUtil()
+                    }
+                })
+            }
+            return imageLoderUtil!!
+        }
+    }
     fun bindImg(url: String, options: RequestOptions): RequestBuilder<*> {
-        return bindImg(BaseApplication.getApp(), url, options)
+        return bindImg(SKUtilsLibrary.context!!, url, options)
     }
 
     fun bindImg(context: Context, url: String, options: RequestOptions): RequestBuilder<*> {
@@ -181,25 +196,24 @@ object ImageLoderUtil {
             }
             return option
         }
-    }
-
-    fun getLoadDrawable(): Drawable {
-        var open: InputStream? = null
-        var drawable: Drawable? = null
-        try {
-            open = BaseApplication.getApp().getAssets().open("load.jpg")
-            drawable = Drawable.createFromStream(open, null)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } finally {
+        fun getLoadDrawable(): Drawable {
+            var open: InputStream? = null
+            var drawable: Drawable? = null
             try {
-                if (open != null) {
-                    open.close()
-                }
+                open = SKUtilsLibrary.context!!.getAssets().open("load.jpg")
+                drawable = Drawable.createFromStream(open, null)
             } catch (e: IOException) {
                 e.printStackTrace()
+            } finally {
+                try {
+                    if (open != null) {
+                        open.close()
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
+            return drawable!!
         }
-        return drawable!!
     }
 }

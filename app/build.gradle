@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 def cfg = rootProject.ext.android
 android {
@@ -13,6 +13,11 @@ android {
         versionName cfg["versionName"]
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        externalNativeBuild {
+//            cmake {
+//                cppFlags "-std=c++11"
+//            }
+//        }
     }
     buildTypes {
         release {
@@ -31,19 +36,34 @@ android {
         exclude 'META-INF/ASL2.0'
         exclude 'licenses/*'
     }
+
     compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+//    externalNativeBuild {
+//        cmake {
+//            path "src/main/cpp/CMakeLists.txt"
+//            version "3.10.2"
+//        }
+//    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation rootProject.ext.deps["fragment-ktx"]
+    implementation rootProject.ext.deps["swiperefreshlayout"]
     implementation project(path: ':SKLibrary')
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "com.facebook.react:react-native:+"
+    implementation "jp.wasabeef:blurry:3.0.0"
 
 }
 repositories {

@@ -2,11 +2,13 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#87CEFA</color>
     <color name="tab_normal">#000000</color>
     <color name="tab_selected">#dc372b</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="black30">#30000000</color>
+    <color name="black90">#90000000</color>
     <color name="danger">#dc3545</color>
     <color name="who">#17a2b8</color>
     <color name="time_text">#6c757d</color>

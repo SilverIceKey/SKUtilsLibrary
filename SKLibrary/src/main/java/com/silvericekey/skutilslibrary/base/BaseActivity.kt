@@ -1,23 +1,82 @@
 package com.silvericekey.skutilslibrary.base
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.silvericekey.skutilslibrary.utils.permission.PermissionUtil
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
+import com.silvericekey.skutilslibrary.utils.PermissionUtil
+import com.silvericekey.skutilslibrary.utils.SystemBarUtil
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
-    protected lateinit var mPresenter: T
 
+/**
+ * 基类
+ */
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermissions.PermissionCallbacks, IBaseActivity {
+    protected lateinit var mPresenter: T
+    protected var fitSystemBarView: View? = null
+
+    var optionsCompat: ActivityOptionsCompat? = null
+    var slideToFinishSpeed = 2
+    var openSlideToFinish = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
             this.intent.putExtras(savedInstanceState)
         }
-        setContentView(getLayoutID())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            var flag: Int
+            if (isStatusDark()) {
+                flag = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            } else {
+                flag = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            }
+            window.decorView.systemUiVisibility = flag//导航栏不会被隐藏但activity布局会扩展到导航栏所在位置
+            window.navigationBarColor = Color.TRANSPARENT
+            window.statusBarColor = statusColor()
+        }
+        if (getLayoutID() != -1) {
+            setContentView(getLayoutID())
+        } else {
+            setContentView(getLayout())
+        }
+
         initStatusBar()
         mPresenter = initPresenter()
+        initTransitionViews()
+        for (view in views.keys) {
+            ViewCompat.setTransitionName(view, views[view])
+        }
         initView()
+    }
+
+    open fun isStatusDark(): Boolean {
+        return true
+    }
+
+    open fun statusColor(): Int {
+        return Color.TRANSPARENT
+    }
+
+    open fun fitSystemBar(): Boolean {
+        return false
+    }
+
+    open fun fitSystemBarView(): View? {
+        return null
+    }
+
+
+    open fun initTransitionViews() {
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -31,7 +90,21 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
         mPresenter.refreshData()
     }
 
-    abstract fun getLayoutID(): Int
+    override fun onResume() {
+        super.onResume()
+        fitSystemBarView = if (fitSystemBarView() == null) window.decorView.findViewById(android.R.id.content) else fitSystemBarView()
+        if (fitSystemBar()) {
+            SystemBarUtil.setPadding(this, fitSystemBarView)
+        }
+    }
+
+    open fun getLayoutID(): Int {
+        return -1
+    }
+
+    open fun getLayout(): View? {
+        return null
+    }
 
     abstract fun initView()
 
@@ -70,6 +143,45 @@ abstract class BaseActivity<T : BasePresenter> : AppCompatActivity(), EasyPermis
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         simpleCallback?.permissionDenied()
         fullCallback?.permissionDenied(perms)
+    }
+
+    var views: HashMap<View, String> = hashMapOf()
+    fun addTransitionName(view: View, tag: String) {
+        views.put(view, tag)
+    }
+
+    fun initOptionsCompat(vararg sharedElements: Pair<View, String>) {
+        optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, *sharedElements)
+    }
+
+    override fun startActivity(intent: Intent?) {
+        if (optionsCompat == null) {
+            super.startActivity(intent)
+        } else {
+            startActivity(intent, optionsCompat?.toBundle())
+        }
+    }
+
+    private var mDownX: Int = 0
+    private var mDownTime: Long = 0
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        when (ev!!.action) {
+            MotionEvent.ACTION_DOWN -> {
+                mDownX = ev.x.toInt()
+                mDownTime = System.currentTimeMillis()
+            }
+            MotionEvent.ACTION_UP -> {
+                if ((ev.x.toInt() - mDownX) / (System.currentTimeMillis() - mDownTime) >= slideToFinishSpeed && openSlideToFinish) {
+                    finish()
+                    return true
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    override fun getActivity(): Activity {
+        return this
     }
 
     override fun onDestroy() {

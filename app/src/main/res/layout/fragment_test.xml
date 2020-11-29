@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,25 +16,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center|center_vertical"
-            android:onClick="request"
             android:text="请求" />
-
-        <Button
-            android:id="@+id/websocker_request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center|center_vertical"
-            android:onClick="webSocketRequest"
-            android:text="长连接请求" />
-
         <Button
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center|center_vertical"
-            android:onClick="tabs"
             android:text="标签" />
 
         <Button
@@ -42,8 +31,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center|center_vertical"
-            android:onClick="requestInstallPermission"
             android:text="请求安装权限" />
+
+        <Button
+            android:id="@+id/anime_move"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|center_vertical"
+            android:text="移动动画测试" />
 
         <TextView
             android:id="@+id/text"
@@ -51,25 +47,107 @@
             android:layout_height="wrap_content"
             android:gravity="center" />
 
-        <EditText
-            android:id="@+id/qr_info"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入二维码信息" />
+            android:hint="二维码内容"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/qr_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/create_qr_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="生成二维码"
-            android:onClick="createQRCode" />
+            android:text="生成二维码" />
 
         <ImageView
             android:id="@+id/qr_img"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dropDownWidth="match_parent"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/numView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="开始" />
+
+            <Button
+                android:id="@+id/pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="暂停" />
+
+            <Button
+                android:id="@+id/reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="重置" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/flashlight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="打开闪光灯" />
+
+        <Button
+            android:id="@+id/btnStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="可点击" />
+
+        <Button
+            android:id="@+id/btnStatusChange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="按钮状态调整" />
+
+        <Button
+            android:id="@+id/select_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择相机/相册" />
+
+        <Button
+            android:id="@+id/rn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RN测试" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/avator" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

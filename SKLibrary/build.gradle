@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
 def cfg = rootProject.ext.android
@@ -39,6 +41,7 @@ dependencies {
     api rootProject.ext.deps["aucx"]
     api rootProject.ext.deps["zxing_core"]
     api rootProject.ext.deps["BaseRecyclerViewAdapterHelper"]
+    api rootProject.ext.deps["picture_library"]
     api rootProject.ext.deps["otto"]
     annotationProcessor rootProject.ext.deps["auto_service"]
 
@@ -52,15 +55,15 @@ dependencies {
     api rootProject.ext.deps['rxandroid2_adapter_rxjava2']
     api rootProject.ext.deps['multidex']
     api rootProject.ext.deps['PhotoView']
-    api rootProject.ext.deps['arouter']
-    api rootProject.ext.deps['mmkv']
-    api rootProject.ext.deps['hutool']
-    api rootProject.ext.deps['logger']
+    api rootProject.ext.deps['easing']
+    api rootProject.ext.deps['androidanimations']
+    api rootProject.ext.deps['kotson']
+    api rootProject.ext.deps['kotlinx_coroutines_core']
+    api rootProject.ext.deps['kotlinx_coroutines_android']
     api project(":autosize")
-    api project(":FlycoSystemBar_Lib")
-    api project(":gluetablayout")
-    api "androidx.core:core-ktx:1.3.2"
+    api "androidx.core:core-ktx:+"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
 }
 
 repositories {
