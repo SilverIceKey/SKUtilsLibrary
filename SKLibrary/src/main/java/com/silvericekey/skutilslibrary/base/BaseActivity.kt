@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import androidx.core.view.ViewCompat
-import com.silvericekey.skutilslibrary.utils.PermissionUtil
 import com.silvericekey.skutilslibrary.utils.SystemBarUtil
+import com.silvericekey.skutilslibrary.utils.permission.PermissionUtil
 import pub.devrel.easypermissions.EasyPermissions
 
 

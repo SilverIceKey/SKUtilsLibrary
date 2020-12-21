@@ -45,7 +45,6 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
                 return false
             }
         })
-//        ToastUtils.showShort(JNITools().getApi())
         mainHandler = Handler() { msg: Message? ->
             Log.d("debug", "${Thread.currentThread()}")
             true
@@ -56,7 +55,6 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView {
 
     fun bindCustomService() {
         var service = Intent(this, CustomService::class.java)
-//        startService(service)
         bindService(service, object : ServiceConnection {
             override fun onServiceDisconnected(name: ComponentName?) {
                 unbindService(this)
