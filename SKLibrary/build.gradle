@@ -24,45 +24,60 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    // ------------- Three Parts -------------
     compileOnly rootProject.ext.deps["androidx_appcompat"]
+    api "androidx.core:core-ktx:1.3.2"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21"
+    //协程
+    api rootProject.ext.deps['kotlinx_coroutines_core']
+    api rootProject.ext.deps['kotlinx_coroutines_android']
+    // ------------- Three Parts -------------
+    //界面相关
     api rootProject.ext.deps["material"]
-    api rootProject.ext.deps["easypermissions"]
-    api rootProject.ext.deps["eventBus"]
-    api rootProject.ext.deps["glide"]
-    annotationProcessor rootProject.ext.deps["glideCompiler"]
-    api rootProject.ext.deps["picasso"]
-    api rootProject.ext.deps["fresco"]
-    api rootProject.ext.deps["aucx"]
-    api rootProject.ext.deps["zxing_core"]
     api rootProject.ext.deps["BaseRecyclerViewAdapterHelper"]
-    api rootProject.ext.deps["picture_library"]
+    api rootProject.ext.deps["autosize"]
+    api rootProject.ext.deps['PhotoView']
+    api rootProject.ext.deps['multidex']
+    //权限相关
+    api rootProject.ext.deps["easypermissions"]
+    //图像相关
+    api rootProject.ext.deps["glide"]
+    api rootProject.ext.deps["glide-integration"]
+    kapt rootProject.ext.deps["glideCompiler"]
+    api rootProject.ext.deps["androidsvg"]
+    //线程与通知相关
+    api rootProject.ext.deps["eventBus"]
     api rootProject.ext.deps["otto"]
-    annotationProcessor rootProject.ext.deps["auto_service"]
-
-    api rootProject.ext.deps['retrofit2']
-    api rootProject.ext.deps['okhttp3_logging-interceptor']
-    api rootProject.ext.deps['rxandroid2_gson_convert']
     api rootProject.ext.deps['rxjava2']
     api rootProject.ext.deps['rxandroid2']
+    annotationProcessor rootProject.ext.deps["auto_service"]
+    //工具相关
+    api rootProject.ext.deps["utilcodex"]
+    api rootProject.ext.deps["gson"]
+    api rootProject.ext.deps["picture_library"]
+    //加解密相关
+    api rootProject.ext.deps["zxing_core"]
+    //网络相关
+    api rootProject.ext.deps['retrofit2']
+    api rootProject.ext.deps['logger']
+    api rootProject.ext.deps['okhttp3_logging-interceptor']
+    api rootProject.ext.deps['rxandroid2_gson_convert']
     api rootProject.ext.deps['rxandroid2_gson_convert']
     api rootProject.ext.deps['rxandroid2_scalars_convert']
     api rootProject.ext.deps['rxandroid2_adapter_rxjava2']
-    api rootProject.ext.deps['multidex']
-    api rootProject.ext.deps['PhotoView']
+    //存储相关
+    api rootProject.ext.deps['mmkv']
+    //动画相关
     api rootProject.ext.deps['easing']
     api rootProject.ext.deps['androidanimations']
-    api rootProject.ext.deps['kotson']
-    api rootProject.ext.deps['kotlinx_coroutines_core']
-    api rootProject.ext.deps['kotlinx_coroutines_android']
-    api project(":autosize")
-    api "androidx.core:core-ktx:+"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }
 

@@ -1,2 +1,2 @@
-include ':app', ':SKLibrary', ':autosize'
+include ':app', ':SKLibrary'
 rootProject.name = 'SKUtilsLibrary'

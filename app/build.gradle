@@ -60,7 +60,7 @@ dependencies {
     implementation rootProject.ext.deps["fragment-ktx"]
     implementation rootProject.ext.deps["swiperefreshlayout"]
     implementation project(path: ':SKLibrary')
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api "com.facebook.react:react-native:+"
     implementation "jp.wasabeef:blurry:3.0.0"

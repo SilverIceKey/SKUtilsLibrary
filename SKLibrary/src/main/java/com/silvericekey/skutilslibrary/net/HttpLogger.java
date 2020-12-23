@@ -7,6 +7,9 @@ import org.jetbrains.annotations.NotNull;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
+/**
+ * 日志拦截器
+ */
 public class HttpLogger implements HttpLoggingInterceptor.Logger {
     private final StringBuffer mMessage = new StringBuffer();
     @Override
