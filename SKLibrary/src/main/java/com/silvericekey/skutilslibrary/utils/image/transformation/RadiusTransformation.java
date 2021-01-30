@@ -35,14 +35,12 @@ public class RadiusTransformation extends BitmapTransformation {
         if (source == null) return null;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            int size = Math.min(source.getWidth(), source.getHeight());
-
-            Bitmap bitmap = pool.get(size, size, Bitmap.Config.ARGB_8888);
+            Bitmap bitmap = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
             Paint paint = new Paint();
             paint.setShader(new BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
             paint.setAntiAlias(true);
-            canvas.drawRoundRect(0, 0, size, size, radius, radius, paint);
+            canvas.drawRoundRect(0, 0, source.getWidth(), source.getHeight(), radius, radius, paint);
             return bitmap;
         }
         return source;
