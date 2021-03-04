@@ -24,9 +24,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        // Enables Jetpack Compose for this module
+        compose true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    composeOptions {
+        kotlinCompilerVersion '1.4.21'
+        kotlinCompilerExtensionVersion '1.0.0-alpha10'
     }
     viewBinding {
         enabled = true
@@ -80,6 +88,16 @@ dependencies {
     //动画相关
     api rootProject.ext.deps['easing']
     api rootProject.ext.deps['androidanimations']
+    //Jetpack Compose
+    api rootProject.ext.deps['compose_ui']
+    api rootProject.ext.deps['compose_ui_tooling']
+    api rootProject.ext.deps['compose_foundation']
+    api rootProject.ext.deps['compose_material']
+    api rootProject.ext.deps['compose_material_icons_core']
+    api rootProject.ext.deps['compose_material_icons_extended']
+    api rootProject.ext.deps['compose_runtime_livedata']
+    api rootProject.ext.deps['compose_runtime_rxjava2']
+    api rootProject.ext.deps['compose_ui_test']
 
 }
 

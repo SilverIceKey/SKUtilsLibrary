@@ -2,7 +2,7 @@ ext {
 
     android = [
             libMinSdkVersion : 14,
-            appMinSdkVersion : 19,
+            appMinSdkVersion : 21,
             targetSdkVersion : 28,
             compileSdkVersion: 28,
             versionCode      : 16,
@@ -60,6 +60,16 @@ ext {
             // ------------- Kotlin ------------------------
             "kotlinx_coroutines_core"      : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${depsVersion["kotlin_coroutines"]}",
             "kotlinx_coroutines_android"   : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${depsVersion["kotlin_coroutines"]}",
+            //-------------- Jetpack Compose ---------------
+            "compose_ui":"androidx.compose.ui:ui:1.0.0-alpha10",
+            "compose_ui_tooling":"androidx.compose.ui:ui-tooling:1.0.0-alpha10",
+            "compose_foundation":"androidx.compose.foundation:foundation:1.0.0-alpha10",
+            "compose_material":"androidx.compose.material:material:1.0.0-alpha10",
+            "compose_material_icons_core":"androidx.compose.material:material-icons-core:1.0.0-alpha10",
+            "compose_material_icons_extended":"androidx.compose.material:material-icons-extended:1.0.0-alpha10",
+            "compose_runtime_livedata":"androidx.compose.runtime:runtime-livedata:1.0.0-alpha10",
+            "compose_runtime_rxjava2":"androidx.compose.runtime:runtime-rxjava2:1.0.0-alpha10",
+            "compose_ui_test":"androidx.compose.ui:ui-test-junit4:1.0.0-alpha10",
             // ------------- Test dependencies -------------
             "junit"                        : "junit:junit:4.12",
             "truth"                        : "com.google.truth:truth:0.28",

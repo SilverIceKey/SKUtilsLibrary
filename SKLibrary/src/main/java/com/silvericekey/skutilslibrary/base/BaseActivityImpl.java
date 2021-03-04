@@ -2,6 +2,7 @@ package com.silvericekey.skutilslibrary.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -95,6 +96,13 @@ public abstract class BaseActivityImpl<V extends ViewBinding, P extends BasePres
      */
     protected abstract V getViewBinding();
 
+    /**
+     * 获取view
+     * @return
+     */
+    protected View getView(){
+        return null;
+    }
     /**
      * 初始化presenter
      *

@@ -45,6 +45,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        // Enables Jetpack Compose for this module
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerVersion '1.4.21'
+        kotlinCompilerExtensionVersion '1.0.0-alpha10'
+    }
 //    externalNativeBuild {
 //        cmake {
 //            path "src/main/cpp/CMakeLists.txt"
@@ -67,6 +75,18 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api "com.facebook.react:react-native:+"
     implementation "jp.wasabeef:blurry:3.0.0"
+
+
+    //Jetpack Compose
+    api rootProject.ext.deps['compose_ui']
+    api rootProject.ext.deps['compose_ui_tooling']
+    api rootProject.ext.deps['compose_foundation']
+    api rootProject.ext.deps['compose_material']
+    api rootProject.ext.deps['compose_material_icons_core']
+    api rootProject.ext.deps['compose_material_icons_extended']
+    api rootProject.ext.deps['compose_runtime_livedata']
+    api rootProject.ext.deps['compose_runtime_rxjava2']
+    api rootProject.ext.deps['compose_ui_test']
 
 }
 repositories {

@@ -1,21 +1,14 @@
-package com.silverknife.meizhi.features.main;
+package com.silverknife.meizhi.features.main
 
-import com.silvericekey.skutilslibrary.base.BaseActivityImpl;
-import com.silverknife.meizhi.databinding.ActivityMainBinding;
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.silvericekey.skutilslibrary.base.BaseActivityImpl
+import com.silverknife.meizhi.databinding.ActivityMainBinding
 
-public class MainActivityImpl extends BaseActivityImpl<ActivityMainBinding, MainPresenterImpl> implements MainActivity{
-    @Override
-    protected ActivityMainBinding getViewBinding() {
-        return ActivityMainBinding.inflate(getLayoutInflater());
-    }
-
-    @Override
-    protected MainPresenterImpl getPresenter() {
-        return new MainPresenterImpl(this);
-    }
-
-    @Override
-    protected void initViewAndData() {
+class MainActivityImpl : AppCompatActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
     }
 }
