@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
 def cfg = rootProject.ext.android
@@ -98,6 +97,11 @@ dependencies {
     api rootProject.ext.deps['compose_runtime_livedata']
     api rootProject.ext.deps['compose_runtime_rxjava2']
     api rootProject.ext.deps['compose_ui_test']
+    api rootProject.ext.deps['compose_activity_ktx']
+    api rootProject.ext.deps['compose_activity_compose']
+    api rootProject.ext.deps['compose_lifecycle_runtime_ktx']
+    api rootProject.ext.deps['compose_lifecycle_viewmodel_ktx']
+    api rootProject.ext.deps['compose_lifecycle_viewmodel_compose']
 
 }
 

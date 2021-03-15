@@ -2,7 +2,7 @@
 apply from: 'conf.gradle'
 
 buildscript {
-    ext.kotlin_version = '1.4.21'
+    ext.kotlin_version = '1.4.30'
 
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
@@ -14,7 +14,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.realm:realm-gradle-plugin:7.1.0-SNAPSHOT"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 
 
