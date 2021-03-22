@@ -13,7 +13,7 @@ import okhttp3.Response;
 /**
  * @author by sunfusheng on 2017/6/14.
  */
-public class ProgressManager {
+public class  ProgressManager {
 
     private static Map<String, OnProgressListener> listenersMap = Collections.synchronizedMap(new HashMap<>());
     private static OkHttpClient okHttpClient;
