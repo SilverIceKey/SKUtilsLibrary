@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 
 def cfg = rootProject.ext.android
 
@@ -23,18 +23,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildFeatures {
-        // Enables Jetpack Compose for this module
-        compose true
-    }
+//    buildFeatures {
+//        // Enables Jetpack Compose for this module
+//        compose true
+//    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    composeOptions {
-        kotlinCompilerVersion '1.4.21'
-        kotlinCompilerExtensionVersion '1.0.0-alpha10'
-    }
+//    composeOptions {
+//        kotlinCompilerVersion '1.4.21'
+//        kotlinCompilerExtensionVersion '1.0.0-alpha10'
+//    }
     viewBinding {
         enabled = true
     }
@@ -102,6 +102,8 @@ dependencies {
     api rootProject.ext.deps['compose_lifecycle_runtime_ktx']
     api rootProject.ext.deps['compose_lifecycle_viewmodel_ktx']
     api rootProject.ext.deps['compose_lifecycle_viewmodel_compose']
+    //test
+    testImplementation rootProject.ext.deps['junit']
 
 }
 

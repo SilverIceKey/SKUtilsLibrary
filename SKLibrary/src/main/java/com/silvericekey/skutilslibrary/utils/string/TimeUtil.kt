@@ -83,6 +83,9 @@ class TimeUtil {
      * 时间偏移
      */
     fun offsetDay(offsetDay:Int):Date{
-        return Date()
+        val simpleDateFormat = SimpleDateFormat(DEFAULT_DATE_FORMAT)
+        val formatDate = simpleDateFormat.format(Date())
+        val parseDate = simpleDateFormat.parse(formatDate)
+        return Date(parseDate.time+3600*24*offsetDay*1000)
     }
 }
