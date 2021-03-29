@@ -4,6 +4,7 @@ import com.silvericekey.skutilslibrary.base.BaseApplication
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
+import kotlin.contracts.contract
 
 /**
  * <pre>

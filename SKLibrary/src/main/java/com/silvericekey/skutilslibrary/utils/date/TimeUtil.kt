@@ -1,7 +1,6 @@
-package com.silvericekey.skutilslibrary.utils.string
+package com.silvericekey.skutilslibrary.utils.date
 
 import android.annotation.SuppressLint
-import android.text.format.DateUtils
 import java.text.DateFormat
 import java.text.ParsePosition
 import java.text.SimpleDateFormat
@@ -16,6 +15,9 @@ import java.util.*
  */
 class TimeUtil {
     val DEFAULT_DATE_FORMAT = "yyyy-MM-dd"
+    val MIN_TIME = 60*1000L
+    val HOUR_TIME = MIN_TIME*60
+    val DAY_TIME = HOUR_TIME*24
     companion object {
         @JvmStatic
         private var timeUtils: TimeUtil? = null
@@ -80,12 +82,33 @@ class TimeUtil {
     }
 
     /**
-     * 时间偏移
+     * 时间偏移天数
      */
-    fun offsetDay(offsetDay:Int):Date{
+    fun offsetDay(offsetValue:Int,date:Date = Date()):Date{
         val simpleDateFormat = SimpleDateFormat(DEFAULT_DATE_FORMAT)
-        val formatDate = simpleDateFormat.format(Date())
+        val formatDate = simpleDateFormat.format(date)
         val parseDate = simpleDateFormat.parse(formatDate)
-        return Date(parseDate.time+3600*24*offsetDay*1000)
+        return Date(parseDate.time+offsetValue*DAY_TIME)
     }
+
+    /**
+     * 时间偏移小时
+     */
+    fun offsetHour(offsetValue:Int,date:Date = Date()):Date{
+        val simpleDateFormat = SimpleDateFormat(DEFAULT_DATE_FORMAT)
+        val formatDate = simpleDateFormat.format(date)
+        val parseDate = simpleDateFormat.parse(formatDate)
+        return Date(parseDate.time+offsetValue*HOUR_TIME)
+    }
+
+    /**
+     * 时间偏移分钟
+     */
+    fun offsetMin(offsetValue:Int,date:Date = Date()):Date{
+        val simpleDateFormat = SimpleDateFormat(DEFAULT_DATE_FORMAT)
+        val formatDate = simpleDateFormat.format(date)
+        val parseDate = simpleDateFormat.parse(formatDate)
+        return Date(parseDate.time+offsetValue*MIN_TIME)
+    }
+
 }
