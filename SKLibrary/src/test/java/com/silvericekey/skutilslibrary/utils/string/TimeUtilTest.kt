@@ -1,10 +1,8 @@
 package com.silvericekey.skutilslibrary.utils.string
 
-import com.silvericekey.skutilslibrary.utils.QRCodeUtil
 import com.silvericekey.skutilslibrary.utils.date.TimeUtil
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 import java.text.SimpleDateFormat
 import java.util.*
 
