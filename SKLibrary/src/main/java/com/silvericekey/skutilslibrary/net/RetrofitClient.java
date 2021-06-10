@@ -103,7 +103,7 @@ public class RetrofitClient {
         Cache cache = new Cache(cacheFile, cacheSize);
         okHttpClient = new OkHttpClient.Builder()
                 .cache(cache)
-                .addNetworkInterceptor(new HttpLoggingInterceptor(new HttpLogger()))
+                .addInterceptor( new HttpLoggingInterceptor(new HttpLogger()))
                 .connectTimeout(retrofitConfig.connectTimeout(), TimeUnit.MILLISECONDS)
                 .readTimeout(retrofitConfig.ReadTimeout(), TimeUnit.MILLISECONDS)
                 .writeTimeout(retrofitConfig.WriteTimeout(), TimeUnit.MILLISECONDS)
