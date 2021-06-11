@@ -1,6 +1,8 @@
 package com.silvericekey.skutilslibrary.net;
 
+import com.orhanobut.logger.Logger;
 import com.silvericekey.skutilslibrary.base.BaseApplication;
+import com.silvericekey.skutilslibrary.utils.log.LoggerHelper;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -42,13 +44,37 @@ public class RetrofitClient {
      * 是否使用默认配置
      */
     private boolean useDefaultConfig = false;
+    /**
+     * 日志拦截器
+     */
+    private HttpLoggingInterceptor httpLoggingInterceptor;
 
+    /**
+     * RetrofitClient 懒汉模式
+     */
     private static class RetrofitClientHolder {
         public static RetrofitClient retrofitClient = new RetrofitClient();
     }
 
+    /**
+     * RetrofitClient单例获取
+     * @return
+     */
     public static RetrofitClient getInstance() {
         return RetrofitClientHolder.retrofitClient;
+    }
+
+    /**
+     * RetrofitClient初始化
+     */
+    private RetrofitClient() {
+        //判断日志拦截器是否为空
+        if (httpLoggingInterceptor==null){
+            //初始化日志拦截器
+            httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLogger());
+            //设置拦截等级
+            httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        }
     }
 
     /**
@@ -101,9 +127,10 @@ public class RetrofitClient {
             cacheFile.mkdirs();
         }
         Cache cache = new Cache(cacheFile, cacheSize);
+        Logger.d("初始化OKhttpClient");
         okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
                 .cache(cache)
-                .addInterceptor( new HttpLoggingInterceptor(new HttpLogger()))
                 .connectTimeout(retrofitConfig.connectTimeout(), TimeUnit.MILLISECONDS)
                 .readTimeout(retrofitConfig.ReadTimeout(), TimeUnit.MILLISECONDS)
                 .writeTimeout(retrofitConfig.WriteTimeout(), TimeUnit.MILLISECONDS)

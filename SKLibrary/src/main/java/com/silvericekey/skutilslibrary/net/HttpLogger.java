@@ -11,7 +11,11 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * 日志拦截器
  */
 public class HttpLogger implements HttpLoggingInterceptor.Logger {
+    /**
+     * 请求信息全部日志
+     */
     private final StringBuffer mMessage = new StringBuffer();
+
     @Override
     public void log(@NotNull String message) {
         // 请求或者响应开始

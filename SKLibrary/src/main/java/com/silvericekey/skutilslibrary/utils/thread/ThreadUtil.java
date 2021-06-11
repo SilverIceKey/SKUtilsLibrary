@@ -1,7 +1,5 @@
 package com.silvericekey.skutilslibrary.utils.thread;
 
-import com.blankj.utilcode.util.ThreadUtils;
-
 import java.util.WeakHashMap;
 
 public class ThreadUtil {

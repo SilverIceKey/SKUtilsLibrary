@@ -1,4 +1,4 @@
-package com.silvericekey.skutilslibrary.utils.view
+package com.silvericekey.skutilslibrary.utils.anime
 
 import android.animation.*
 import android.annotation.SuppressLint

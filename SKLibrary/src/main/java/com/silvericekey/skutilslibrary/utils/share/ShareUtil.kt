@@ -1,8 +1,8 @@
-package com.silvericekey.skutilslibrary.utils.view
+package com.silvericekey.skutilslibrary.utils.share
 
 import android.content.Intent
 import android.net.Uri
-import com.blankj.utilcode.util.ActivityUtils
+import com.silvericekey.skutilslibrary.utils.activity.ActivityUtil
 
 /*
 * 分享工具
@@ -36,7 +36,7 @@ class ShareUtil {
         shareIntent.putExtra(Intent.EXTRA_TEXT, text)
         //切记需要使用Intent.createChooser，否则会出现别样的应用选择框，您可以试试
         shareIntent = Intent.createChooser(shareIntent, title)
-        ActivityUtils.getTopActivity().startActivity(shareIntent)
+        ActivityUtil.getTopActivity().startActivity(shareIntent)
     }
 
     /*
@@ -49,7 +49,7 @@ class ShareUtil {
         shareIntent.type = "image/*"
         //切记需要使用Intent.createChooser，否则会出现别样的应用选择框，您可以试试
         shareIntent = Intent.createChooser(shareIntent, title)
-        ActivityUtils.getTopActivity().startActivity(shareIntent)
+        ActivityUtil.getTopActivity().startActivity(shareIntent)
     }
 
     /*
@@ -62,6 +62,6 @@ class ShareUtil {
         shareIntent.type = "image/*"
         //切记需要使用Intent.createChooser，否则会出现别样的应用选择框，您可以试试
         shareIntent = Intent.createChooser(shareIntent, title)
-        ActivityUtils.getTopActivity().startActivity(shareIntent)
+        ActivityUtil.getTopActivity().startActivity(shareIntent)
     }
 }
