@@ -1,10 +1,7 @@
 package com.silvericekey.skutilslibrary.utils.io
 
 import com.silvericekey.skutilslibrary.base.BaseApplication
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.InputStream
-import kotlin.contracts.contract
+import java.io.*
 
 /**
  * 文件IO相关
@@ -40,6 +37,44 @@ class FileIOUtil {
             println(e.message)
         }
         return ""
+    }
+
+    /**
+     * 从路径中中读取文件，返回String
+     * @param filePath 文件路径
+     * @return
+     */
+    fun readFile2StringFromPath(filePath: String = "", fileName: String): String {
+        try {
+            val fis = File(filePath + fileName).inputStream()
+            return convertStreamToString(fis!!)
+        } catch (e: Exception) {
+            println(e.message)
+        }
+        return ""
+    }
+
+    /**
+     * 数据写入到文件
+     * @param filePath 文件路径
+     * @return
+     */
+    fun writeToDisk(filePath: String = "", fileName: String, message: String): Boolean {
+        try {
+            val tmpFile = File(filePath + fileName)
+            if (!tmpFile.exists()){
+                tmpFile.mkdirs()
+            }
+            val fis = tmpFile.outputStream()
+            fis.write("\r\n".toByteArray())
+            fis.write(message.toByteArray())
+            fis.flush()
+            fis.close()
+            return true
+        } catch (e: Exception) {
+            println(e.message)
+            return false
+        }
     }
 
     /**

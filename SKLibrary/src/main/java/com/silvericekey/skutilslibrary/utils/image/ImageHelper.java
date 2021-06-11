@@ -53,57 +53,6 @@ public class ImageHelper {
         return bitmap;
     }
 
-    /**
-     * 底片效果的图片
-     */
-    public static Bitmap getFilmPhoto(Bitmap bitmapSource) {
-        int width = bitmapSource.getWidth();
-        int height = bitmapSource.getHeight();
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
-        int[] oldPix = new int[width * height];
-        int[] newPix = new int[width * height];
-        int color;
-        int r, g, b, a;
-        bitmapSource.getPixels(oldPix, 0, width, 0, 0, width, height);
-
-        for (int i = 0; i < width * height; i++) {
-            color = oldPix[i];
-            r = Color.red(color);
-            g = Color.green(color);
-            b = Color.blue(color);
-            a = Color.alpha(color);
-
-
-            r = 255 - r;
-            g = 255 - g;
-            b = 255 - b;
-
-            if (r > 255) {
-                r = 255;
-            } else if (r < 0) {
-                r = 0;
-            }
-
-            if (g > 255) {
-                g = 255;
-            } else if (g < 0) {
-                g = 0;
-            }
-
-
-            if (b > 255) {
-                b = 255;
-            } else if (b < 0) {
-                b = 0;
-            }
-            newPix[i] = Color.argb(a, r, g, b);
-
-        }
-        bitmap.setPixels(newPix, 0, width, 0, 0, width, height);
-        return bitmap;
-    }
-
     /*
      * base64转bitmap
      * */
