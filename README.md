@@ -7,8 +7,7 @@
 使用的第三方框架如下，同时感谢框架作者(官方提供框架不列出)：  
 [glide](https://github.com/bumptech/glide)  
 [picasso](https://github.com/square/picasso)  
-[fresco](https://github.com/facebook/fresco)  
-[AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)  
+[fresco](https://github.com/facebook/fresco)
 [zxing](https://github.com/zxing/zxing)  
 [otto](https://github.com/square/otto)  
 [retrofit](https://github.com/square/retrofit)  
@@ -22,7 +21,11 @@
 [NumberAnimTextView](https://github.com/Bakumon/NumberAnimTextView)  
 [Kotson](https://github.com/SalomonBrys/Kotson)
 [QMUI](https://github.com/Tencent/QMUI_Android)
-[PictureSelector](https://github.com/LuckSiege/PictureSelector)
+[PictureSelector](https://github.com/LuckSiege/PictureSelector)  
+参考框架:  
+[AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)  
+相关方法(目前只支持中文阅读，抱歉|Currently only supports Chinese reading, sorry):  
+[README-CN](https://github.com/SilverIceKey/SKUtilsLibrary/tree/master/SKLibrary/README-CN.md)
 ### How to get to your project
 Step 1. Add the JitPack repository to your build file
 ```groovy

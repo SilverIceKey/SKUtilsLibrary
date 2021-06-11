@@ -20,3 +20,4 @@
 - ```2020/08/10``` 新增qmui、PictureSelector框架，preference修改。
 - ```2020/08/11``` 新增fitSystemBarView指定view不占用statusbar。新增http请求内联error自动处理方法
 - ```2021/06/08``` logger修改为fork之后修改的版本，新增保存日志到本地
+- ```2021/06/11``` 删除第三方的工具包，尝试开始编写自用工具包只包含本人项目中使用的那部分，编写类型还是借鉴第三方工具包的，修复httplogger日志拦截器不工作的问题，添加readme中文接口说明书

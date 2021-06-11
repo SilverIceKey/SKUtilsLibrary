@@ -2,7 +2,13 @@ package com.silvericekey.skutilslibrary.utils.card
 
 import java.util.*
 
+/**
+ * 身份证号码检查
+ */
 object CardCheckUtil {
+    /**
+     * 检查是否成年
+     */
     fun checkAdult(date: Date):Boolean{
         val current = Calendar.getInstance()
         val birthDay = Calendar.getInstance()

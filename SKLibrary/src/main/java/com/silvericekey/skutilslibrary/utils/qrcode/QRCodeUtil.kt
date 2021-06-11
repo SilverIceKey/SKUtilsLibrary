@@ -42,7 +42,7 @@ class QRCodeUtil {
             createQRCode(info, size, -1, logo)
 
     /*
-    * 根绝bitmap读取二维码
+    * 根据bitmap读取二维码
     * */
     fun readQRCode(bitmap: Bitmap): String {
         var pixels = intArrayOf()
@@ -52,10 +52,16 @@ class QRCodeUtil {
         return QRCodeReader().decode(binaryBitmap).text
     }
 
+    /**
+     * 快捷创建二维码bitmap
+     */
     fun createQRCode(info: String, size: Int, color: Int): Bitmap {
         return createQRCode(info, size, color, null)
     }
 
+    /**
+     * 快捷创建二维码bitmap
+     */
     fun createQRCode(info: String, size: Int, color: Int, logo: Bitmap?): Bitmap {
         var hint = HashMap<EncodeHintType, Any>()
         hint.put(EncodeHintType.MARGIN, 0)
@@ -71,7 +77,9 @@ class QRCodeUtil {
         )
     }
 
-
+    /**
+     * bitmap添加logo
+     */
     private fun bitMatrixToBitmap(bitMatrix: BitMatrix, color: Int, logo: Bitmap?): Bitmap {
         val width = bitMatrix.width
         val height = bitMatrix.height

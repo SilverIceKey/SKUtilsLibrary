@@ -10,10 +10,7 @@ import android.graphics.Paint;
 import android.util.Base64;
 
 /**
- * Package : com.jacob.picture
- * Author : jacob
- * Date : 15-3-23
- * Description : 这个类是用来xxx
+ * 图像处理相关
  */
 public class ImageHelper {
 

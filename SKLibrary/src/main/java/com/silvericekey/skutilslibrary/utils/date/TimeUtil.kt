@@ -7,11 +7,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * <pre>
- *     time   : 2020/07/01
- *     desc   :
- *     version: 1.0
- * </pre>
+ * 时间相关
  */
 class TimeUtil {
     val DEFAULT_DATE_FORMAT = "yyyy-MM-dd"

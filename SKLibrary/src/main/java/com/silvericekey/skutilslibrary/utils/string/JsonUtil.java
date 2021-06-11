@@ -1,5 +1,8 @@
 package com.silvericekey.skutilslibrary.utils.string;
 
+/**
+ * json格式化工具logger专用
+ */
 public class JsonUtil {
     /**
      * 格式化json字符串

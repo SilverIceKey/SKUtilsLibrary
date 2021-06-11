@@ -7,11 +7,7 @@ import java.io.InputStream
 import kotlin.contracts.contract
 
 /**
- * <pre>
- *     time   : 2020/07/17
- *     desc   :
- *     version: 1.0
- * </pre>
+ * 文件IO相关
  */
 class FileIOUtil {
     companion object {
@@ -32,7 +28,7 @@ class FileIOUtil {
     }
 
     /**
-     * 读取File工具类，返回String
+     * 从Assets中读取文件，返回String
      * @param fileName assets文件名
      * @return
      */

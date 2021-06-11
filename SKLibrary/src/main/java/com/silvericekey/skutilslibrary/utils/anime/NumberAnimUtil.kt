@@ -43,6 +43,10 @@ class NumberAnimUtil {
      */
     private var interpolator:TimeInterpolator = AccelerateDecelerateInterpolator()
     private lateinit var animator: ValueAnimator
+
+    /**
+     * 设置开始值
+     */
     fun setStart(start: String): NumberAnimUtil {
         val p = Pattern.compile("[0-9]*\\.?[0-9]+")
         val m = p.matcher(start)
@@ -59,6 +63,9 @@ class NumberAnimUtil {
         return this
     }
 
+    /**
+     * 设置结束值
+     */
     fun setEnd(end: String): NumberAnimUtil {
         val p = Pattern.compile("[0-9]*\\.?[0-9]+")
         val m = p.matcher(end)
@@ -76,61 +83,97 @@ class NumberAnimUtil {
         return this
     }
 
+    /**
+     * 设置间隔
+     */
     fun setDuration(duration: Long): NumberAnimUtil {
         mDuration = duration
         return this
     }
 
+    /**
+     * 设置前缀
+     */
     fun setPrefixString(prefixString: String): NumberAnimUtil {
         mPrefixString = prefixString
         return this
     }
 
+    /**
+     * 设置后缀
+     */
     fun setPostfixString(postfixString: String): NumberAnimUtil {
         mPostfixString = postfixString
         return this
     }
 
+    /**
+     * 是否为整数
+     */
     fun setIsInt(isInt: Boolean): NumberAnimUtil {
         this.isInt = isInt
         return this
     }
 
+    /**
+     * 设置插值器
+     */
     fun setInterpolator(interpolator: TimeInterpolator): NumberAnimUtil {
         this.interpolator = interpolator
         return this
     }
 
+    /**
+     * 设置值更新监听
+     */
     fun addUpdateListener(listener: ValueAnimator.AnimatorUpdateListener): NumberAnimUtil {
         animatorUpdaterListeners.add(listener)
         return this
     }
 
+    /**
+     * 设置动画监听
+     */
     fun addListener(listener: AnimatorListenerAdapter): NumberAnimUtil {
         animatorListeners.add(listener)
         return this
     }
 
+    /**
+     * 暂停
+     */
     fun pause() {
         if (animator.isRunning) {
             animator.pause()
         }
     }
 
+    /**
+     * 恢复
+     */
     fun resume() {
         if (animator.isPaused) {
             animator.resume()
         }
     }
 
+    /**
+     * 是否在运行
+     */
     fun isRunning():Boolean{
         return animator.isRunning
     }
 
+    /**
+     * 停止
+     */
     fun stop() {
         animator.cancel()
     }
 
+    /**
+     * 绑定控件并执行
+     */
     @SuppressLint("SetTextI18n")
     fun playOn(textView: TextView) {
         animator = ValueAnimator.ofObject(BigDecimalEvaluator(), BigDecimal(mNumStart), BigDecimal(mNumEnd))
