@@ -34,11 +34,11 @@ public class StringUtils {
     public static String List2String(List<String> list) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).endsWith("mp4")||list.get(i).endsWith("avi")||list.get(i).endsWith("mkv")){
+            if (list.get(i).endsWith("mp4") || list.get(i).endsWith("avi") || list.get(i).endsWith("mkv")) {
                 continue;
             }
             stringBuilder.append(list.get(i));
-            if (i<list.size()-1){
+            if (i < list.size() - 1) {
                 stringBuilder.append(",");
             }
         }
@@ -53,10 +53,19 @@ public class StringUtils {
      */
     public static String ListGetVideo(List<String> list) {
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).endsWith("mp4")||list.get(i).endsWith("avi")||list.get(i).endsWith("mkv")){
+            if (list.get(i).endsWith("mp4") || list.get(i).endsWith("avi") || list.get(i).endsWith("mkv")) {
                 return list.get(i);
             }
         }
         return "";
+    }
+
+    /**
+     * 字符串判空
+     * @param str
+     * @return
+     */
+    public static boolean isEmpty(String str) {
+        return str == null || str.length() == 0;
     }
 }

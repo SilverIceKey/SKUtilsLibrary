@@ -1,15 +1,21 @@
 package com.silvericekey.skutilslibrary.net;
 
-import com.orhanobut.logger.Logger;
 import com.silvericekey.skutilslibrary.base.BaseApplication;
-import com.silvericekey.skutilslibrary.utils.log.LoggerHelper;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Authenticator;
 import okhttp3.Cache;
+import okhttp3.Credentials;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.Route;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -127,8 +133,15 @@ public class RetrofitClient {
             cacheFile.mkdirs();
         }
         Cache cache = new Cache(cacheFile, cacheSize);
-        Logger.d("初始化OKhttpClient");
+        Proxy proxy = new Proxy(retrofitConfig.proxyType(),new InetSocketAddress(retrofitConfig.proxyIPAddr(),retrofitConfig.proxyPort()));
         okHttpClient = new OkHttpClient.Builder()
+                .proxy(proxy)
+                .proxyAuthenticator((route, response) -> {
+                    String credential = Credentials.basic(retrofitConfig.proxyUserName(), retrofitConfig.proxyPassword());
+                    return response.request().newBuilder()
+                            .header("Proxy-Authorization", credential)
+                            .build();
+                })
                 .addInterceptor(httpLoggingInterceptor)
                 .cache(cache)
                 .connectTimeout(retrofitConfig.connectTimeout(), TimeUnit.MILLISECONDS)
