@@ -21,8 +21,8 @@ public class EncodeUtil {
      * @param url
      * @return
      */
-    public static String UrlEncode(String url) {
-        return UrlEncode(url, Charset.defaultCharset().name());
+    public static String urlEncode(String url) {
+        return urlEncode(url, Charset.defaultCharset().name());
     }
 
     /**
@@ -31,7 +31,7 @@ public class EncodeUtil {
      * @param url
      * @return
      */
-    public static String UrlEncode(String url, String charSetName) {
+    public static String urlEncode(String url, String charSetName) {
         try {
             return URLEncoder.encode(url, charSetName);
         } catch (UnsupportedEncodingException e) {
@@ -44,14 +44,14 @@ public class EncodeUtil {
     /**
      * url解码
      */
-    public static String UrlDecode(String url) {
-        return UrlDecode(url, Charset.defaultCharset().name());
+    public static String urlDecode(String url) {
+        return urlDecode(url, Charset.defaultCharset().name());
     }
 
     /**
      * url解码
      */
-    public static String UrlDecode(String url, String charSetName) {
+    public static String urlDecode(String url, String charSetName) {
         try {
             return URLDecoder.decode(url, charSetName);
         } catch (UnsupportedEncodingException e) {
@@ -100,7 +100,9 @@ public class EncodeUtil {
      * @return html-encode string
      */
     public static String htmlEncode(final CharSequence input) {
-        if (input == null || input.length() == 0) return "";
+        if (input == null || input.length() == 0) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         char c;
         for (int i = 0, len = input.length(); i < len; i++) {
@@ -140,7 +142,9 @@ public class EncodeUtil {
      * @return the string of decode html-encode string
      */
     public static CharSequence htmlDecode(final String input) {
-        if (input == null || input.length() == 0) return "";
+        if (input == null || input.length() == 0) {
+            return "";
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Html.fromHtml(input, Html.FROM_HTML_MODE_LEGACY);
         } else {
@@ -155,7 +159,9 @@ public class EncodeUtil {
      * @return binary string
      */
     public static String binaryEncode(final String input) {
-        if (input == null || input.length() == 0) return "";
+        if (input == null || input.length() == 0) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         for (char i : input.toCharArray()) {
             sb.append(Integer.toBinaryString(i)).append(" ");
@@ -170,7 +176,9 @@ public class EncodeUtil {
      * @return UTF-8 String
      */
     public static String binaryDecode(final String input) {
-        if (input == null || input.length() == 0) return "";
+        if (input == null || input.length() == 0) {
+            return "";
+        }
         String[] splits = input.split(" ");
         StringBuilder sb = new StringBuilder();
         for (String split : splits) {

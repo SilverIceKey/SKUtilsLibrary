@@ -18,11 +18,29 @@ public class ActivityUtil implements Application.ActivityLifecycleCallbacks {
      * Activity状态
      */
     public enum ActivityStatus {
+        /**
+         * 创建完成
+         */
         CREATED,
+        /**
+         * 开始完成
+         */
         STARTED,
+        /**
+         * 恢复完成
+         */
         RESUMED,
+        /**
+         * 暂停完成
+         */
         PAUSED,
+        /**
+         * 停止完成
+         */
         STOPPED,
+        /**
+         * 保存状态
+         */
         SAVEINSTANCESTATE
     }
 
