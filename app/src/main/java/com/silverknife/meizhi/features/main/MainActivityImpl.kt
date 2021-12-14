@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.orhanobut.logger.Logger
 import com.silvericekey.skutilslibrary.net.RetrofitClient
 import com.silvericekey.skutilslibrary.utils.log.LoggerHelper
+import com.silvericekey.skutilslibrary.utils.thread.ThreadUtil
 import com.silverknife.meizhi.R
 import com.silverknife.meizhi.common.Api
 import kotlinx.android.synthetic.main.activity_main.*

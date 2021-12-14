@@ -3,19 +3,14 @@ package com.silvericekey.skutilslibrary.net;
 import com.silvericekey.skutilslibrary.base.BaseApplication;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Authenticator;
 import okhttp3.Cache;
 import okhttp3.Credentials;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.Route;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -37,11 +32,11 @@ public class RetrofitClient {
     /**
      * retrofit临时配置
      */
-    private RetrofitConfig retrofitConfig;
+    private AbstractRetrofitConfig retrofitConfig;
     /**
      * retrofit默认配置
      */
-    private RetrofitConfig defaultConfig;
+    private AbstractRetrofitConfig defaultConfig;
     /**
      * 目前配置是否为默认配置
      */
@@ -89,7 +84,7 @@ public class RetrofitClient {
      * @param retrofitConfig
      * @return
      */
-    public RetrofitClient defaultConfig(RetrofitConfig retrofitConfig) {
+    public RetrofitClient defaultConfig(AbstractRetrofitConfig retrofitConfig) {
         this.defaultConfig = retrofitConfig;
         this.retrofitConfig = retrofitConfig;
         useDefaultConfig = true;
@@ -102,7 +97,7 @@ public class RetrofitClient {
      * @param retrofitConfig
      * @return
      */
-    public RetrofitClient config(RetrofitConfig retrofitConfig) {
+    public RetrofitClient config(AbstractRetrofitConfig retrofitConfig) {
         this.retrofitConfig = retrofitConfig;
         useDefaultConfig = false;
         return this;
@@ -145,8 +140,8 @@ public class RetrofitClient {
                 .addInterceptor(httpLoggingInterceptor)
                 .cache(cache)
                 .connectTimeout(retrofitConfig.connectTimeout(), TimeUnit.MILLISECONDS)
-                .readTimeout(retrofitConfig.ReadTimeout(), TimeUnit.MILLISECONDS)
-                .writeTimeout(retrofitConfig.WriteTimeout(), TimeUnit.MILLISECONDS)
+                .readTimeout(retrofitConfig.readTimeout(), TimeUnit.MILLISECONDS)
+                .writeTimeout(retrofitConfig.writeTimeout(), TimeUnit.MILLISECONDS)
                 .build();
         return okHttpClient;
     }
@@ -178,9 +173,9 @@ public class RetrofitClient {
     /**
      * 返回请求接口实例
      *
-     * @param service
-     * @param <T>
-     * @return
+     * @param service 请求接口类
+     * @param <T> 请求接口类类型
+     * @return 请求接口
      */
     public <T> T createService(Class<T> service) {
         if (defaultConfig == null || retrofitConfig == null) {

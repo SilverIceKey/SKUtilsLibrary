@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  */
 public class SystemBarUtil {
     private static float DEFAULT_ALPHA = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 0.2f : 0.3f;
-
+    private static Pattern IS_FLYMEOS_CHECK = Pattern.compile("Flyme OS [4|5]", Pattern.CASE_INSENSITIVE);
     /**
      * Android4.4以上的状态栏着色
      *
@@ -377,7 +377,7 @@ public class SystemBarUtil {
     public static boolean isFlyme4Later() {
         return Build.FINGERPRINT.contains("Flyme_OS_4")
                 || Build.VERSION.INCREMENTAL.contains("Flyme_OS_4")
-                || Pattern.compile("Flyme OS [4|5]", Pattern.CASE_INSENSITIVE).matcher(Build.DISPLAY).find();
+                || IS_FLYMEOS_CHECK.matcher(Build.DISPLAY).find();
     }
 
     /** 判断是否为MIUI6以上 */

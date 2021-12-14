@@ -5,7 +5,7 @@ import java.net.Proxy;
 /**
  * retrofit配置接口
  */
-public abstract class RetrofitConfig {
+public abstract class AbstractRetrofitConfig {
     /**
      * 默认连接超时
      */
@@ -40,7 +40,7 @@ public abstract class RetrofitConfig {
      *
      * @return
      */
-    public Long ReadTimeout() {
+    public Long readTimeout() {
         return DEFAULT_READ_TIMEOUT;
     }
 
@@ -49,7 +49,7 @@ public abstract class RetrofitConfig {
      *
      * @return
      */
-    public Long WriteTimeout() {
+    public Long writeTimeout() {
         return DEFAULT_WRITE_TIMEOUT;
     }
 
